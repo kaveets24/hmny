@@ -15,12 +15,12 @@ class Header extends Component {
   }
 
   render() {
-    console.log('some auth',this.props);
+    console.log('some auth', this.props);
 
     return (
       <nav>
         <div className="nav-wrapper">
-          <a className="left brand-logo" href="/">
+          <a id="hmny" className="left brand-logo" href="/">
             hmny
           </a>
           <ul className="right">

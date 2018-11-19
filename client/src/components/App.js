@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { BrowserRouter, Route } from "react-router-dom";
 import Header from "./Header";
+import Player from "./Player";
 import { connect } from "react-redux"; // gives certain components ability to call action creators.
 import * as actions from "../actions";
 
@@ -21,6 +22,7 @@ class App extends Component {
         <BrowserRouter>
           <div>
             <Header />
+            <Player />
             <Route exact path="/" component={Landing} />
             <Route exact path="/surveys" component={Dashboard} />
             <Route path="/surveys/new" component={SurveyNew} />
