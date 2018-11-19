@@ -20,7 +20,7 @@ passport.use(
     {
       clientID: keys.googleClientID,
       clientSecret: keys.googleClientSecret,
-      callbackURL: '/auth/google/callback',
+      callbackURL: 'https://hmny-prod.herokuapp.com/auth/google/callback',
       proxy: true // trust any incoming proxies to enable the callback url to begin with https, instead of http.
     },
     async (accessToken, refreshToken, profile, done) => {
