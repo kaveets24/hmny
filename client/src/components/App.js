@@ -14,7 +14,7 @@ const Landing = () => <h2>Landing</h2>;
 class App extends Component {
   componentDidMount() {
     this.props.fetchUser();
-  }
+  } // determines if the user is logged in
   render() {
     return (
       <div className="container">

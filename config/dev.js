@@ -1,6 +1,6 @@
 module.exports = {
-    googleClientID: '608617730593-til5v6puav26m1aapc67e0dbmfm8j7qn.apps.googleusercontent.com',
-    googleClientSecret: 'V5HW_bnmHCubOIhpsEQapt5L',
+    googleClientID: '702379093055-gg66nua83rjkiqnjkm3m1af7r8emenum.apps.googleusercontent.com',
+    googleClientSecret: 'A-a_evRX8n7z9BWIZ9SChHxg',
     mongoURI: 'mongodb://kaveets24:Tennischamp24!@ds219191.mlab.com:19191/hmny-dev',
     cookieKey: '123qweqweasdfasdf'
 }

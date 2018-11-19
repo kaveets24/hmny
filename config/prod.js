@@ -7,4 +7,3 @@ module.exports = {
     cookieKey: process.env.COOKIE_KEY
 }
 
-// 'mongodb://kaveets24-prod:Tennischamp24!@ds131973.mlab.com:31973/kaveets24-emaily-prod'
