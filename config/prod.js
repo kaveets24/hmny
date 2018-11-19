@@ -1,4 +1,4 @@
-// prod.js - contains production keys for emaily.
+// prod.js - contains production keys for hmny.
 
 module.exports = {
     googleClientID: process.env.GOOGLE_CLIENT_ID,
