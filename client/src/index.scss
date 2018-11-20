@@ -4,65 +4,46 @@
     padding: 0;
 }
 
+
 body {
     font-family: 'Roboto', sans-serif;
     font-size: $small-font;
     background-color: $color2;
+  
 }
 
-header {
+.header {
     background-color: $color1;
     height: 70px;
     padding: 0 16px;
-}
-
-#hmny {
-    font-family: $logo-font-family;
-    text-transform: lowercase;
-    font-weight: bold;
-    font-size: $large-font
-}
-
-
-/* Nav Bar  */
-
-.topnav {
     overflow: hidden;
-    background-color: $color1;
-    a {
+    line-height: 70px;
+
+    &__hmny {
+        font-family: $logo-font-family;
+        text-transform: lowercase;
+        font-weight: bold;
+        font-size: $large-font;
         float: left;
-        display: block;
+    }
+    &__a {
         color: $color2;
-        text-align: center;
-        line-height: 70px;
         text-decoration: none;
-        padding: 0 14px;
-    }
-
-   .right-items {
-        width: 20%;
-        height: 60px;
-        position: absolute;
-        right: 0;
-        margin: auto;
-    }
+        padding: 0 16px;
 
 
-    .icon {
-        display: none;
     }
-    .navbar-button:hover {
-        background-color: #ddd;
-        color: $color2;
+    .rightnav {
+        float: right;
+        text-align: center;      
+
     }
 }
 
-.container {
-    padding: 16px 14px;
-    height: 100%;
-}
 
-footer {
+
+
+.player {
     overflow: hidden;
     background-color: $color1;
     bottom: 0;
@@ -70,30 +51,28 @@ footer {
     position: fixed;
     width: 100%;
 
-
-    .player {
+    &__div {
         position: relative;
+    }
     
-        &__button {
-            position: relative;
-            text-align: center;
-            width: 100%;
-            margin: auto;
-            
-        }
-        &__a {
-            display: inline-block;
-            color: $color2;
-            text-align: center;
-            line-height: 60px;
-            text-decoration: none;
-            padding: 0 14px;
-        }
-
-        &__a:hover {
-            background-color: #ddd;
-            color: $color2;
-        }
+    &__button {
+        position: relative;
+        text-align: center;
+        width: 100%;
+        margin: auto;
+        
+    }
+    &__a {
+        display: inline-block;
+        color: $color2;
+        text-align: center;
+        line-height: 60px;
+        text-decoration: none;
+        padding: 0 14px;
     }
 
+    &__a:hover {
+        background-color: #ddd;
+        color: $color2;
+    }
 }

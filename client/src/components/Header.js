@@ -8,9 +8,9 @@ class Header extends Component {
       case null:
         return null
       case false:
-        return <li><a href="/auth/google">Login With Google</a></li>
+        return <a class="header__a" href="/auth/google">Login</a>
       default:
-        return <li><a href="/api/logout">Logout</a></li>
+        return <a class="header__a" href="/api/logout">Logout</a>
     }
   }
 
@@ -18,16 +18,14 @@ class Header extends Component {
     console.log('some auth', this.props);
 
     return (
-      <nav>
-        <div className="nav-wrapper">
-          <a id="hmny" className="left brand-logo" href="/">
-            hmny
-          </a>
-          <ul className="right">
+      <header className="header">
+        <a href="/" className="header__hmny header__a">Hmny</a>
+        <nav className="rightnav">
+          <a className="header__a" href="#playlists">Playlists</a>
+          <a className="header__a" href="#settings">Settings</a>
             {this.renderContent()}
-          </ul>
-        </div>
-      </nav>
+        </nav>      
+      </header>
     );
   }
 }
