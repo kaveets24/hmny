@@ -13,6 +13,17 @@ const SurveyNew = () => <h2>SurveyNew</h2>;
 const Landing = () => <h2>Landing</h2>;
 
 class App extends Component {
+  renderPlayer() {
+    switch(this.props.auth) {
+      case null:
+        return null
+      case false:
+        return null;
+        
+      default:
+        return <Player />
+    }
+  }
   componentDidMount() {
     this.props.fetchUser();
   } // determines if the user is logged in
@@ -22,13 +33,15 @@ class App extends Component {
         <BrowserRouter>
           <div>
             <Header />
-            <Route exact path="/"/>
-            <Route exact path="/listen" component={Player} />
+            {/* <Route exact path="/" component={Player} /> */}
+            {this.renderPlayer()}
           </div>
         </BrowserRouter>
       </div>
     );
   }
 }
-
-export default connect(null, actions)(App); // first arg is mapStateToProps, 2nd arg is the action creators we want to wire up.
+function mapStateToProps({ auth }) {
+  return { auth };
+}
+export default connect(mapStateToProps, actions)(App); // first arg is mapStateToProps, 2nd arg is the action creators we want to wire up.
