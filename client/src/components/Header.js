@@ -8,9 +8,17 @@ class Header extends Component {
       case null:
         return null
       case false:
-        return <a class="header__a" href="/auth/google">Login</a>
+        return <a className="header__a" href="/auth/google">Login</a>
       default:
-        return <a class="header__a" href="/api/logout">Logout</a>
+        return (
+          <div>
+            <a className="header__a" href="#playlists">Playlists</a>
+            <a className="header__a" href="#settings">Settings</a>
+            <a className="header__a" href="/api/logout">Logout</a>
+          </div>
+        )
+        
+        
     }
   }
 
@@ -21,9 +29,7 @@ class Header extends Component {
       <header className="header">
         <a href="/" className="header__hmny header__a">Hmny</a>
         <nav className="rightnav">
-          <a className="header__a" href="#playlists">Playlists</a>
-          <a className="header__a" href="#settings">Settings</a>
-            {this.renderContent()}
+          {this.renderContent()}
         </nav>      
       </header>
     );
