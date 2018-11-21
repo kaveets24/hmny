@@ -24,12 +24,14 @@ body {
         text-transform: lowercase;
         font-weight: bold;
         font-size: $large-font;
-        float: left;
     }
     &__a {
         color: $color2;
         text-decoration: none;
+        display: block;
+        float: left;
         padding: 0 16px;
+        height: 100%; 
 
 
     }
@@ -39,11 +41,6 @@ body {
     text-align: center;
 
 }
-
-
-
-
-
 
 .player {
     overflow: hidden;
