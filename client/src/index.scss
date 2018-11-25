@@ -2,6 +2,8 @@
 * {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+
 }
 
 
@@ -40,22 +42,23 @@ body {
     text-align: center;
 
 }
-
 .main {
     background-color: blue;
     margin: 16px auto;
-    padding: 0 16px;
-    max-width: 1000px;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 100px;
+    padding: 16px;
+    max-width: 1250px;
 
     &__ul {
-        list-style-type: none;
+        display: grid;
+        grid-template-columns: repeat( auto-fit, minmax(200px,1fr));
+        justify-items: center;
+        grid-gap: 10px;  
     }
 
     &__li {
         background-color: green;
+        height: 200px;
+        width: 200px;
     }
 
 }
