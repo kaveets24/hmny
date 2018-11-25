@@ -48,14 +48,14 @@ body {
     padding: 16px;
     max-width: 1250px;
 
-    &__ul {
+    &__grid {
         display: grid;
         grid-template-columns: repeat( auto-fit, minmax(200px,1fr));
         justify-items: center;
         grid-gap: 10px;  
     }
 
-    &__li {
+    &__item {
         background-color: green;
         height: 200px;
         width: 200px;
