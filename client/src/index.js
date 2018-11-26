@@ -6,7 +6,7 @@ import reduxThunk from 'redux-thunk';
 
 import reducers from './reducers';
 import App from "./components/App";
-import "./index.scss";
+import "./style/index.scss";
 
 const store = createStore(reducers, {}, applyMiddleware(reduxThunk));
 ReactDOM.render(
@@ -15,3 +15,5 @@ ReactDOM.render(
   </Provider>,
   document.querySelector("#root")
 );
+
+console.log("Hey there"); 
