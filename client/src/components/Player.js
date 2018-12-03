@@ -1,5 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import 'font-awesome/css/font-awesome.min.css';
+
 
 
 const Player = () => {
