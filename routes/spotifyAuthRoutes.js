@@ -6,52 +6,53 @@ var redirect_uri = 'http://localhost:8000/callback'; // Your redirect uri
 
 let request = require('request')
 let querystring = require('querystring')
+var express = require('express');
+var router = express.Router();
 
+router.get('/spotifylogin', function(req, res) {
+  res.redirect('https://accounts.spotify.com/authorize?' +
+    querystring.stringify({
+      response_type: 'code',
+      client_id,
+      scope: 'user-read-private user-read-email',
+      redirect_uri
+    }))
+})
 
-module.exports = app => {
-  app.get('/spotifylogin', function(req, res) {
-    res.redirect('https://accounts.spotify.com/authorize?' +
-      querystring.stringify({
-        response_type: 'code',
-        client_id,
-        scope: 'user-read-private user-read-email',
-        redirect_uri
-      }))
-  })
-  
-  app.get('/callback', function(req, res) {
-    let code = req.query.code || null
-    let authOptions = {
-      url: 'https://accounts.spotify.com/api/token',
-      form: {
-        code: code,
-        redirect_uri,
-        grant_type: 'authorization_code'
-      },
-      headers: {
-        'Authorization': 'Basic ' + (new Buffer(
-          client_id + ':' + client_secret
-        ).toString('base64'))
-      },
+router.get('/callback', function(req, res) {
+  let code = req.query.code || null
+  let authOptions = {
+    url: 'https://accounts.spotify.com/api/token',
+    form: {
+      code: code,
+      redirect_uri,
+      grant_type: 'authorization_code'
+    },
+    headers: {
+      'Authorization': 'Basic ' + (new Buffer(
+        client_id + ':' + client_secret
+      ).toString('base64'))
+    },
+    json: true
+  }
+  request.post(authOptions, function(error, response, body) {
+    var access_token = body.access_token
+    let uri = 'http://localhost:3000'
+    res.redirect(uri + '?access_token=' + access_token)
+
+    var options = {
+      url: 'https://api.spotify.com/v1/me',
+      headers: { 'Authorization': 'Bearer ' + access_token },
       json: true
-    }
-    request.post(authOptions, function(error, response, body) {
-      var access_token = body.access_token
-      let uri = 'http://localhost:3000'
-      res.redirect(uri + '?access_token=' + access_token)
+    };
 
-      var options = {
-        url: 'https://api.spotify.com/v1/me',
-        headers: { 'Authorization': 'Bearer ' + access_token },
-        json: true
-      };
-  
-      request.get(options, function(error, response, body) {
-        console.log(body);
-      });
-    })
-
-
+    request.get(options, function(error, response, body) {
+      console.log(body);
+    });
   })
-  
-}
+
+
+})
+
+module.exports = router;
+

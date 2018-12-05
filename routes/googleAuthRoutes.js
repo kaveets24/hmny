@@ -1,25 +1,27 @@
 const passport = require('passport');
+const express = require('express');
+const router = express.Router();
 
-module.exports = app => {
-  app.get(
+  router.get(
     '/auth/google',
     passport.authenticate('google', {
       scope: ['profile', 'email']
     })
   );
 
-  app.get('/auth/google/callback',
+  router.get('/auth/google/callback',
     passport.authenticate('google'),
     (req, res) => res.redirect('/')  
   );
 
-  app.get('/api/logout', (req, res) => {
+  router.get('/api/logout', (req, res) => {
     req.logout(); // Takes the cookie which contains our user id, and kills the id that's there.
     res.redirect("/");
   });
 
-  app.get('/api/current_user', (req, res) => {
+  router.get('/api/current_user', (req, res) => {
      
      res.send(req.user);
   });
-};
+
+module.exports = router;
