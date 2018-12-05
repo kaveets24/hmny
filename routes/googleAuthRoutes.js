@@ -19,8 +19,7 @@ const router = express.Router();
     res.redirect("/");
   });
 
-  router.get('/api/current_user', (req, res) => {
-     
+  router.get('/api/current_user', (req, res) => {     
      res.send(req.user);
   });
 

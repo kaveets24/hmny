@@ -3,11 +3,12 @@ const express = require('express');
 const router = express.Router();
 const request = require('request')
 const querystring = require('querystring')
+const keys = require('../config/keys');
 
 // Spotify Credentials
-const client_id = 'ca729d1f96734b07b1b259e78a7ecf86'; // Your client id
-const client_secret = '350fa68a17404632bc6389fa3500d2bb'; // Your secret
-const redirect_uri = 'http://localhost:8000/callback'; // Your redirect uri
+const client_id = keys.spotifyClientID; // Your client id
+const client_secret = keys.spotifyClientSecret; // Your secret
+const redirect_uri = (process.env.NODE_ENV === 'production') ? 'https://hmny-prod.herokuapp.com/callback' : 'http://localhost:8000/callback'
 
 router.get('/spotifylogin', function(req, res) {
   res.redirect('https://accounts.spotify.com/authorize?' +
