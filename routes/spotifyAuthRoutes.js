@@ -1,13 +1,13 @@
 
-var client_id = 'ca729d1f96734b07b1b259e78a7ecf86'; // Your client id
-var client_secret = '350fa68a17404632bc6389fa3500d2bb'; // Your secret
-var redirect_uri = 'http://localhost:8000/callback'; // Your redirect uri
+const express = require('express');
+const router = express.Router();
+const request = require('request')
+const querystring = require('querystring')
 
-
-let request = require('request')
-let querystring = require('querystring')
-var express = require('express');
-var router = express.Router();
+// Spotify Credentials
+const client_id = 'ca729d1f96734b07b1b259e78a7ecf86'; // Your client id
+const client_secret = '350fa68a17404632bc6389fa3500d2bb'; // Your secret
+const redirect_uri = 'http://localhost:8000/callback'; // Your redirect uri
 
 router.get('/spotifylogin', function(req, res) {
   res.redirect('https://accounts.spotify.com/authorize?' +
