@@ -9,7 +9,6 @@ import App from "./components/App";
 
 // Stylesheets, Google Fonts & Font-Awesome
 import "./style/index.scss";
-import 'font-awesome/css/font-awesome.min.css';
 
 
 const store = createStore(reducers, {}, applyMiddleware(reduxThunk));
