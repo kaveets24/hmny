@@ -15,13 +15,27 @@ const SurveyNew = () => <h2>SurveyNew</h2>;
 const Landing = () => <h2>Landing</h2>;
 
 class App extends Component {
-  renderPlayer() {
+  renderContent() {
+    console.log(this.props.auth)
     switch(this.props.auth) {
       case null:
-        return null
-      case false:
         return null;
         
+      case false:
+        return (
+        <div className="main__message">
+          <span className="main__welcome">Howdy!<br></br>
+          </span>
+          <span className="main__hmny">hmny </span> 
+          lets you build playlists using songs from your favorite platforms.<br></br>
+          <div className="main__icons">
+            <i className="fab fa-spotify"></i>
+            <i className="fab fa-youtube"></i>
+            <i className="fab fa-soundcloud"></i>
+          </div>  
+
+        </div>)
+              
       default:
         return <Player />
     }
@@ -37,7 +51,7 @@ class App extends Component {
             <Header />
             <div className="main">
             <Route exact path="/playlists" component={Playlists} />
-            {this.renderPlayer()}
+            {this.renderContent()}
             </div>       
           </div>
         </BrowserRouter>
