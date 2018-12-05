@@ -39,7 +39,19 @@ module.exports = app => {
       var access_token = body.access_token
       let uri = 'http://localhost:3000'
       res.redirect(uri + '?access_token=' + access_token)
+
+      var options = {
+        url: 'https://api.spotify.com/v1/me',
+        headers: { 'Authorization': 'Bearer ' + access_token },
+        json: true
+      };
+  
+      request.get(options, function(error, response, body) {
+        console.log(body);
+      });
     })
+
+
   })
   
 }
