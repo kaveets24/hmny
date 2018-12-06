@@ -1,9 +1,9 @@
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const SpotifyStrategy = require('passport-spotify').Strategy;
 const mongoose = require('mongoose');
-const keys = require('../config/keys');
-
 const User = mongoose.model('users');
+const keys = require('../config/keys');
 
 passport.serializeUser((user, done) => {
   done(null, user.id);
@@ -34,6 +34,28 @@ passport.use(
           const user = await new User({ googleId: profile.id }).save();
             done(null, user);
             console.log("A new user has been added to mongoDB")   
+    }
+  )
+);
+ 
+passport.use(
+  new SpotifyStrategy(
+    {
+      clientID: keys.spotifyClientID,
+      clientSecret: keys.spotifyClientSecret,
+      callbackURL: 'http://localhost:8000/callback'
+    },
+     async (accessToken, refreshToken, expires_in, profile, done) => {
+      const existingUser = await User.findOne({ spotifyId: profile.id });
+
+      if (existingUser) {
+        console.log("A spotify user exists ya dumbo");
+        return done(null, existingUser);
+      }
+
+      const user = await new User({ spotifyId: profile.id }).save();
+      done(null, user);
+      console.log("A new spotify user has been added to mongoDB")   
     }
   )
 );

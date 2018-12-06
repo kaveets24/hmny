@@ -1,4 +1,4 @@
-
+const passport = require('passport');
 const express = require('express');
 const router = express.Router();
 const request = require('request')
@@ -10,7 +10,7 @@ const client_id = keys.spotifyClientID; // Your client id
 const client_secret = keys.spotifyClientSecret; // Your secret
 const redirect_uri = (process.env.NODE_ENV === 'production') ? 'https://hmny-prod.herokuapp.com/callback' : 'http://localhost:8000/callback'
 
-router.get('/spotifylogin', function(req, res) {
+router.get('/spotifylogin', passport.authenticate('spotify'), function(req, res) {
   res.redirect('https://accounts.spotify.com/authorize?' +
     querystring.stringify({
       response_type: 'code',
@@ -20,7 +20,8 @@ router.get('/spotifylogin', function(req, res) {
     }))
 })
 
-router.get('/callback', function(req, res) {
+// NEED TO FIGURE OUT WHY THIS IS NOT AUTHENTICATING
+router.get('/callback', passport.authenticate('spotify'),  function(req, res) {
   let code = req.query.code || null
   let authOptions = {
     url: 'https://accounts.spotify.com/api/token',
