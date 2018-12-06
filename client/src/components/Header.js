@@ -24,8 +24,6 @@ class Header extends Component {
   }
 
   render() {
-    console.log('some auth', this.props);
-
     return (
       <header className="header">
         <Link to="/" className="header__hmny header__a">Hmny</Link>

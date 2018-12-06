@@ -7,35 +7,17 @@ import { BrowserRouter, Route } from "react-router-dom";
 import Header from "./Header";
 import Player from "./Player";
 import Playlists from "./Playlists";
-
-
-// dummy components
-const Dashboard = () => <h2>Dashboard</h2>;
-const SurveyNew = () => <h2>SurveyNew</h2>;
-const Landing = () => <h2>Landing</h2>;
+import Welcome from "./Welcome";
 
 class App extends Component {
   renderContent() {
-    console.log(this.props.auth)
     switch(this.props.auth) {
       case null:
         return null;
         
       case false:
-        return (
-        <div className="main__message">
-          <span className="main__welcome">Howdy!<br></br>
-          </span>
-          <span className="main__hmny">hmny </span> 
-          lets you build playlists using songs from your favorite platforms.<br></br>
-          <div className="main__icons">
-            <i className="fab fa-spotify"></i>
-            <i className="fab fa-youtube"></i>
-            <i className="fab fa-soundcloud"></i>
-          </div>  
-
-        </div>)
-              
+        return <Welcome />
+                
       default:
         return <Player />
     }
