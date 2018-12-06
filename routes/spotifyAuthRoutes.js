@@ -38,7 +38,7 @@ router.get('/callback', function(req, res) {
   }
   request.post(authOptions, function(error, response, body) {
     var access_token = body.access_token
-    let uri = (process.env.NODE_ENV === 'production' ? 'https://hmny-prod.herokuapp.com' : 'http://localhost:3000';
+    let uri = (process.env.NODE_ENV === 'production') ? 'https://hmny-prod.herokuapp.com' : 'http://localhost:3000';
     res.redirect(uri + '?access_token=' + access_token)
 
     var options = {
