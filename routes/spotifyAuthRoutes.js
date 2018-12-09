@@ -1,14 +1,7 @@
 const passport = require('passport');
 const express = require('express');
 const router = express.Router();
-const request = require('request')
-const querystring = require('querystring')
 const keys = require('../config/keys');
-
-// Spotify Credentials
-const client_id = keys.spotifyClientID; // Your client id
-const client_secret = keys.spotifyClientSecret; // Your secret
-// const redirect_uri = (process.env.NODE_ENV === 'production') ? 'https://hmny-prod.heroku.com/callback' : 'http://localhost:8000/callback'
 
 // GET /auth/spotify
 //   Use passport.authenticate() as route middleware to authenticate the

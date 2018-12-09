@@ -5,6 +5,15 @@ const mongoose = require('mongoose');
 const User = mongoose.model('users');
 const keys = require('../config/keys');
 
+var SpotifyWebApi = require('spotify-web-api-node');
+
+// credentials are optional
+var spotifyApi = new SpotifyWebApi({
+  clientId: keys.spotifyClientID,
+  clientSecret: keys.spotifyClientSecret,
+  redirectUri: 'http://localhost:8000/callback'
+});
+
 passport.serializeUser((user, done) => {
   done(null, user);
 });
@@ -50,6 +59,14 @@ passport.use(
       proxy: true,
     },
     async (accessToken, refreshToken, expires_in, profile, done) => {
+      console.log("Access Token: ", accessToken);
+      spotifyApi.setAccessToken(accessToken);
+  //     spotifyApi.getUserPlaylists(profile.id)
+  //     .then(function(data) {
+  //   // console.log('Retrieved playlists', data.body);
+  // },function(err) {
+  //   console.log('Something went wrong!', err);
+  // });
       const existingUser = await User.findOne({ spotifyId: profile.id });
         if (existingUser) {
           // we already have a record with the given profile ID
@@ -57,7 +74,7 @@ passport.use(
           return done(null, existingUser);
         } 
           // we don't have a user record with this ID, make a new record!
-          const user = await new User({ spotifyId: profile.id }).save();
+          const user = await new User({ spotifyId: profile.id, spotifyAccessToken: accessToken }).save();
             done(null, user);
             console.log("A new spotify user has been added to mongoDB")   
     }

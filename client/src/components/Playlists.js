@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 const Playlists = () => {
     const playlistNames = ["Playlist 1","Playlist 2","Playlist 3", "Playlist 4", "Playlist 5", "Playlist 6","Playlist 7","Playlist 8", "Playlist 9", "Playlist 10"];
@@ -12,5 +13,8 @@ const Playlists = () => {
     )
 
 }
+function mapStateToProps({ auth }) {
+    return { auth };
 
-export default Playlists;
+}
+export default connect(mapStateToProps)(Playlists);
