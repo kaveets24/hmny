@@ -22,9 +22,11 @@ class App extends Component {
         return <Player />
     }
   }
+
+  
   componentDidMount() {
-    this.props.fetchUser();
-  } // determines if the user is logged in
+    this.props.fetchUser(); // determines if the user is logged in
+  } 
   render() {
     return (
       <div className="container">
