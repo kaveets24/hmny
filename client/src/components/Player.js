@@ -5,6 +5,11 @@ import { connect } from 'react-redux';
 class Player extends Component {
 
   initializeSpotify() {
+    const script = document.createElement("script");
+    script.src = "https://sdk.scdn.co/spotify-player.js";
+    script.async = true;
+    document.body.appendChild(script);
+    
     window.onSpotifyWebPlaybackSDKReady = () => {
       const token = 'BQBfBgUlKaoDlI36Lxy1v0vSSrdaPGk9cOmzC_-tbKJTt8izxJ48-A95V96GLhDU_2RjDGENRXhCBM4gfGMOoKZ3f45san1l3ekWVfwk7wN52UKduvM5D73EdLqwIXRKaXkD766d7BNzqACNNHSWFBcsijcXBSpqyYyDX30';
       const player = new window.Spotify.Player({
