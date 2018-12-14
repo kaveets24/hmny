@@ -7,11 +7,13 @@ const keys = require('../config/keys');
 
 var SpotifyWebApi = require('spotify-web-api-node');
 
+const ROOT_URL = (process.env.NODE_ENV === 'production') ? 'http://hmny-prod.herokuapp.com' : 'http://localhost:8000'; 
+
 // credentials are optional
 var spotifyApi = new SpotifyWebApi({
   clientId: keys.spotifyClientID,
   clientSecret: keys.spotifyClientSecret,
-  redirectUri: 'http://localhost:8000/callback'
+  redirectUri: new URL('/callback', ROOT_URL).href
 });
 
 passport.serializeUser((user, done) => {
