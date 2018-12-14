@@ -59,7 +59,7 @@ passport.use(
       proxy: true,
     },
     async (accessToken, refreshToken, expires_in, profile, done) => {
-      console.log("Access Token: ", accessToken);
+      // console.log("Access Token: ", accessToken);
       spotifyApi.setAccessToken(accessToken);
   //     spotifyApi.getUserPlaylists(profile.id)
   //     .then(function(data) {
@@ -71,7 +71,11 @@ passport.use(
         if (existingUser) {
           // we already have a record with the given profile ID
           console.log("A spotify user exists ya dumbo");
-          return done(null, existingUser);
+
+          await User.findOneAndUpdate({spotifyId: profile.id}, {$set: {spotifyAccessToken: accessToken}}, {new: true}, (err, user) => {
+            if (err) return done(null, user);
+            return done(null, user);
+          })
         } 
           // we don't have a user record with this ID, make a new record!
           const user = await new User({ spotifyId: profile.id, spotifyAccessToken: accessToken }).save();

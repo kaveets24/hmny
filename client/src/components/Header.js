@@ -9,7 +9,7 @@ class Header extends Component {
       case null:
         return null
       case false:
-        return <a className="header__a" href="/auth/google">Login</a>
+        return <a className="header__a" href="/auth/spotify">Login</a>
       default:
         return (
           <div>

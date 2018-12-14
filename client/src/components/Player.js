@@ -4,14 +4,15 @@ import { connect } from 'react-redux';
 
 class Player extends Component {
 
-  initializeSpotify() {
+  // Initialize the Spotify Web Playback SDK
+  initializeSpotifySdk() {
     const script = document.createElement("script");
     script.src = "https://sdk.scdn.co/spotify-player.js";
     script.async = true;
     document.body.appendChild(script);
     
     window.onSpotifyWebPlaybackSDKReady = () => {
-      const token = 'BQBfBgUlKaoDlI36Lxy1v0vSSrdaPGk9cOmzC_-tbKJTt8izxJ48-A95V96GLhDU_2RjDGENRXhCBM4gfGMOoKZ3f45san1l3ekWVfwk7wN52UKduvM5D73EdLqwIXRKaXkD766d7BNzqACNNHSWFBcsijcXBSpqyYyDX30';
+      const token = this.props.auth.spotifyAccessToken;
       const player = new window.Spotify.Player({
         name: 'hmny',
         getOAuthToken: cb => { cb(token); }
@@ -42,7 +43,7 @@ class Player extends Component {
   }
 
   componentDidMount() {
-    this.initializeSpotify();
+      this.initializeSpotifySdk();
   }
 
 
@@ -67,8 +68,9 @@ class Player extends Component {
 
 };
 
+function mapStateToProps({ auth }) {
+  return { auth };
+};
 
-// will need this to access state and conditionally render components
-//   export default connect(mapStateToProps)(Player);
+export default connect(mapStateToProps)(Player);
 
-export default Player;
