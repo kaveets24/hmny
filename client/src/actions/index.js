@@ -2,7 +2,7 @@ import axios from "axios";
 import { 
   FETCH_USER,
   UPDATE_PLAYER,
-  PLAY_PAUSE
+  UPDATE_DEVICE_ID,
 } from "./types";
 
 export const fetchUser = () => async dispatch => {
@@ -16,10 +16,9 @@ export const updatePlayer = (playerState) => dispatch => {
   dispatch({type: UPDATE_PLAYER, payload: playerState})
 }
 
-export const playPause = (playerState) => dispatch => {
-  playerState.playing= !playerState.playing;
+export const updateDeviceId = (device_id) => dispatch => {
 
-  dispatch({type: PLAY_PAUSE, payload: playerState})
-
+  dispatch({type: UPDATE_DEVICE_ID, payload: device_id});
 }
+
 

@@ -42,9 +42,10 @@ class Player extends Component {
         });
 
         // Ready
-        this.player.addListener("ready", ({ device_id }) => {
+        this.player.addListener("ready", async ({ device_id }) => {
           console.log("Ready with Device ID", device_id);
-          this.onPlayClick();
+          await this.props.updateDeviceId(device_id);
+          this.selectHmnyOnSpotifyConnect();
         });
 
         // Not Ready
@@ -60,14 +61,13 @@ class Player extends Component {
   onPlayerStateChange(playerState) {
     // if we're no longer listening to music, we'll get a null state.
     console.log("onPlayerStateChange called");
-    console.log(playerState);
+    console.log("Here's the current state:", this.props.playerState);
     if (playerState !== null) {
       const {
         current_track: currentTrack,
         position,
         duration
       } = playerState.track_window; // using ES6 destructuring, take objects off of the playerState.track_window
-
       const trackName = currentTrack.name;
       const albumName = currentTrack.album.name;
       const artistName = currentTrack.artists
@@ -84,7 +84,27 @@ class Player extends Component {
         artistName,
         playing
       });
+
     }
+  }
+  componentDidMount() {
+    this.initializeSpotifySdk();
+  }
+
+  selectHmnyOnSpotifyConnect() {
+    const { spotifyAccessToken } = this.props.auth;
+    const  { deviceId } = this.props.playerState; 
+    fetch("https://api.spotify.com/v1/me/player", {
+      method: "PUT",
+      headers: {
+        authorization: `Bearer ${spotifyAccessToken}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        "device_ids": [ deviceId ],
+        "play": false,
+      }),
+    });
   }
 
 
@@ -100,9 +120,7 @@ class Player extends Component {
   }
 
 
-  componentDidMount() {
-    this.initializeSpotifySdk();
-  }
+
 
   render() {
     let playButtonClass;

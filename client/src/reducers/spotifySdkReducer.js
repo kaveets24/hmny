@@ -1,4 +1,4 @@
-import  { UPDATE_PLAYER } from '../actions/types';
+import { UPDATE_PLAYER, UPDATE_DEVICE_ID } from '../actions/types';
 
 const playerState = {
     deviceId: "",
@@ -11,10 +11,14 @@ const playerState = {
     duration: 0,
 };
 
-export default function(state=playerState, action) {
+export default function (state = playerState, action) {
     switch (action.type) {
         case UPDATE_PLAYER:
-            return action.payload;
+            return Object.assign({}, state, action.payload);
+
+        case UPDATE_DEVICE_ID:
+            return { ...state, deviceId: action.payload };
+
         default:
             return playerState;
 
