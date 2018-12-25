@@ -9,6 +9,7 @@ class Player extends Component {
   // Initialize the Spotify Web Playback SDK
   initializeSpotifySdk() {
     const token = this.props.auth.spotifyAccessToken;
+    console.log(token);
 
 
     const script = document.createElement("script");

@@ -22,7 +22,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // Routes
-app.use('/', googleAuth)
+app.use('/', googleAuth);
 app.use('/', spotifyAuth); // correct way using express Router;
 // require('./routes/authRoutes')(app); // returns function defined in authRoutes and calls with the app object.
 // require('./routes/spotifyAuthRoutes')(app);

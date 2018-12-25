@@ -1,6 +1,6 @@
 import React from "react";
 
-const Welcome = (props) => {
+const Welcome = () => {
   return (
     <div className="main__message">
       <span className="main__welcome">
