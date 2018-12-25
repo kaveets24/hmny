@@ -11,7 +11,6 @@ export const fetchUser = () => async dispatch => {
 };
 
 export const updatePlayer = (playerState) => dispatch => {
-  // const res = // fetch the player state, but how?
   // console.log("updatePlayer action called. Here's the playerState object it was passed:", playerState);
   
   dispatch({type: UPDATE_PLAYER, payload: playerState})

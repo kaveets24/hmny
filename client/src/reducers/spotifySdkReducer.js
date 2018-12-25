@@ -1,8 +1,8 @@
 import  { UPDATE_PLAYER } from '../actions/types';
 
 const playerState = {
-    // deviceId: "",
-    // error: "",
+    deviceId: "",
+    error: "",
     trackName: "Track Name",
     artistName: "Artist Name",
     albumName: "Album Name",

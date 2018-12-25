@@ -106,7 +106,7 @@ body {
         margin: auto;
         
     }
-    &__a {
+    &__button {
         display: inline-block;
         color: $color2;
         text-align: center;
@@ -115,7 +115,7 @@ body {
         padding: 0 14px;
     }
 
-    &__a:hover {
+    &__button:hover {
         background-color: #ddd;
         color: $color2;
     }
