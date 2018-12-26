@@ -90,10 +90,11 @@ class Player extends Component {
   componentDidMount() {
     this.initializeSpotifySdk();
   }
-
+// Sets hmny as the user's currently playing device on Spotify
   selectHmnyOnSpotifyConnect() {
     const { spotifyAccessToken } = this.props.auth;
     const  { deviceId } = this.props.playerState; 
+    
     fetch("https://api.spotify.com/v1/me/player", {
       method: "PUT",
       headers: {

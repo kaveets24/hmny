@@ -1,6 +1,6 @@
 import { UPDATE_PLAYER, UPDATE_DEVICE_ID } from '../actions/types';
 
-const playerState = {
+const initialState = {
     deviceId: "",
     error: "",
     trackName: "Track Name",
@@ -11,7 +11,7 @@ const playerState = {
     duration: 0,
 };
 
-export default function (state = playerState, action) {
+export default function (state = initialState, action) {
     switch (action.type) {
         case UPDATE_PLAYER:
             return Object.assign({}, state, action.payload);
@@ -20,7 +20,7 @@ export default function (state = playerState, action) {
             return { ...state, deviceId: action.payload };
 
         default:
-            return playerState;
+            return state;
 
     }
 }

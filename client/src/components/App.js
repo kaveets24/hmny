@@ -7,6 +7,7 @@ import { BrowserRouter, Route } from "react-router-dom";
 import Header from "./Header";
 import Player from "./Player";
 import Playlists from "./Playlists";
+import Playlist from "./Playlist";
 import Welcome from "./Welcome";
 
 class App extends Component {
@@ -35,6 +36,7 @@ class App extends Component {
             <Header />
             <div className="main">
             <Route exact path="/playlists" component={Playlists} />
+            <Route exact path="/Playlist_1" component={Playlist} /> 
             {this.renderContent()}
             </div>       
           </div>
