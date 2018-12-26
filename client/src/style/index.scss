@@ -12,7 +12,6 @@ body {
     font-size: $small-font;
     background-color: $color2;  
 }
-
 .header {
     color: $color2;
     position: fixed;
@@ -93,25 +92,27 @@ body {
 }
 
 .playlist {
-    position: relative;
+    display: grid;
     background-color: blue;
     color: white;
     height: 400px;
+    grid-template-columns: 3fr 1fr;
 
-    &__albumart {
-        position: absolute;
-        right: 0;
-        // height: 33%;
-        // width: 33%;
+    &__currenttrack {
+        text-align: center;
+        grid-column: 2;
+
+        &__albumart {
+            width: 250px;
+            height: 250px;
+
+        }
+    
     }
-    &__trackname {
-        bottom: 0;
-        background-color: yellow;
-    }
+
     &__trackrow {
-        display: flex;
         background-color: pink;
-        // width: calculate(1/3);
+        grid-column: 1;
 
         &__data {
             background-color: purple;

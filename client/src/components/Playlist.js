@@ -10,7 +10,7 @@ const tracks = [
         src: "Spotify"
     },
     {
-        name: "Track_2",
+        name: "A super long name: Track_2 (featuring pdiddy and young spanky IV)",
         order: 2,
         artist: "Artist_2",
         length: "3:00",
@@ -44,7 +44,7 @@ class Playlist extends Component{
                     <span className="playlist__trackrow__data">{track.artist}</span>
                     <span className="playlist__trackrow__data">{track.length}</span>
                     {/* <span className="playlist__trackrow__data">{track.src}</span> */}
-                    <i className="fab fa-spotify playlist__trackrow__data" />
+                    <span className='playlist__trackrow__data'><i className="fab fa-spotify" /></span>
                 </div> 
             )
         })
@@ -52,8 +52,11 @@ class Playlist extends Component{
         return (
             <div className="playlist">
             {allTracks}
-                <img className="playlist__albumart" src={this.props.playerState.albumArt} alt="Your Album Art"/>
-                <div className="playlist__albumart playlist__trackname">{this.props.playerState.trackName}</div>
+            <div className="playlist__currenttrack">
+                <div className="playlist__currenttrack__playlistname">Playlist 1</div>
+                <img className="playlist__currenttrack__albumart" src={this.props.playerState.albumArt} alt="Your Album Art"/>
+                <div className="playlist__currenttrack__trackname">{this.props.playerState.trackName}</div>
+            </div>
             </div>
         )
 
