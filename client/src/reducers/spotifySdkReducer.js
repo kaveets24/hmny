@@ -6,6 +6,7 @@ const initialState = {
     trackName: "Track Name",
     artistName: "Artist Name",
     albumName: "Album Name",
+    albumArt: "",
     playing: false,
     position: 0,
     duration: 0,

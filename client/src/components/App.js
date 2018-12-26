@@ -36,7 +36,7 @@ class App extends Component {
             <Header />
             <div className="main">
             <Route exact path="/playlists" component={Playlists} />
-            <Route exact path="/Playlist_1" component={Playlist} /> 
+            <Route exact path="/playlist_1" component={Playlist} /> 
             {this.renderContent()}
             </div>       
           </div>

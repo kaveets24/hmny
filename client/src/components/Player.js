@@ -39,6 +39,7 @@ class Player extends Component {
         // Playback status updates
         this.player.addListener("player_state_changed", state => {
           this.onPlayerStateChange(state);
+          console.log(state);
         });
 
         // Ready
@@ -70,6 +71,7 @@ class Player extends Component {
       } = playerState.track_window; // using ES6 destructuring, take objects off of the playerState.track_window
       const trackName = currentTrack.name;
       const albumName = currentTrack.album.name;
+      const albumArt = currentTrack.album.images[0].url;
       const artistName = currentTrack.artists
         .map(artist => artist.name)
         .join(", ");
@@ -81,6 +83,7 @@ class Player extends Component {
         duration,
         trackName,
         albumName,
+        albumArt,
         artistName,
         playing
       });
@@ -90,7 +93,7 @@ class Player extends Component {
   componentDidMount() {
     this.initializeSpotifySdk();
   }
-// Sets hmny as the user's currently playing device on Spotify
+// Sets hmny as the user's currently playing device on Spotify Connect
   selectHmnyOnSpotifyConnect() {
     const { spotifyAccessToken } = this.props.auth;
     const  { deviceId } = this.props.playerState; 
