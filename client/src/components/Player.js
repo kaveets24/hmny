@@ -123,17 +123,32 @@ class Player extends Component {
   }
 
   onSetVolume(volume) {
+    // calls the UPDATE_VOLUME action 
     this.props.updateVolume(this.player, volume)
   }
-  
-  render() {
-    let playButtonClass;
-    this.props.playerState.playing === true
-      ? (playButtonClass = "fas fa-pause")
-      : (playButtonClass = "fas fa-play");
 
-    let volume = (this.props.playerState.volume)
-    console.log(volume);
+  onToggleMute() {
+    if (this.props.playerState.volume > 0.01) {
+      this.onSetVolume(0.01);
+    } else { this.onSetVolume(1)}
+
+  }
+
+  render() {
+
+    const { playing, volume } = this.props.playerState;
+
+    let playButtonClass;
+    playing === true ? (playButtonClass = "fas fa-pause") : (playButtonClass = "fas fa-play");
+
+    let volumeButtonClass;
+    if (volume >= 0.5 ) {
+      volumeButtonClass = "fas fa-volume-up";
+    } else if (volume < 0.5 && volume > 0.01) {
+      volumeButtonClass = "fas fa-volume-down";
+    } else {
+      volumeButtonClass = "fas fa-volume-mute";
+    }
 
     return (
       <footer className="player">
@@ -147,15 +162,11 @@ class Player extends Component {
           <div className="player__button player__button--hover" onClick={() => this.onNextClick()}>
             <i className="fas fa-step-forward" />
           </div>
-
-            <div className="player__button player__button--volume fa-xs">
-              <i className="fas fa-volume-down" />
+            <div onClick={() => this.onToggleMute()} className="player__button player__button--volume fa-xs">
+              <i className={volumeButtonClass} />
             </div>
             <div className="player__slidecontainer player__button">
               <input onChange={(event)=> this.onSetVolume(event.target.value / 100)} type="range" min="1" max="100" value={volume*100} className="player__slider" />
-            </div>
-            <div className="player__button player__button--volume fa-xs">
-              <i className="fas fa-volume-up" />
             </div>
         </div>
       </footer>
