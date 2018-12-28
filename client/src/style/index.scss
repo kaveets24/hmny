@@ -130,8 +130,37 @@ body {
         text-align: center;
         width: 100%;
         margin: auto;
-        
     }
+
+    &__slider {
+        -webkit-appearance: none;
+        width: 100%;
+        height: 10px;
+        border-radius: 5px;   
+        background: #d3d3d3;
+        outline: none;
+        opacity: 0.7;
+        -webkit-transition: .2s;
+        transition: opacity .2s;
+    }
+    
+    &__slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 15px;
+        height: 15px;
+        border-radius: 50%; 
+        background: $color2;
+        cursor: pointer;
+    }
+    &__slider::-moz-range-thumb {
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        background: $color2;
+        cursor: pointer;
+    }
+
     &__button {
         display: inline-block;
         color: $color2;
@@ -141,8 +170,12 @@ body {
         padding: 0 14px;
     }
 
-    &__button:hover {
-        background-color: #ddd;
+    &__button--hover:hover {
+        background-color: $hoverColor;
         color: $color2;
+    }
+
+    &__button--volume {
+        opacity: 0.5;
     }
 }

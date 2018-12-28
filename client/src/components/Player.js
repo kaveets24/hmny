@@ -76,7 +76,6 @@ class Player extends Component {
         .map(artist => artist.name)
         .join(", ");
       const playing = !playerState.paused;
-
       // Call updatePlayer action with this object passed to it.
       this.props.updatePlayer({
         position,
@@ -93,11 +92,11 @@ class Player extends Component {
   componentDidMount() {
     this.initializeSpotifySdk();
   }
-// Sets hmny as the user's currently playing device on Spotify Connect
+  // Sets hmny as the user's currently playing device on Spotify Connect
   selectHmnyOnSpotifyConnect() {
     const { spotifyAccessToken } = this.props.auth;
-    const  { deviceId } = this.props.playerState; 
-    
+    const { deviceId } = this.props.playerState;
+
     fetch("https://api.spotify.com/v1/me/player", {
       method: "PUT",
       headers: {
@@ -105,7 +104,7 @@ class Player extends Component {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        "device_ids": [ deviceId ],
+        "device_ids": [deviceId],
         "play": false,
       }),
     });
@@ -123,30 +122,41 @@ class Player extends Component {
     this.player.nextTrack();
   }
 
-
-
-
+  onSetVolume(volume) {
+    this.props.updateVolume(this.player, volume)
+  }
+  
   render() {
     let playButtonClass;
     this.props.playerState.playing === true
       ? (playButtonClass = "fas fa-pause")
       : (playButtonClass = "fas fa-play");
 
+    let volume = (this.props.playerState.volume)
+    console.log(volume);
+
     return (
       <footer className="player">
         <div className="player__div fa-lg">
-          <div className="player__button" onClick={() => this.onPreviousClick()}>
+          <div className="player__button player__button--hover" onClick={() => this.onPreviousClick()}>
             <i className="fas fa-step-backward" />
           </div>
-          <div className="player__button" onClick={() => this.onPlayClick()}>
+          <div className="player__button player__button--hover" onClick={() => this.onPlayClick()}>
             <i className={playButtonClass} />
           </div>
-          <div className="player__button" onClick={()=> {this.onNextClick()}}>
+          <div className="player__button player__button--hover" onClick={() => this.onNextClick()}>
             <i className="fas fa-step-forward" />
           </div>
-          <div className="player__button">
-            <i className="fas fa-volume-up" />
-          </div>
+
+            <div className="player__button player__button--volume fa-xs">
+              <i className="fas fa-volume-down" />
+            </div>
+            <div className="player__slidecontainer player__button">
+              <input onChange={(event)=> this.onSetVolume(event.target.value / 100)} type="range" min="1" max="100" value={volume*100} className="player__slider" />
+            </div>
+            <div className="player__button player__button--volume fa-xs">
+              <i className="fas fa-volume-up" />
+            </div>
         </div>
       </footer>
     );

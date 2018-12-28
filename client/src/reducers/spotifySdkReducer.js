@@ -1,4 +1,4 @@
-import { UPDATE_PLAYER, UPDATE_DEVICE_ID } from '../actions/types';
+import { UPDATE_PLAYER, UPDATE_DEVICE_ID, UPDATE_VOLUME } from '../actions/types';
 
 const initialState = {
     deviceId: "",
@@ -10,6 +10,7 @@ const initialState = {
     playing: false,
     position: 0,
     duration: 0,
+    volume: 1,
 };
 
 export default function (state = initialState, action) {
@@ -19,6 +20,9 @@ export default function (state = initialState, action) {
 
         case UPDATE_DEVICE_ID:
             return { ...state, deviceId: action.payload };
+        
+        case UPDATE_VOLUME:
+            return {...state, volume: action.payload };
 
         default:
             return state;

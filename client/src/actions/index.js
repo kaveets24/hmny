@@ -3,6 +3,7 @@ import {
   FETCH_USER,
   UPDATE_PLAYER,
   UPDATE_DEVICE_ID,
+  UPDATE_VOLUME,
 } from "./types";
 
 export const fetchUser = () => async dispatch => {
@@ -20,5 +21,13 @@ export const updateDeviceId = (device_id) => dispatch => {
 
   dispatch({type: UPDATE_DEVICE_ID, payload: device_id});
 }
+
+export const updateVolume = (player, volume) => async dispatch => {
+  await player.setVolume(volume);
+  const getVolume = await player.getVolume()
+
+    
+    dispatch({type: UPDATE_VOLUME, payload: getVolume})
+};
 
 
