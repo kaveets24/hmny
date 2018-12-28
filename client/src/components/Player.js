@@ -162,7 +162,7 @@ class Player extends Component {
           <div className="player__button player__button--hover" onClick={() => this.onNextClick()}>
             <i className="fas fa-step-forward" />
           </div>
-            <div onClick={() => this.onToggleMute()} className="player__button player__button--volume fa-xs">
+            <div onClick={() => this.onToggleMute()} className="player__button player__button--volumeicon fa-xs">
               <i className={volumeButtonClass} />
             </div>
             <div className="player__slidecontainer player__button">

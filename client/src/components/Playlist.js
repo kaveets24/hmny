@@ -35,29 +35,39 @@ const tracks = [
 
 class Playlist extends Component{
 
-    render() {
+    renderTracks() {
         const allTracks = tracks.map(track => {
             return (
                 <div className="playlist__trackrow">
-                    <span className="playlist__data">{track.order}</span>
-                    <span className="playlist__data">{track.name}</span>
-                    <span className="playlist__data">{track.artist}</span>
-                    <span className="playlist__data">{track.length}</span>
-                    <span className='playlist__data'><i className="fab fa-spotify" /></span>
+                    <div className="playlist__trackrow--white">
+                        <span className="playlist__data">{track.order}.</span>
+                        <span className="playlist__data">{track.name}</span>
+                    </div>
+                    <div className="playlist__trackrow--grey">
+                        <span className="playlist__data--grey">{track.artist}</span>
+                        <span className="playlist__data">{track.length}</span>
+                        <span className='playlist__data'><i className="fab fa-spotify" /></span>
+                    </div>        
+             
                 </div>               
             )
         })
 
+        return allTracks;
+    }
+
+    render() {
         return (
             <div className="playlist">
                 <div className="playlist__column1">
-                {allTracks}
+                {this.renderTracks()}
                 </div>
-            <div className="playlist__column2">
-                <div className="playlist__playlistname">Playlist 1</div>
-                <img className="playlist__albumart" src={this.props.playerState.albumArt} alt="Your Album Art"/>
-                <div className="playlist__trackname">{this.props.playerState.trackName}</div>
-            </div>
+
+                <div className="playlist__column2">
+                    <div className="playlist__playlistname">Playlist 1</div>
+                    <img className="playlist__albumart" src={this.props.playerState.albumArt} alt="Your Album Art"/>
+                    <div className="playlist__trackname">{this.props.playerState.trackName}</div>
+                </div>
             </div>
         )
 

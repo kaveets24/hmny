@@ -92,20 +92,31 @@ body {
 
 .playlist {
     display: flex;
-    // background-color: blue;
-    color: white;
+    color: $color1;
+    &__trackrow {
+        background-color: $playlist-background-color;
+        &--white {
+            font-weight: 500;
+
+        }
+        &--grey {
+            color: $color3;
+            padding-left: 45px;
+        }
+    }
 
     &__column1 {
         flex-basis: 70%;
 
     }
     &__data {
-        background-color: purple;
+        // background-color: purple;
         padding: 0 10px;
     }
 
     &__column2 {
         flex-basis: 30%;
+        text-align: center;
 
     }
 
@@ -171,11 +182,11 @@ body {
     }
 
     &__button--hover:hover {
-        background-color: $hoverColor;
+        background-color: $hover-color;
         color: $color2;
     }
 
-    &__button--volume {
+    &__button--volumeicon {
         opacity: 0.5;
         width: 40px;
     }
