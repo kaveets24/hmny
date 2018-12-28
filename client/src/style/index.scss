@@ -50,7 +50,6 @@ body {
     margin: 100px auto;
     padding: 16px;
     max-width: 1250px;
-    background-color: brown;
 
     &__message {
         color: $color1;
@@ -92,33 +91,30 @@ body {
 }
 
 .playlist {
-    display: grid;
-    background-color: blue;
+    display: flex;
+    // background-color: blue;
     color: white;
-    height: 400px;
-    grid-template-columns: 3fr 1fr;
 
-    &__currenttrack {
-        text-align: center;
-        grid-column: 2;
+    &__column1 {
+        flex-basis: 70%;
 
-        &__albumart {
-            width: 250px;
-            height: 250px;
-
-        }
-    
+    }
+    &__data {
+        background-color: purple;
+        padding: 0 10px;
     }
 
-    &__trackrow {
-        background-color: pink;
-        grid-column: 1;
+    &__column2 {
+        flex-basis: 30%;
 
-        &__data {
-            background-color: purple;
-            padding: 0 10px;
-        }
     }
+
+    &__albumart {
+        width: 250px;
+        height: 250px;
+
+    }
+
 }
 
 .player {

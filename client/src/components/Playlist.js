@@ -39,23 +39,24 @@ class Playlist extends Component{
         const allTracks = tracks.map(track => {
             return (
                 <div className="playlist__trackrow">
-                    <span className="playlist__trackrow__data">{track.order}</span>
-                    <span className="playlist__trackrow__data">{track.name}</span>
-                    <span className="playlist__trackrow__data">{track.artist}</span>
-                    <span className="playlist__trackrow__data">{track.length}</span>
-                    {/* <span className="playlist__trackrow__data">{track.src}</span> */}
-                    <span className='playlist__trackrow__data'><i className="fab fa-spotify" /></span>
-                </div> 
+                    <span className="playlist__data">{track.order}</span>
+                    <span className="playlist__data">{track.name}</span>
+                    <span className="playlist__data">{track.artist}</span>
+                    <span className="playlist__data">{track.length}</span>
+                    <span className='playlist__data'><i className="fab fa-spotify" /></span>
+                </div>               
             )
         })
 
         return (
             <div className="playlist">
-            {allTracks}
-            <div className="playlist__currenttrack">
-                <div className="playlist__currenttrack__playlistname">Playlist 1</div>
-                <img className="playlist__currenttrack__albumart" src={this.props.playerState.albumArt} alt="Your Album Art"/>
-                <div className="playlist__currenttrack__trackname">{this.props.playerState.trackName}</div>
+                <div className="playlist__column1">
+                {allTracks}
+                </div>
+            <div className="playlist__column2">
+                <div className="playlist__playlistname">Playlist 1</div>
+                <img className="playlist__albumart" src={this.props.playerState.albumArt} alt="Your Album Art"/>
+                <div className="playlist__trackname">{this.props.playerState.trackName}</div>
             </div>
             </div>
         )
