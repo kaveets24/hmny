@@ -128,7 +128,7 @@ class Player extends Component {
   }
 
   onToggleMute() {
-    if (this.props.playerState.volume > 0.01) {
+    if (this.props.playerState.volume > 0.02) {
       this.onSetVolume(0);
     } else { this.onSetVolume(1)}
 
@@ -166,7 +166,7 @@ class Player extends Component {
               <i className={volumeButtonClass} />
             </div>
             <div className="player__slidecontainer player__button">
-              <input onChange={(event)=> this.onSetVolume(event.target.value / 100)} type="range" min="1" max="100" value={volume*100} className="player__slider" />
+              <input onChange={(event)=> this.onSetVolume(event.target.value / 100)} className="player__slider" type="range" min="1" max="100" value={volume*100}  />
             </div>
         </div>
       </footer>
