@@ -24,9 +24,8 @@ export const updateDeviceId = (device_id) => dispatch => {
 
 export const updateVolume = (player, volume) => async dispatch => {
   await player.setVolume(volume);
-  const getVolume = await player.getVolume()
-
-    
+  const getVolume = await player.getVolume();
+  
     dispatch({type: UPDATE_VOLUME, payload: getVolume})
 };
 
