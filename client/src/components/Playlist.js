@@ -44,8 +44,8 @@ class Playlist extends Component{
                         <span className="playlist__data">{track.name}</span>
                     </div>
                     <div className="playlist__trackrow--grey">
-                        <span className="playlist__data--grey">{track.artist}</span>
-                        <span className="playlist__data">{track.length}</span>
+                        <span className="playlist__data">{track.artist}</span>
+                        <span className="playlist__data playlist__data--duration">{track.length}</span>
                         <span className='playlist__data'><i className="fab fa-spotify" /></span>
                     </div>        
              

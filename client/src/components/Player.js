@@ -129,7 +129,7 @@ class Player extends Component {
 
   onToggleMute() {
     if (this.props.playerState.volume > 0.01) {
-      this.onSetVolume(0.01);
+      this.onSetVolume(0);
     } else { this.onSetVolume(1)}
 
   }

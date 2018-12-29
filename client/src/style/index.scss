@@ -83,7 +83,9 @@ body {
     }
 
     &__item {
-        background-color: green;
+        color: $color1;
+        text-align: center;
+        background-color: $playlist-background-color;
         height: 200px;
         width: 200px;
     }
@@ -94,6 +96,7 @@ body {
     display: flex;
     color: $color1;
     &__trackrow {
+        position: relative;
         background-color: $playlist-background-color;
         &--white {
             font-weight: 500;
@@ -101,7 +104,7 @@ body {
         }
         &--grey {
             color: $color3;
-            padding-left: 45px;
+            padding-left: 35px;
         }
     }
 
@@ -110,8 +113,13 @@ body {
 
     }
     &__data {
-        // background-color: purple;
         padding: 0 10px;
+        line-height: 30px;
+
+        &--duration {
+            position: absolute;
+            right:0 ;
+        }
     }
 
     &__column2 {
