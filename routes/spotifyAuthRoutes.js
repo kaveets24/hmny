@@ -43,7 +43,6 @@ router.get('/refresh_token', function (req, res) {
   var refreshToken = req.user.spotifyRefreshToken;
   var spotifyId = req.user.spotifyId;
 
-  console.log(refreshToken);
   var authOptions = {
     url: 'https://accounts.spotify.com/api/token',
     headers: { 'Authorization': 'Basic ' + (new Buffer(keys.spotifyClientID + ':' + keys.spotifyClientSecret).toString('base64')) },

@@ -5,6 +5,7 @@ import * as actions from "../actions";
 class Player extends Component {
   // Initialize the Spotify Web Playback SDK
   initializeSpotifySdk() {
+
     const token = this.props.auth.spotifyAccessToken;
 
     console.log(token);
@@ -31,7 +32,10 @@ class Player extends Component {
           console.error(message);
           await this.props.requestNewSpotifyToken();
           // Take the user back to the spotify Login/Authentication page to get a new refresh token
-          setTimeout(() => this.initializeSpotifySdk(), 5000);
+          setTimeout(async () => {
+            await this.props.fetchUser();
+            this.initializeSpotifySdk()
+          }, 5000);
           
         });
         this.player.addListener("account_error", ({ message }) => {
@@ -58,7 +62,8 @@ class Player extends Component {
         this.player.addListener("not_ready", ({ device_id }) => {
           console.log("Device ID has gone offline", device_id);
         });
-        // Connect to the player!
+        // Connect to the player!￼
+
         this.player.connect();
       }
     };
