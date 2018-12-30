@@ -3,10 +3,11 @@ const mongoose = require('mongoose');
 const cookieSession = require('cookie-session');
 const passport = require('passport');
 const keys = require('./config/keys');
-const spotifyAuth = require('./routes/spotifyAuthRoutes');
-const googleAuth = require('./routes/googleAuthRoutes');
+
 require('./models/User');
 require('./services/passport');
+const spotifyAuth = require('./routes/spotifyAuthRoutes');
+const googleAuth = require('./routes/googleAuthRoutes');
 
 const app = express();
 
@@ -24,9 +25,6 @@ app.use(passport.session());
 // Routes
 app.use('/', googleAuth);
 app.use('/', spotifyAuth); // correct way using express Router;
-// require('./routes/authRoutes')(app); // returns function defined in authRoutes and calls with the app object.
-// require('./routes/spotifyAuthRoutes')(app);
-
 
 if (process.env.NODE_ENV === 'production') {
 

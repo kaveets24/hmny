@@ -2,6 +2,9 @@ const passport = require('passport');
 const express = require('express');
 const router = express.Router();
 const keys = require('../config/keys');
+const request = require('request');
+const mongoose = require("mongoose");
+var User = mongoose.model("users");
 
 // GET /auth/spotify
 //   Use passport.authenticate() as route middleware to authenticate the
@@ -14,7 +17,7 @@ router.get(
     scope: ["streaming", "user-read-birthdate", "user-read-email", "user-read-private"],
     showDialog: true
   }),
-  function(req, res) {
+  function (req, res) {
     // The request will be redirected to spotify for authentication, so this
     // function will not be called.
   }
@@ -28,10 +31,48 @@ router.get(
 router.get(
   '/callback',
   passport.authenticate('spotify', { failureRedirect: '/' }),
-  function(req, res) {
+  function (req, res) {
     res.redirect('/');
   }
 );
+
+router.get('/refresh_token', function (req, res) {
+  // requesting access token from refresh token
+  var refreshToken = req.user.spotifyRefreshToken;
+  var spotifyId = req.user.spotifyId;
+
+  console.log(refreshToken);
+  var authOptions = {
+    url: 'https://accounts.spotify.com/api/token',
+    headers: { 'Authorization': 'Basic ' + (new Buffer(keys.spotifyClientID + ':' + keys.spotifyClientSecret).toString('base64')) },
+    form: {
+      grant_type: 'refresh_token',
+      refresh_token: refreshToken
+    },
+    json: true
+  };
+
+  request.post(authOptions, function (error, response, body) {
+    if (!error && response.statusCode === 200) {
+      var accessToken = body.access_token;
+      console.log(accessToken);
+
+
+      User.findOneAndUpdate(
+        { spotifyId: spotifyId },
+        { $set: { spotifyAccessToken: accessToken, spotifyRefreshToken: refreshToken } },
+        { new: true },
+        (err, user) => {
+          if (err) return;
+          return;
+        }
+      );
+
+      res.redirect('/');
+
+    }
+  });
+});
 
 module.exports = router;
 

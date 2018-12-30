@@ -5,6 +5,8 @@ module.exports = function(app) {
     app.use(proxy('/api/*', { target: 'http://localhost:8000' }));
     app.use(proxy('/auth/*', { target: 'http://localhost:8000' }));
     app.use(proxy('/callback', { target: 'http://localhost:8000' }));
+    app.use(proxy('/refresh_token', { target: 'http://localhost:8000' }));
+
 
 
 }
