@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actions from "../actions";
-import Axios from "axios";
 
 class Player extends Component {
   // Initialize the Spotify Web Playback SDK
@@ -25,14 +24,12 @@ class Player extends Component {
         // Error handling
         this.player.addListener("initialization_error", ({ message }) => {
           console.error(message);
-          Axios.get('/callback')
           
         });
         this.player.addListener("authentication_error", ({ message }) => {
           console.error(message);
           // Take the user back to the spotify Login/Authentication page to get a new refresh token
           // this.requestNewSpotifyToken();
-          Axios.get('/callback')
           
         });
         this.player.addListener("account_error", ({ message }) => {
