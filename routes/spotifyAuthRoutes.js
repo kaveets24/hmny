@@ -6,6 +6,8 @@ const request = require('request');
 const mongoose = require("mongoose");
 var User = mongoose.model("users");
 
+
+
 // GET /auth/spotify
 //   Use passport.authenticate() as route middleware to authenticate the
 //   request. The first step in spotify authentication will involve redirecting
@@ -57,18 +59,25 @@ router.get('/refresh_token', function (req, res) {
       var accessToken = body.access_token;
       console.log(accessToken);
 
+        User.findOneAndUpdate(
+          { spotifyId: spotifyId },
+          { $set: { spotifyAccessToken: accessToken, spotifyRefreshToken: refreshToken } },
+          { new: true },
+          (err, user) => {
+            if (err) return err;
+            console.log("USER", user);
+            req.logout();
+            req.login(user, function(err) {
+              if (err) return;
+              return res.redirect('/api/current_user');
+                            
+            });  
 
-      User.findOneAndUpdate(
-        { spotifyId: spotifyId },
-        { $set: { spotifyAccessToken: accessToken, spotifyRefreshToken: refreshToken } },
-        { new: true },
-        (err, user) => {
-          if (err) return;
-          return;
-        }
-      );
 
-      res.redirect('/');
+            
+          });
+
+
 
     }
   });

@@ -57,8 +57,8 @@ passport.use(
     },
     async (accessToken, refreshToken, expires_in, profile, done) => {
       // console.log("Access Token: ", accessToken);
-      spotifyApi.setAccessToken(accessToken);
-      spotifyApi.setRefreshToken(refreshToken);
+      // spotifyApi.setAccessToken(accessToken);
+      // spotifyApi.setRefreshToken(refreshToken);
       //     spotifyApi.getUserPlaylists(profile.id)
       //     .then(function(data) {
       //   // console.log('Retrieved playlists', data.body);

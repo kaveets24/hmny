@@ -6,6 +6,7 @@ class Player extends Component {
   // Initialize the Spotify Web Playback SDK
   initializeSpotifySdk() {
     const token = this.props.auth.spotifyAccessToken;
+
     console.log(token);
 
     const script = document.createElement("script");
@@ -28,6 +29,7 @@ class Player extends Component {
         });
         this.player.addListener("authentication_error", ({ message }) => {
           console.error(message);
+          this.props.requestNewSpotifyToken();
           // Take the user back to the spotify Login/Authentication page to get a new refresh token
           // this.requestNewSpotifyToken();
           
@@ -92,7 +94,8 @@ class Player extends Component {
 
     }
   }
-  componentDidMount() {
+  async componentDidMount() {
+    await this.props.fetchUser();
     this.initializeSpotifySdk();
   }
   // Sets hmny as the user's currently playing device on Spotify Connect

@@ -7,6 +7,7 @@ const keys = require('./config/keys');
 require('./models/User');
 require('./services/passport');
 const spotifyAuth = require('./routes/spotifyAuthRoutes');
+
 const googleAuth = require('./routes/googleAuthRoutes');
 
 const app = express();
