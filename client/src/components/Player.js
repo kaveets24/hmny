@@ -31,7 +31,7 @@ class Player extends Component {
           console.error(message);
           await this.props.requestNewSpotifyToken();
           // Take the user back to the spotify Login/Authentication page to get a new refresh token
-          this.initializeSpotifySdk();
+          setTimeout(() => this.initializeSpotifySdk(), 5000);
           
         });
         this.player.addListener("account_error", ({ message }) => {
