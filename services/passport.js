@@ -20,11 +20,6 @@ passport.serializeUser((user, done) => {
   done(null, user);
 });
 
-// passport.deserializeUser((id, done) => {
-//   User.findById(id).then(user => {
-//     done(null, user);
-//   });
-// });
 passport.deserializeUser(function(obj, done) {
   done(null, obj);
 });
@@ -63,6 +58,7 @@ passport.use(
     async (accessToken, refreshToken, expires_in, profile, done) => {
       // console.log("Access Token: ", accessToken);
       spotifyApi.setAccessToken(accessToken);
+      spotifyApi.setRefreshToken(refreshToken);
       //     spotifyApi.getUserPlaylists(profile.id)
       //     .then(function(data) {
       //   // console.log('Retrieved playlists', data.body);
@@ -76,7 +72,7 @@ passport.use(
 
         await User.findOneAndUpdate(
           { spotifyId: profile.id },
-          { $set: { spotifyAccessToken: accessToken } },
+          { $set: { spotifyAccessToken: accessToken, spotifyRefreshToken: refreshToken } },
           { new: true },
           (err, user) => {
             if (err) return done(null, user);
@@ -87,7 +83,8 @@ passport.use(
         // we don't have a user record with this ID, make a new record!
         const user = await new User({
           spotifyId: profile.id,
-          spotifyAccessToken: accessToken
+          spotifyAccessToken: accessToken,
+          spotifyRefreshToken: refreshToken,
         }).save();
         done(null, user);
         console.log("A new spotify user has been added to mongoDB");

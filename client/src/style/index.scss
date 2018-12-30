@@ -27,7 +27,7 @@ body {
     &__hmny {
         font-family: $logo-font-family;
         font-weight: bold;
-        font-size: $large-font;
+        font-size: $medium-font;
         text-transform: lowercase;
     }
     &__a {
@@ -53,7 +53,7 @@ body {
 
     &__message {
         color: $color1;
-        font-size: $large-font;
+        font-size: $medium-font;
         max-width: 500px;
         margin: auto;
         padding: inherit;
@@ -127,11 +127,20 @@ body {
         text-align: center;
 
     }
+    &__playlistname {
+        font-size: $large-font;
+    }
 
     &__albumart {
         width: 250px;
         height: 250px;
     }
+
+    &__trackname {
+        font-size: $medium-font;
+    }
+
+
 
 }
 

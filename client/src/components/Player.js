@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actions from "../actions";
+import Axios from "axios";
 
 class Player extends Component {
   // Initialize the Spotify Web Playback SDK
@@ -24,10 +25,15 @@ class Player extends Component {
         // Error handling
         this.player.addListener("initialization_error", ({ message }) => {
           console.error(message);
+          Axios.get('/callback')
+          
         });
         this.player.addListener("authentication_error", ({ message }) => {
           console.error(message);
           // Take the user back to the spotify Login/Authentication page to get a new refresh token
+          // this.requestNewSpotifyToken();
+          Axios.get('/callback')
+          
         });
         this.player.addListener("account_error", ({ message }) => {
           console.error(message);
@@ -162,11 +168,11 @@ class Player extends Component {
           <div className="player__button player__button--hover" onClick={() => this.onNextClick()}>
             <i className="fas fa-step-forward" />
           </div>
-            <div onClick={() => this.onToggleMute()} className="player__button player__button--volumeicon fa-xs">
+            <div onClick={() => this.onToggleMute()} className="player__button player__button--hover player__button--volumeicon fa-xs">
               <i className={volumeButtonClass} />
             </div>
             <div className="player__slidecontainer player__button">
-              <input onChange={(event)=> this.onSetVolume(event.target.value / 100)} className="player__slider" type="range" min="1" max="100" value={volume*100}  />
+              <input onChange={(event)=> this.onSetVolume(event.target.value / 100)} className="player__slider" type="range" min="0" max="100" value={volume*100}  />
             </div>
         </div>
       </footer>
