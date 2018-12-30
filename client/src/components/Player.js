@@ -27,11 +27,11 @@ class Player extends Component {
           console.error(message);
           
         });
-        this.player.addListener("authentication_error", ({ message }) => {
+        this.player.addListener("authentication_error", async ({ message }) => {
           console.error(message);
-          this.props.requestNewSpotifyToken();
+          await this.props.requestNewSpotifyToken();
           // Take the user back to the spotify Login/Authentication page to get a new refresh token
-          // this.requestNewSpotifyToken();
+          this.initializeSpotifySdk();
           
         });
         this.player.addListener("account_error", ({ message }) => {
@@ -94,8 +94,7 @@ class Player extends Component {
 
     }
   }
-  async componentDidMount() {
-    await this.props.fetchUser();
+  componentDidMount() {
     this.initializeSpotifySdk();
   }
   // Sets hmny as the user's currently playing device on Spotify Connect

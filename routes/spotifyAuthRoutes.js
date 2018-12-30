@@ -57,7 +57,6 @@ router.get('/refresh_token', function (req, res) {
   request.post(authOptions, function (error, response, body) {
     if (!error && response.statusCode === 200) {
       var accessToken = body.access_token;
-      console.log(accessToken);
 
         User.findOneAndUpdate(
           { spotifyId: spotifyId },
@@ -65,7 +64,6 @@ router.get('/refresh_token', function (req, res) {
           { new: true },
           (err, user) => {
             if (err) return err;
-            console.log("USER", user);
             req.logout();
             req.login(user, function(err) {
               if (err) return;
