@@ -8,8 +8,6 @@ class Player extends Component {
 
     const token = this.props.auth.spotifyAccessToken;
 
-    console.log(token);
-
     const script = document.createElement("script");
     script.src = "https://sdk.scdn.co/spotify-player.js";
     script.async = true;
@@ -30,10 +28,8 @@ class Player extends Component {
         });
         this.player.addListener("authentication_error", async ({ message }) => {
           console.error(message);
-          await this.props.requestNewSpotifyToken();
-          // Take the user back to the spotify Login/Authentication page to get a new refresh token
-          setTimeout(async () => {
-            await this.props.fetchUser();
+          await this.props.requestNewSpotifyToken(); // fetch new accessToken and fetchUser();
+          setTimeout(() => {
             this.initializeSpotifySdk()
           }, 5000);
           
@@ -55,7 +51,7 @@ class Player extends Component {
         this.player.addListener("ready", async ({ device_id }) => {
           console.log("Ready with Device ID", device_id);
           await this.props.updateDeviceId(device_id);
-          this.selectHmnyOnSpotifyConnect();
+          // this.selectHmnyOnSpotifyConnect();
         });
 
         // Not Ready

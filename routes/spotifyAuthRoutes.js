@@ -38,7 +38,7 @@ router.get(
   }
 );
 
-router.get('/refresh_token', function (req, res) {
+router.get('/auth/refresh_token', function (req, res) {
   // requesting access token from refresh token
   var refreshToken = req.user.spotifyRefreshToken;
   var spotifyId = req.user.spotifyId;
@@ -66,12 +66,9 @@ router.get('/refresh_token', function (req, res) {
             req.logout();
             req.login(user, function(err) {
               if (err) return;
-              return res.redirect('/api/current_user');
-                            
-            });  
-
-
-            
+              return res.send(user);
+            });
+                      
           });
 
 

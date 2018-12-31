@@ -29,8 +29,11 @@ export const updateVolume = (player, volume) => async dispatch => {
     dispatch({type: UPDATE_VOLUME, payload: getVolume})
 };
 
-export const requestNewSpotifyToken = () => async () => {
-  axios.get('/refresh_token');
+export const requestNewSpotifyToken = () => async dispatch => {
+  await axios.get('/auth/refresh_token');
+  const res = await axios.get("/api/current_user");
+  dispatch({ type: FETCH_USER, payload: res.data });
+
 }
 
 

@@ -4,17 +4,9 @@ const SpotifyStrategy = require("passport-spotify").Strategy;
 const mongoose = require("mongoose");
 const User = mongoose.model("users");
 const keys = require("../config/keys");
+const spotifyApi = require('./spotifyWebApi');
 
-var SpotifyWebApi = require("spotify-web-api-node");
 
-const ROOT_URL = keys.rootUrl;
-
-// credentials are optional
-var spotifyApi = new SpotifyWebApi({
-  clientId: keys.spotifyClientID,
-  clientSecret: keys.spotifyClientSecret,
-  redirectUri: new URL("/callback", ROOT_URL).href
-});
 
 passport.serializeUser((user, done) => {
   done(null, user);
@@ -56,15 +48,6 @@ passport.use(
       proxy: true
     },
     async (accessToken, refreshToken, expires_in, profile, done) => {
-      // console.log("Access Token: ", accessToken);
-      // spotifyApi.setAccessToken(accessToken);
-      // spotifyApi.setRefreshToken(refreshToken);
-      //     spotifyApi.getUserPlaylists(profile.id)
-      //     .then(function(data) {
-      //   // console.log('Retrieved playlists', data.body);
-      // },function(err) {
-      //   console.log('Something went wrong!', err);
-      // });
       const existingUser = await User.findOne({ spotifyId: profile.id });
       if (existingUser) {
         // we already have a record with the given profile ID
