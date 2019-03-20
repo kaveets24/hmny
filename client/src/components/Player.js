@@ -51,7 +51,7 @@ class Player extends Component {
         this.player.addListener("ready", async ({ device_id }) => {
           console.log("Ready with Device ID", device_id);
           await this.props.updateDeviceId(device_id);
-          // this.selectHmnyOnSpotifyConnect();
+          this.selectHmnyOnSpotifyConnect();
         });
 
         // Not Ready
