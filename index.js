@@ -6,11 +6,13 @@ const keys = require('./config/keys');
 
 require('./models/User');
 require('./models/Track');
+require('./models/Playlist');
 
 require('./services/passport');
 const spotifyAuth = require('./routes/spotifyAuthRoutes');
 const spotifyWrapper = require('./routes/spotifyWrapperRoutes');
 const googleAuth = require('./routes/googleAuthRoutes');
+const playlists = require('./routes/playlists');
 
 const app = express();
 
@@ -29,6 +31,7 @@ app.use(passport.session());
 app.use('/', googleAuth);
 app.use('/', spotifyAuth); // correct way using express Router;
 app.use('/', spotifyWrapper); // correct way using express Router;
+app.use('/playlists', playlists);
 
 if (process.env.NODE_ENV === 'production') {
 
