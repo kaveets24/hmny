@@ -31,4 +31,22 @@ router.get('/api/findtrack', requireLogin, async (req, res) => {
 
 });
 
+
+// Should include a regex or pattern matcher for the current playlist, and will begin playback of the first song. 
+router.get('/api/play', async (req, res) => {
+    const user = req.user;
+    spotifyApi.setAccessToken(user.spotifyAccessToken);
+    spotifyApi.setRefreshToken(user.spotifyRefreshToken);
+
+    const spotifyUri = "spotify:album:5oSVYKZLKGCmwYqmJ7AZnO";
+
+   const play =  await spotifyApi.play({"context_uri": spotifyUri});
+
+    console.log(play);
+    
+
+  
+
+});
+
 module.exports = router;    
