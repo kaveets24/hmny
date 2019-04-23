@@ -30,23 +30,23 @@ class Playlists extends Component {
         break;
     }
     return playlists.map(playlist => {
-        return (
+      return (
         <Link to={`/${playlist.playlistName}`.replace(" ", "_")}>
           <div key={playlist.playlistName} className="main__item">
             {playlist.playlistName}
           </div>
         </Link>
-        )
+      );
     });
   }
   // Used arrow "class-field" snytax so that "this" is bound correctly.
   handleSubmit = event => {
     event.preventDefault();
-    axios.post("playlists/new", { name: this.state.newPlaylistName });
+    axios.post("playlists/new", { newPlaylistName: this.state.newPlaylistName });
 
     // clear out the input field after successfully submitting.
     this.props.fetchPlaylists();
-    this.setState({ name: "" });
+    this.setState({ newPlaylistName: "" });
   };
 
   // Used arrow "class-field" snytax so that "this" is bound correctly.
@@ -64,7 +64,7 @@ class Playlists extends Component {
         <form onSubmit={this.handleSubmit} id="newPlaylist">
           <input
             onChange={this.handleChange}
-            value={this.state.name}
+            value={this.state.newPlaylistName}
             type="text"
             placeholder="Enter a name for your playlist"
           />
