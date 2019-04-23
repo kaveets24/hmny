@@ -13,7 +13,7 @@ export const fetchUser = () => async dispatch => {
 };
 
 export const fetchPlaylists = () => async dispatch => {
-  const res = await axios.get("/playlists");
+  const res = await axios.get("/playlists/view");
   dispatch({ type: FETCH_PLAYLISTS, payload: res.data });
 };
 

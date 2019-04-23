@@ -6,7 +6,6 @@ module.exports = function(app) {
     app.use(proxy('/auth/*', { target: 'http://localhost:8000' }));
     app.use(proxy('/callback', { target: 'http://localhost:8000' }));
     app.use(proxy('/refresh_token', { target: 'http://localhost:8000' }));
-    app.use(proxy('/playlists', { target: 'http://localhost:8000' }));
     app.use(proxy('/playlists/*', { target: 'http://localhost:8000' }));
 
 
