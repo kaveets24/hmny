@@ -1,4 +1,5 @@
 const express = require('express');
+const bodyParser = require('body-parser')
 const mongoose = require('mongoose');
 const cookieSession = require('cookie-session');
 const passport = require('passport');
@@ -26,6 +27,18 @@ app.use(
 );
 app.use(passport.initialize());
 app.use(passport.session());
+
+// Body Parser
+app.use(bodyParser.urlencoded({ extended: false }))
+
+// parse application/json
+app.use(bodyParser.json())
+
+// app.use(function (req, res) {
+//   res.setHeader('Content-Type', 'text/plain')
+//   res.write('you posted:\n')
+//   res.end(JSON.stringify(req.body, null, 2))
+// })
 
 // Routes
 app.use('/', googleAuth);

@@ -11,19 +11,16 @@ const Playlist = mongoose.model("playlists");
 // Should be triggered by a form submit. 
 
 router.get('/playlists/view', async (req, res) => {
-  console.log("Route hit");
   // reach out to database and grab the user's playlists
     const user = await User.findById(req.user._id, (err) => {
       if (err) res.send(err, "There was an error fetching your playlists...")
     });
-
     res.send(user);
 });
 
-// Might be able to re-route as a post request once we have the form set up so that we can render the new playlists without a page refresh. 
-router.get("/playlists/new", async (req, res) => {
+router.post("/playlists/new", async (req, res) => {
   let newPlaylist = new Playlist({
-    playlistName: "test3",
+    playlistName: req.body.newPlaylistName,
     tracks: [],
     dateCreated: Date.now()
   });
@@ -37,8 +34,6 @@ router.get("/playlists/new", async (req, res) => {
     $push: { playlists: [newPlaylist] }
   });
 
-  // Redirect to hit the React-Router which re-renders the Playlists component, showing your newly created playlist :)
-  res.redirect('/playlists');
 });
 
 
