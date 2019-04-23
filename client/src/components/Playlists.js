@@ -40,9 +40,9 @@ class Playlists extends Component {
     });
   }
   // Used arrow "class-field" snytax so that "this" is bound correctly.
-  handleSubmit = event => {
+  handleSubmit = async event => {
     event.preventDefault();
-    axios.post("playlists/new", { newPlaylistName: this.state.newPlaylistName });
+    await axios.post("playlists/new", { newPlaylistName: this.state.newPlaylistName });
 
     // clear out the input field after successfully submitting.
     this.props.fetchPlaylists();

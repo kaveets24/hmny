@@ -33,8 +33,9 @@ router.post("/playlists/new", async (req, res) => {
   const currentUser = await User.findByIdAndUpdate(req.user._id, {
     $push: { playlists: [newPlaylist] }
   });
-
+  res.send("Request completed!")
 });
+
 
 
 module.exports = router;
