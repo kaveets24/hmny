@@ -31,7 +31,7 @@ app.use(passport.session());
 app.use('/', googleAuth);
 app.use('/', spotifyAuth); // correct way using express Router;
 app.use('/', spotifyWrapper); // correct way using express Router;
-app.use('/playlists', playlists);
+app.use('/', playlists);
 
 if (process.env.NODE_ENV === 'production') {
 

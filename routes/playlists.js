@@ -9,9 +9,20 @@ const Playlist = mongoose.model("playlists");
 
 // Create a new playlist
 // Should be triggered by a form submit. 
-router.get("/new", async (req, res) => {
+
+router.get('/playlists', async (req, res) => {
+  console.log("Route hit");
+  // reach out to database and grab the user's playlists
+    const user = await User.findById(req.user._id, (err) => {
+      if (err) res.send(err, "There was an error fetching your playlists...")
+    });
+
+    res.send(user);
+});
+
+router.get("/playlists/new", async (req, res) => {
   let newPlaylist = new Playlist({
-    playlistName: "test2",
+    playlistName: "test3",
     tracks: [],
     dateCreated: Date.now()
   });
@@ -25,7 +36,7 @@ router.get("/new", async (req, res) => {
     $push: { playlists: [newPlaylist] }
   });
 
-  res.send(req.user.playlists);
+  res.redirect('/playlists');
 });
 
 
