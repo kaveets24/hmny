@@ -22,6 +22,8 @@ router.post("/playlists/new", async (req, res) => {
   let newPlaylist = new Playlist({
     playlistName: req.body.name,
     tracks: [],
+    description: req.body.description,
+    artwork: req.body.artwork,
     dateCreated: Date.now()
   });
 

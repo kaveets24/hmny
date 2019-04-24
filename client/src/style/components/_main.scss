@@ -29,7 +29,7 @@
     }
     &__grid {
         display: grid;
-        grid-template-columns: repeat( auto-fit, minmax(200px,1fr));
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); // more info: https://css-tricks.com/auto-sizing-columns-css-grid-auto-fill-vs-auto-fit/
         justify-items: center;
         grid-gap: 50px;  
         padding: 20px;

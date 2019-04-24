@@ -13,4 +13,4 @@ const trackSchema = new Schema({
 });
 
 module.exports = trackSchema;
-mongoose.model('tracks', trackSchema);
+mongoose.model('track', trackSchema);

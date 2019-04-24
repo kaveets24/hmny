@@ -3,7 +3,7 @@ const router = express.Router();
 const requireLogin = require("../middleware/requireLogin");
 const spotifyApi = require("../services/spotifyWebApi");
 const mongoose = require("mongoose");
-const Track = mongoose.model("tracks");
+const Track = mongoose.model("track");
 // const Playlist = require('../models/Playlist');
 
 router.get("/api/findtrack", requireLogin, async (req, res) => {
@@ -35,9 +35,9 @@ router.get("/api/play", async (req, res) => {
   spotifyApi.setAccessToken(user.spotifyAccessToken);
   spotifyApi.setRefreshToken(user.spotifyRefreshToken);
 
-  const spotifyUri = "spotify:album:5oSVYKZLKGCmwYqmJ7AZnO";
+  const context_uri = req.body.context_uri;
 
-  const play = await spotifyApi.play({ context_uri: spotifyUri });
+  const play = await spotifyApi.play(context_uri);
 
   console.log(play);
 });

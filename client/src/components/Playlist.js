@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
+import Track from './Track';
 
 const tracks = [
     {
@@ -36,24 +37,12 @@ const tracks = [
 class Playlist extends Component{
 
     renderTracks() {
-        const allTracks = tracks.map(track => {
-            return (
-                <div className="playlist__trackrow">
-                    <div className="playlist__trackrow--white">
-                        <span className="playlist__data">{track.order}.</span>
-                        <span className="playlist__data">{track.name}</span>
-                    </div>
-                    <div className="playlist__trackrow--grey">
-                        <span className="playlist__data">{track.artist}</span>
-                        <span className="playlist__data playlist__data--duration">{track.length}</span>
-                        <span className='playlist__data'><i className="fab fa-spotify" /></span>
-                    </div>        
-             
-                </div>               
-            )
+        // tracks will be replaced by a reference to an array of tracks returned by a query of mongoDb.
+        // This markup should be replaced with a simple reference to the <Track /> component.
+        // track metadata will be passed down through props.
+        return tracks.map(track => {
+            return <Track />        
         })
-
-        return allTracks;
     }
 
     render() {

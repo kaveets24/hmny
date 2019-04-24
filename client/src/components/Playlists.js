@@ -72,7 +72,7 @@ class Playlists extends Component {
     return (
       <div> 
       <div className="main__form">
-        <img src="https://via.placeholder.com/150C" className="main__form-artwork">
+        <img src="https://via.placeholder.com/150C" alt="artwork" className="main__form-artwork">
 
         </img>
         <form
