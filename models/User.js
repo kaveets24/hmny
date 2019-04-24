@@ -1,15 +1,14 @@
 
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
-const playlistSchema = require('./Playlist');
 
 const userSchema = new Schema({
   googleId: String,
   spotifyId: String,
   spotifyAccessToken: String,
   spotifyRefreshToken: String,
-  playlists: [playlistSchema]
+  playlists: [{ type: Schema.Types.ObjectId, ref: 'playlist' }]
 });
 
-mongoose.model('users', userSchema);
+mongoose.model('user', userSchema);
 

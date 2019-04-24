@@ -4,7 +4,7 @@ const router = express.Router();
 const keys = require('../config/keys');
 const request = require('request');
 const mongoose = require("mongoose");
-var User = mongoose.model("users");
+var User = mongoose.model("user");
 
 
 

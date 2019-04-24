@@ -13,7 +13,7 @@ require('./services/passport');
 const spotifyAuth = require('./routes/spotifyAuthRoutes');
 const spotifyWrapper = require('./routes/spotifyWrapperRoutes');
 const googleAuth = require('./routes/googleAuthRoutes');
-const playlists = require('./routes/playlists');
+const playlists = require('./routes/playlistRoutes');
 
 const app = express();
 

@@ -1,0 +1,51 @@
+.playlist {
+    display: flex;
+    color: $color1;
+    &__trackrow {
+        position: relative;
+        background-color: $playlist-background-color;
+        &--white {
+            font-weight: 500;
+
+        }
+        &--grey {
+            color: $color3;
+            padding-left: 35px;
+        }
+    }
+
+    &__column1 {
+        flex-basis: 70%;
+
+    }
+    &__data {
+        padding: 0 10px;
+        line-height: 30px;
+
+        &--duration {
+            position: absolute;
+            right:0 ;
+        }
+    }
+
+    &__column2 {
+        flex-basis: 30%;
+        text-align: center;
+
+    }
+    &__playlistname {
+        font-size: $large-font;
+    }
+
+    &__albumart {
+        width: 250px;
+        height: 250px;
+    }
+
+    &__trackname {
+        font-size: $medium-font;
+    }
+
+
+
+}

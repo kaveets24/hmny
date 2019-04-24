@@ -1,0 +1,81 @@
+.main {
+    margin: 100px auto;
+    padding: 16px;
+    max-width: 1250px;
+
+    &__message {
+        color: $color1;
+        font-size: $medium-font;
+        max-width: 500px;
+        margin: auto;
+        padding: inherit;
+    }
+    &__welcome {
+        font-size: 40px;
+    }
+    &__hmny {
+        font-family: $logo-font-family;
+        color: yellow;
+        font-weight: bold;
+        text-transform: lowercase;
+
+    }
+    &__icons {
+        display: flex;
+        justify-content: center;
+        i {
+            padding: 15px;
+        }
+    }
+    &__grid {
+        display: grid;
+        grid-template-columns: repeat( auto-fit, minmax(200px,1fr));
+        justify-items: center;
+        grid-gap: 50px;  
+        padding: 20px;
+    }
+
+    &__item {
+        color: $color1;
+        text-align: center;
+        background-color: $playlist-background-color;
+        height: 200px;
+        width: 200px;
+    }
+
+    &__form {
+        max-width: $mobile;
+        margin: 0 auto;
+        text-align: center;
+
+        &-artwork {
+            width: 150px;
+            height: 150px;
+            background-color: blue;
+            margin: auto;
+
+        }
+
+        form {
+            input, textarea {
+                width: 100%;
+                padding: 5px;
+                margin: 10px 0;
+            }
+    
+            textarea {
+                resize: vertical;
+            }
+    
+            button {
+                padding: 10px;
+            }
+
+        }
+        
+
+     
+    }
+
+}
+

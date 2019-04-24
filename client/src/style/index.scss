@@ -1,4 +1,14 @@
-@import 'styleguide';
+// Partials
+@import './partials/styleguide';
+@import './partials/breakpoints';
+
+// Components
+@import './components/main';
+@import './components/header';
+@import './components/player';
+@import './components/playlist';
+
+
 * {
     margin: 0;
     padding: 0;
@@ -12,198 +22,6 @@ body {
     font-size: $small-font;
     background-color: $color2;  
 }
-.header {
-    color: $color2;
-    position: fixed;
-    top:0;
-    z-index: 1;
-    width: 100%;
-    height: 70px;
-    background-color: $color1;
-    padding: 0 16px;
-    overflow: hidden;
-    line-height: 70px;
-
-    &__hmny {
-        font-family: $logo-font-family;
-        font-weight: bold;
-        font-size: $medium-font;
-        text-transform: lowercase;
-    }
-    &__a {
-        color: $color2;
-        text-decoration: none;
-        display: block;
-        float: left;
-        padding: 0 16px;
-        height: 100%; 
-
-
-    }
-}
-.rightnav {
-    float: right;
-    text-align: center;
-
-}
-.main {
-    margin: 100px auto;
-    padding: 16px;
-    max-width: 1250px;
-
-    &__message {
-        color: $color1;
-        font-size: $medium-font;
-        max-width: 500px;
-        margin: auto;
-        padding: inherit;
-    }
-    &__welcome {
-        font-size: 40px;
-    }
-    &__hmny {
-        font-family: $logo-font-family;
-        color: yellow;
-        font-weight: bold;
-        text-transform: lowercase;
-
-    }
-    &__icons {
-        display: flex;
-        justify-content: center;
-        i {
-            padding: 15px;
-        }
-    }
-    &__grid {
-        display: grid;
-        grid-template-columns: repeat( auto-fit, minmax(200px,1fr));
-        justify-items: center;
-        grid-gap: 50px;  
-    }
-
-    &__item {
-        color: $color1;
-        text-align: center;
-        background-color: $playlist-background-color;
-        height: 200px;
-        width: 200px;
-    }
-
-}
-
-.playlist {
-    display: flex;
-    color: $color1;
-    &__trackrow {
-        position: relative;
-        background-color: $playlist-background-color;
-        &--white {
-            font-weight: 500;
-
-        }
-        &--grey {
-            color: $color3;
-            padding-left: 35px;
-        }
-    }
-
-    &__column1 {
-        flex-basis: 70%;
-
-    }
-    &__data {
-        padding: 0 10px;
-        line-height: 30px;
-
-        &--duration {
-            position: absolute;
-            right:0 ;
-        }
-    }
-
-    &__column2 {
-        flex-basis: 30%;
-        text-align: center;
-
-    }
-    &__playlistname {
-        font-size: $large-font;
-    }
-
-    &__albumart {
-        width: 250px;
-        height: 250px;
-    }
-
-    &__trackname {
-        font-size: $medium-font;
-    }
 
 
 
-}
-
-.player {
-    overflow: hidden;
-    background-color: $color1;
-    bottom: 0;
-    left: 0;
-    position: fixed;
-    width: 100%;
-
-    &__div {
-        position: relative;
-        text-align: center;
-        width: 100%;
-        margin: auto;
-    }
-
-    &__slider {
-        -webkit-appearance: none;
-        width: 100%;
-        height: 10px;
-        border-radius: 5px;   
-        background: #d3d3d3;
-        outline: none;
-        opacity: 0.7;
-        -webkit-transition: .2s;
-        transition: opacity .2s;
-    }
-    
-    &__slider::-webkit-slider-thumb {
-        -webkit-appearance: none;
-        appearance: none;
-        width: 15px;
-        height: 15px;
-        border-radius: 50%; 
-        background: $color2;
-        cursor: pointer;
-    }
-    &__slider::-moz-range-thumb {
-        width: 15px;
-        height: 15px;
-        border-radius: 50%;
-        background: $color2;
-        cursor: pointer;
-    }
-
-    &__button {
-        display: inline-block;
-        color: $color2;
-        text-align: center;
-        line-height: 60px;
-        text-decoration: none;
-        padding: 0 14px;
-    }
-
-    &__button--hover:hover {
-        background-color: $hover-color;
-        color: $color2;
-    }
-
-    &__button--volumeicon {
-        opacity: 0.5;
-        width: 40px;
-    }
-}

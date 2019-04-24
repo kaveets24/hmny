@@ -7,7 +7,7 @@ const playlistSchema = new Schema({
   playlistName: String,
   tracks: [trackSchema], // an array of Tracks
   dateCreated: Date,
-  _user: { type: Schema.Types.ObjectId, ref: 'User' },
+  user: { type: Schema.Types.ObjectId, ref: 'user' },
 });
 
-mongoose.model('playlists', playlistSchema);
+mongoose.model('playlist', playlistSchema);

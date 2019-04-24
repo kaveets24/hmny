@@ -27,7 +27,7 @@ class Header extends Component {
     return (
       <header className="header">
         <Link to="/" className="header__hmny header__a">Hmny</Link>
-        <nav className="rightnav">
+        <nav className="header__rightnav">
           {this.renderNav()}
         </nav>      
       </header>

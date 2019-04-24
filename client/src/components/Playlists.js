@@ -6,13 +6,15 @@ import axios from "axios";
 
 class Playlists extends Component {
   state = {
-    newPlaylistName: ""
+    name: "",
+    description: "",
+    artwork: ""
   };
 
   renderContent() {
     let playlists = [];
     switch (this.props.auth) {
-      case null:
+      case undefined:
         return null;
 
       default:
@@ -25,16 +27,20 @@ class Playlists extends Component {
           );
         }
         for (let p of this.props.auth.playlists) {
-          playlists.push(p);
+          if (typeof p === "object") {
+            // Is there a better way to wait for playlists to be an object?
+            playlists.push(p);
+          }
         }
         break;
     }
     return playlists.map(playlist => {
       return (
-        <Link to={`/${playlist.playlistName}`.replace(" ", "_")}>
-          <div key={playlist.playlistName} className="main__item">
-            {playlist.playlistName}
-          </div>
+        <Link
+          key={playlist.playlistName}
+          to={`/${playlist.playlistName}`.replace(" ", "-")}
+        >
+          <div className="main__item">{playlist.playlistName}</div>
         </Link>
       );
     });
@@ -42,16 +48,20 @@ class Playlists extends Component {
   // Used arrow "class-field" snytax so that "this" is bound correctly.
   handleSubmit = async event => {
     event.preventDefault();
-    await axios.post("playlists/new", { newPlaylistName: this.state.newPlaylistName });
+    await axios.post("playlists/new", {
+      name: this.state.name,
+      description: this.state.description,
+      artwork: this.state.artwork
+    });
 
     // clear out the input field after successfully submitting.
     this.props.fetchPlaylists();
-    this.setState({ newPlaylistName: "" });
+    this.setState({ name: "" });
   };
 
   // Used arrow "class-field" snytax so that "this" is bound correctly.
   handleChange = event => {
-    this.setState({ newPlaylistName: event.target.value });
+    this.setState({ name: event.target.value });
   };
 
   componentDidMount() {
@@ -60,20 +70,43 @@ class Playlists extends Component {
 
   render() {
     return (
-      <div className="main__grid">
-        <form onSubmit={this.handleSubmit} id="newPlaylist">
+      <div> 
+      <div className="main__form">
+        <img src="https://via.placeholder.com/150C" className="main__form-artwork">
+
+        </img>
+        <form
+          
+          onSubmit={this.handleSubmit}
+          id="newPlaylist"
+        >
           <input
             onChange={this.handleChange}
-            value={this.state.newPlaylistName}
+            value={this.state.name}
             type="text"
             placeholder="Enter a name for your playlist"
+          />
+
+          <textarea
+            onChange={this.handleChange}
+            value={this.state.description}
+            placeholder="Enter a description"
+          />
+            <input
+            onChange={this.handleChange}
+            value={this.state.artwork}
+            type="text"
+            placeholder="Choose an image"
           />
           <button type="submit" form="newPlaylist">
             Create
           </button>
         </form>
-        {this.renderContent()}
+
+        
       </div>
+      <div className="main__grid">{this.renderContent()}</div>
+     </div>
     );
   }
 }

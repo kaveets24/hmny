@@ -20,7 +20,15 @@ class App extends Component {
         return <Welcome />
                 
       default:
-        return <Player />
+        return (
+          <div>
+          <Route exact path="/playlists" component={Playlists} />
+          <Route exact path="/playlist_1" component={Playlist} /> 
+          <Player />
+          </div>
+   
+        )
+
     }
   }
 
@@ -35,8 +43,6 @@ class App extends Component {
           <div>
             <Header />
             <div className="main">
-            <Route exact path="/playlists" component={Playlists} />
-            <Route exact path="/playlist_1" component={Playlist} /> 
             {this.renderContent()}
             </div>       
           </div>

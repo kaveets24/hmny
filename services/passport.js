@@ -2,7 +2,7 @@ const passport = require("passport");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const SpotifyStrategy = require("passport-spotify").Strategy;
 const mongoose = require("mongoose");
-const User = mongoose.model("users");
+const User = mongoose.model("user");
 const keys = require("../config/keys");
 const spotifyApi = require('./spotifyWebApi');
 
