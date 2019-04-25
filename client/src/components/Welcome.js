@@ -4,7 +4,7 @@ const Welcome = () => {
   return (
     <div className="main__message">
       <span className="main__welcome">
-        Howdy!
+        {/* Howdy! */}
         <br />
       </span>
       <span className="main__hmny">hmny </span>

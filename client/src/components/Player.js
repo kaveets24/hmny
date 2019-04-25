@@ -121,7 +121,7 @@ class Player extends Component {
   onPreviousClick() {
     this.player.previousTrack();
   }
-  onPlayClick() {
+  onPlayClick = () => {
     this.player.togglePlay();
   }
   onNextClick() {
@@ -162,7 +162,7 @@ class Player extends Component {
           <div className="player__button player__button--hover" onClick={() => this.onPreviousClick()}>
             <i className="fas fa-step-backward" />
           </div>
-          <div className="player__button player__button--hover" onClick={() => this.onPlayClick()}>
+          <div className="player__button player__button--hover" onClick={this.onPlayClick}>
             <i className={playButtonClass} />
           </div>
           <div className="player__button player__button--hover" onClick={() => this.onNextClick()}>

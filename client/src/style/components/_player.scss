@@ -32,6 +32,7 @@
         height: 15px;
         border-radius: 50%; 
         background: $color2;
+        outline: none;
         cursor: pointer;
     }
     &__slider::-moz-range-thumb {
@@ -49,6 +50,8 @@
         line-height: 60px;
         text-decoration: none;
         padding: 0 14px;
+
+        
     }
 
     &__button--hover:hover {
@@ -61,3 +64,6 @@
         width: 40px;
     }
 }
+
+
+

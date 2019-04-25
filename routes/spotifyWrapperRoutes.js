@@ -41,6 +41,7 @@ router.get("/api/play", async (req, res) => {
  
 
   const play = await spotifyApi.play(context_uri);
+  res.send();
 
 });
 

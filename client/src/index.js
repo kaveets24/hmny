@@ -1,3 +1,7 @@
+
+// Stylesheets & Google Fonts
+
+import "./style/index.scss";
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
@@ -7,8 +11,6 @@ import reduxThunk from 'redux-thunk';
 import reducers from './reducers';
 import App from "./components/App";
 
-// Stylesheets & Google Fonts
-import "./style/index.scss";
 
 
 const store = createStore(reducers, {}, applyMiddleware(reduxThunk));
