@@ -18,7 +18,7 @@ router.get("/api/findtrack", requireLogin, async (req, res) => {
 
   const tracks = searchResults.body.tracks.items;
 
-  const matchedTrack = tracks[0];
+  const matchedTrack = tracks[3];
   const newTrack = await new Track({
     trackName: matchedTrack.name,
     artistName: matchedTrack.artists[0].name,

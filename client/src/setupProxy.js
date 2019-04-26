@@ -1,13 +1,17 @@
-const proxy = require('http-proxy-middleware')
- 
+const proxy = require("http-proxy-middleware");
+
 module.exports = function(app) {
-    app.use(proxy('/auth/google', { target: 'http://localhost:8000' }));
-    app.use(proxy('/api/*', { target: 'http://localhost:8000' }));
-    app.use(proxy('/auth/*', { target: 'http://localhost:8000' }));
-    app.use(proxy('/callback', { target: 'http://localhost:8000' }));
-    app.use(proxy('/refresh_token', { target: 'http://localhost:8000' }));
-    app.use(proxy('/playlists/*', { target: 'http://localhost:8000' }));
+  const pathnames = [
+    "/auth/google",
+    "/api/*",
+    "/auth/*",
+    "/callback",
+    "/refresh_token",
+    "/playlists/*",
+    "/tracks/*"
+  ];
 
-
-
-}
+  for (path of pathnames) {
+    app.use(proxy(path, { target: "http://localhost:8000" }));
+  }
+};

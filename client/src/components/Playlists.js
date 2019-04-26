@@ -12,13 +12,12 @@ class Playlists extends Component {
   };
 
   renderContent() {
-    let playlists = [];
-    switch (this.props.auth) {
+    switch (this.props.playlists) {
       case undefined:
         return null;
 
       default:
-        if (this.props.auth.playlists.length < 1) {
+        if (this.props.playlists.length < 1) {
           return (
             <div style={{ color: "white" }} className="">
               You currently don't have any playlists! (Ps this is an inline
@@ -26,19 +25,24 @@ class Playlists extends Component {
             </div>
           );
         }
-        for (let p of this.props.auth.playlists) {
-          if (typeof p === "object") {
-            // Is there a better way to wait for playlists to be an object?
-            playlists.push(p);
-          }
-        }
+        // for (let p of this.props.playlists) {
+        //   if (typeof p === "object") {
+        //     // Is there a better way to wait for playlists to be an object?
+        //     playlists.push(p);
+        //   }
+        // }
         break;
     }
-    return playlists.map(playlist => {
+    return this.props.playlists.map(playlist => {
       return (
         <Link
           key={playlist.playlistName}
-          to={`/${playlist.playlistName}`.replace(" ", "-")}
+          to={{
+            pathname: `/playlists/${playlist.playlistName}`.split(" ").join("-"),
+            state: {
+              playlist
+            }
+          }}
         >
           <div className="main__item">{playlist.playlistName}</div>
         </Link>
@@ -70,48 +74,44 @@ class Playlists extends Component {
 
   render() {
     return (
-      <div> 
-      <div className="main__form">
-        <img src="https://via.placeholder.com/150C" alt="artwork" className="main__form-artwork">
-
-        </img>
-        <form
-          
-          onSubmit={this.handleSubmit}
-          id="newPlaylist"
-        >
-          <input
-            onChange={this.handleChange}
-            value={this.state.name}
-            type="text"
-            placeholder="Enter a name for your playlist"
+      <div>
+        <div className="main__form">
+          <img
+            src="https://via.placeholder.com/150C"
+            alt="artwork"
+            className="main__form-artwork"
           />
-
-          <textarea
-            onChange={this.handleChange}
-            value={this.state.description}
-            placeholder="Enter a description"
-          />
+          <form onSubmit={this.handleSubmit} id="newPlaylist">
             <input
-            onChange={this.handleChange}
-            value={this.state.artwork}
-            type="text"
-            placeholder="Choose an image"
-          />
-          <button type="submit" form="newPlaylist">
-            Create
-          </button>
-        </form>
+              onChange={this.handleChange}
+              value={this.state.name}
+              type="text"
+              placeholder="Enter a name for your playlist"
+            />
 
-        
+            <textarea
+              onChange={this.handleChange}
+              value={this.state.description}
+              placeholder="Enter a description"
+            />
+            <input
+              onChange={this.handleChange}
+              value={this.state.artwork}
+              type="text"
+              placeholder="Choose an image"
+            />
+            <button type="submit" form="newPlaylist">
+              Create
+            </button>
+          </form>
+        </div>
+        <div className="main__grid">{this.renderContent()}</div>
       </div>
-      <div className="main__grid">{this.renderContent()}</div>
-     </div>
     );
   }
 }
-function mapStateToProps({ auth }) {
-  return { auth };
+function mapStateToProps({ playlists, auth }) {
+  return { auth, playlists };
 }
 export default connect(
   mapStateToProps,

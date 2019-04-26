@@ -1,25 +1,25 @@
 import React from "react";
 import { connect } from "react-redux";
 
-const track = {
-  name: "Track_1",
-  order: 1,
-  artist: "Artist_1",
-  length: "3:00",
-  src: "Spotify"
-};
+// const track = {
+//   name: "Track_1",
+//   order: 1,
+//   artist: "Artist_1",
+//   length: "3:00",
+//   src: "Spotify"
+// };
 
-function Track() {
+function Track(props) {
   return (
     <div className="playlist__trackrow">
       <div className="playlist__trackrow--white">
-        <span className="playlist__data">{track.order}.</span>
-        <span className="playlist__data">{track.name}</span>
+        <span className="playlist__data">{props.order}.</span>
+        <span className="playlist__data">{props.track.trackName}</span>
       </div>
       <div className="playlist__trackrow--grey">
-        <span className="playlist__data">{track.artist}</span>
+        <span className="playlist__data">{props.track.artistName}</span>
         <span className="playlist__data playlist__data--duration">
-          {track.length}
+          {props.track.duration}
         </span>
         <span className="playlist__data">
           <i className="fab fa-spotify" />

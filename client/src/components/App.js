@@ -23,7 +23,7 @@ class App extends Component {
         return (
           <div>
           <Route exact path="/playlists" component={Playlists} />
-          <Route exact path="/playlist_1" component={Playlist} /> 
+          <Route exact path="/playlists/:playlist_id" component={Playlist} /> 
           <Player />
           </div>
    

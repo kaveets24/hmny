@@ -9,7 +9,8 @@ const trackSchema = new Schema({
   spotifyUri: String,
   youtubeUri: String,
   bpm: Number,
-  source: String // Spotify, Youtube, Soundcloud, etc.
+  source: String, // Spotify, Youtube, Soundcloud, etc.
+  playlist: { type: Schema.Types.ObjectId, ref: 'playlist' }
 });
 
 module.exports = trackSchema;
