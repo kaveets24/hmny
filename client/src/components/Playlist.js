@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import * as actions from "../actions";
 
 import Track from "./Track";
+import Search from "./Search";
 
 const tracks = [
   {
@@ -51,18 +52,24 @@ class Playlist extends Component {
     const { playlist } = this.props.location.state;
 
     return (
-      <div className="playlist">
-        <div className="playlist__column1">{this.renderTracks()}</div>
+      <div>
+        <Search />
 
-        <div className="playlist__column2">
-          <div className="playlist__playlistname">{playlist.playlistName}</div>
-          <img
-            className="playlist__albumart"
-            src={this.props.playerState.albumArt}
-            alt="Your Album Art"
-          />
-          <div className="playlist__trackname">
-            {this.props.playerState.trackName}
+        <div className="playlist">
+          <div className="playlist__column1">{this.renderTracks()}</div>
+
+          <div className="playlist__column2">
+            <div className="playlist__playlistname">
+              {playlist.playlistName}
+            </div>
+            <img
+              className="playlist__albumart"
+              src={this.props.playerState.albumArt}
+              alt="Your Album Art"
+            />
+            <div className="playlist__trackname">
+              {this.props.playerState.trackName}
+            </div>
           </div>
         </div>
       </div>

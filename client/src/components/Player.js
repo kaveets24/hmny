@@ -4,23 +4,13 @@ import * as actions from "../actions";
 
 class Player extends Component {
   // Initialize the Spotify Web Playback SDK
-  initializeSpotifySdk() {
+  async initializeSpotifySdk() {
     const token = this.props.auth.spotifyAccessToken;
 
     const script = document.createElement("script");
     script.src = "https://sdk.scdn.co/spotify-player.js";
     script.async = true;
     document.body.appendChild(script);
-
-    const iframe = document.querySelector(
-      'iframe[src="https://sdk.scdn.co/embedded/index.html"]'
-    );
-    if (iframe) {
-      iframe.style.display = "block";
-      iframe.style.position = "absolute";
-      iframe.style.top = "-1000px";
-      iframe.style.left = "-1000px";
-    }
 
     window.onSpotifyWebPlaybackSDKReady = () => {
       if (window.Spotify !== null) {
@@ -57,11 +47,18 @@ class Player extends Component {
         // Ready
         this.player.addListener("ready", async ({ device_id }) => {
           console.log("Ready with Device ID", device_id);
+          const iframe = document.querySelector(
+            'iframe[src="https://sdk.scdn.co/embedded/index.html"]'
+          );
+          if (iframe) {
+            iframe.style.display = "block";
+            iframe.style.position = "absolute";
+            iframe.style.top = "-1000px";
+            iframe.style.left = "-1000px";
+          }
 
           await this.props.updateDeviceId(device_id);
           this.selectHmnyOnSpotifyConnect();
-
-
         });
 
         // Not Ready
