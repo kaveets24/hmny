@@ -1,7 +1,5 @@
-.search {
-    background-color: green;
-    
-
+.search {    
+  margin: 10px 0;
     form {
         
         input[type=text] {
@@ -12,13 +10,15 @@
             margin: 10px 0;
             font-size: 24px;
             font-weight: bold;
-            background-color: $color3;
-            color: $color1;
+            background-color: $color1;
+            color: $color2;
         }
 
         fieldset {
             overflow: hidden;
             border: none;
+            max-width: 400px;
+            margin: 0 auto;
           }
           
           
@@ -27,6 +27,7 @@
             clear: none;
             display: block;
             padding: 2px 1em 0 0;
+            color: $color1;
           }
           
           input[type=radio] {
