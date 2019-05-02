@@ -46,13 +46,24 @@
         left: 0;
         right: 0;
         bottom: 0;
-        background-color: rgba(232, 236, 241, 0.95); /* Black background with opacity */
+        background-color: rgba(232, 236, 241, 0.97); /* Black background with opacity */
         z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
         cursor: pointer; /* Add a pointer on hover */
+        border-radius: 2px;
+
 
         &--hidden {
           display: none; /* Hidden by default */
 
+        }
+
+        &-button {
+          position: absolute;
+          top: 15px;
+          right: 15px;
+          border: none;
+          font-size: 30px;
+          color: red;
         }
 
     }

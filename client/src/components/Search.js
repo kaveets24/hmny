@@ -3,7 +3,6 @@ import React, { Component } from "react";
 class Search extends Component {
   constructor(props) {
     super(props);
-    this.overlay = React.createRef();
     this.state = {
       inputText: "",
       overlay: false,
@@ -22,8 +21,11 @@ class Search extends Component {
     // make a request to fetch search query (results limited to 20)
   };
 
-  handleClick = () => {
+  showOverlay = () => {
     this.setState({overlay: true})
+  }
+  hideOverlay = () => {
+    this.setState({overlay: false})
   }
 
 
@@ -34,7 +36,7 @@ class Search extends Component {
         <form onSubmit={this.handleSubmit}>
           <input
             onChange={this.handleChange}
-            onClick={this.handleClick}
+            onClick={this.showOverlay}
             value={this.state.inputText}
             type="text"
             placeholder="Search for more tracks..."
@@ -50,8 +52,10 @@ class Search extends Component {
             </div>
           </fieldset>
         </form>
-        <div ref={this.overlay} className={overlayClassName}>
-
+        <div className={overlayClassName}>
+          <div onClick={this.hideOverlay} className="search__results-button">
+            <i className="fa fa-window-close"></i>
+          </div>
         </div>
       </div>
     );
