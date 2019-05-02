@@ -52,7 +52,7 @@ class Playlists extends Component {
   // Used arrow "class-field" snytax so that "this" is bound correctly.
   handleSubmit = async event => {
     event.preventDefault();
-    await axios.post("playlists/new", {
+    await axios.post("/api/playlists/new", {
       name: this.state.name,
       description: this.state.description,
       artwork: this.state.artwork

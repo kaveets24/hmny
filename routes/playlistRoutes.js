@@ -11,7 +11,7 @@ const spotifyApi = require("../services/spotifyWebApi");
 // Create a new playlist
 // Should be triggered by a form submit.
 
-router.get("/playlists/view", async (req, res) => {
+router.get("/api/playlists/view", async (req, res) => {
   // reach out to database and grab the user's playlists
   const user = await User.findById(req.user._id, err => {
     if (err) res.send(err, "There was an error fetching your playlists...");
@@ -19,7 +19,7 @@ router.get("/playlists/view", async (req, res) => {
   res.send(user.playlists);
 });
 
-router.post("/playlists/new", async (req, res) => {
+router.post("/api/playlists/new", async (req, res) => {
   let newPlaylist = new Playlist({
     playlistName: req.body.name,
     tracks: [],
@@ -37,14 +37,14 @@ router.post("/playlists/new", async (req, res) => {
 
 // Track Routes
 
-router.get("/tracks/view", async (req, res) => {
+router.get("/api/tracks/view", async (req, res) => {
   const playlist = await Playlist.findById("5cc29767cba2cb0955e3cc7f", err => {
     if (err) res.send(err, "There was an error fetching your playlists...");
   }).populate("tracks");
   res.send(playlist.tracks);
 });
 // Will be a post request
-router.get("/tracks/new", async (req, res) => {
+router.get("/api/tracks/new", async (req, res) => {
   //  Placeholder code
   const user = req.user;
   console.log("Route hit");

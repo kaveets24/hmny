@@ -1,13 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
 
-// const track = {
-//   name: "Track_1",
-//   order: 1,
-//   artist: "Artist_1",
-//   length: "3:00",
-//   src: "Spotify"
-// };
 
 function Track(props) {
   return (
