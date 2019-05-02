@@ -36,4 +36,24 @@
             margin: 6px 2px 0 2px;
           }
     }
+
+    &__results {
+        position: absolute; /* Sit on top of the page content */
+        width: 75%; /* Full width (cover the whole page) */
+        height: 50%; /* Full height (cover the whole page) */
+        margin: auto;
+        top: 0; 
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(232, 236, 241, 0.95); /* Black background with opacity */
+        z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+        cursor: pointer; /* Add a pointer on hover */
+
+        &--hidden {
+          display: none; /* Hidden by default */
+
+        }
+
+    }
 }
