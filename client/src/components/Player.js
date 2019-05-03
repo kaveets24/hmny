@@ -58,7 +58,7 @@ class Player extends Component {
           }
 
           await this.props.updateDeviceId(device_id);
-          // this.selectHmnyOnSpotifyConnect();
+          this.selectHmnyOnSpotifyConnect();
         });
 
         // Not Ready

@@ -84,6 +84,7 @@ class Search extends Component {
           <fieldset>
             <div className="search__radio-fields">
               <input
+                checked
                 type="radio"
                 value="spotify"
                 id="spotify"
