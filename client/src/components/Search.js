@@ -8,7 +8,7 @@ class Search extends Component {
     super(props);
     this.state = {
       inputText: "",
-      overlay: false,
+      overlay: false
     };
   }
 
@@ -111,7 +111,9 @@ class Search extends Component {
           <div onClick={this.hideOverlay} className="search__results-button">
             <i className="fa fa-window-close" />
           </div>
-          {this.showSearchResults()}
+          <div className="search__results-tracks">
+            {this.showSearchResults()}
+          </div>
         </div>
       </div>
     );

@@ -14,7 +14,7 @@ router.put("/api/findtrack", requireLogin, async (req, res) => {
   spotifyApi.setRefreshToken(user.spotifyRefreshToken);
 
   const searchResults = await spotifyApi.searchTracks(query, {
-    limit: 10
+    limit: 30
   });
   const tracks = searchResults.body.tracks.items;
 
