@@ -37,20 +37,28 @@ const tracks = [
 ];
 
 class Playlist extends Component {
+  constructor(props) {
+    super(props);
+    // Needed to grab this.props.location.state
+  }
   renderTracks() {
-    return this.props.tracks.map(track => {
-      let order = this.props.tracks.indexOf(track) + 1;
+    return this.props.tracks.current.map(track => {
+      let order = this.props.tracks.current.indexOf(track) + 1;
       return <Track track={track} key={order} order={order} />;
     });
   }
 
   componentDidMount() {
+    // We have to do this here because the current playlist object is being passed as a prop through the <Link> component in Playlists.js
+    // If we refresh the page, this.props.location.state is undefined, so we dispatch an action to update this.props.playlists.current in our redux data store.
+    if (this.props.location.state !== undefined) {
+      this.props.setCurrentPlaylist(this.props.location.state.playlist)
+    }
     this.props.fetchTracks();
   }
 
   render() {
-    const { playlist } = this.props.location.state;
-
+    const playlist  = this.props.playlists.current;
     return (
       <div>
         <Search />
@@ -81,7 +89,8 @@ function mapStateToProps(state) {
   return {
     auth: state.auth,
     playerState: state.playerState,
-    tracks: state.tracks
+    tracks: state.tracks,
+    playlists: state.playlists
   };
 }
 

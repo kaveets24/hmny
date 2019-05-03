@@ -14,9 +14,9 @@ const spotifyApi = require("../services/spotifyWebApi");
 router.get("/api/playlists/view", async (req, res) => {
   // reach out to database and grab the user's playlists
   const user = await User.findById(req.user._id, err => {
-    if (err) res.send(err, "There was an error fetching your playlists...");
+    if (err) res.status(404).send(err, "There was an error fetching your playlists...");
   }).populate("playlists");
-  res.send(user.playlists);
+  res.status(200).send(user.playlists);
 });
 
 router.post("/api/playlists/new", async (req, res) => {
@@ -47,7 +47,6 @@ router.get("/api/tracks/view", async (req, res) => {
 router.get("/api/tracks/new", async (req, res) => {
   //  Placeholder code
   const user = req.user;
-  console.log("Route hit");
 
   spotifyApi.setAccessToken(user.spotifyAccessToken);
   spotifyApi.setRefreshToken(user.spotifyRefreshToken);

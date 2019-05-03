@@ -5,7 +5,9 @@ import {
   UPDATE_DEVICE_ID,
   UPDATE_VOLUME,
   FETCH_PLAYLISTS,
-  FETCH_TRACKS
+  SET_CURRENT_PLAYLIST,
+  FETCH_TRACKS,
+  SEARCH_TRACKS
 } from "./types";
 
 export const fetchUser = () => async dispatch => {
@@ -22,6 +24,16 @@ export const fetchPlaylists = () => async dispatch => {
 export const fetchTracks = () => async dispatch => {
   const res = await axios.get("/api/tracks/view");
   dispatch({ type: FETCH_TRACKS, payload: res.data });
+};
+
+export const searchTracks = (query) => async dispatch => {
+  const res = await axios.put('/api/findtrack', {
+    query
+  });
+  dispatch({ type: SEARCH_TRACKS, payload: res.data });
+};
+export const setCurrentPlaylist = (playlist) => async dispatch => {
+  dispatch({ type: SET_CURRENT_PLAYLIST, payload: playlist });
 };
 
 export const updatePlayer = (playerState) => dispatch => {

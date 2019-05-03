@@ -12,12 +12,14 @@ class Playlists extends Component {
   };
 
   renderContent() {
+    console.log("FROM PLAYLISTS.js", this.props.playlists);
     switch (this.props.playlists) {
       case undefined:
         return null;
+    
 
       default:
-        if (this.props.playlists.length < 1) {
+        if (this.props.playlists.all.length < 1) {
           return (
             <div style={{ color: "white" }} className="">
               You currently don't have any playlists! (Ps this is an inline
@@ -33,12 +35,17 @@ class Playlists extends Component {
         // }
         break;
     }
-    return this.props.playlists.map(playlist => {
+
+    return this.props.playlists.all.map(playlist => {
       return (
+
         <Link
           key={playlist.playlistName}
           to={{
-            pathname: `/playlists/${playlist.playlistName}`.split(" ").join("-"),
+            pathname: `/playlists/${playlist.playlistName}`.replace(
+              /\s/gi,
+              "-"
+            ),
             state: {
               playlist
             }
