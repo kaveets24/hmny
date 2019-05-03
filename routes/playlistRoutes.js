@@ -46,23 +46,25 @@ router.get("/api/tracks/view", async (req, res) => {
 // Will be a post request
 router.get("/api/tracks/new", async (req, res) => {
   //  Placeholder code
+  // will need access to this.props.playlists.current & the track metadata. 
+  // Depending on whether or not its a Spotify, Youtube, or Soundcloud uri will determine how the track's metadata is pulled off and converted into the schema of our Track Model.
+  
+  // switch(type) {
+  //   case "Spotify":
+  //     break;
+  //   case "Youtube":
+  //     break;
+  //   case "SoundCloud":
+  //     break;
+  // }
   const user = req.user;
 
-  spotifyApi.setAccessToken(user.spotifyAccessToken);
-  spotifyApi.setRefreshToken(user.spotifyRefreshToken);
-
-  const searchResults = await spotifyApi.searchTracks("artist: Anderson Paak", {
-    limit: 5
-  });
-
-  const tracks = searchResults.body.tracks.items;
-
-  const matchedTrack = tracks[0];
   const newTrack = await new Track({
-    trackName: matchedTrack.name,
-    artistName: matchedTrack.artists[0].name,
-    albumName: "Single",
-    spotifyUri: matchedTrack.uri
+    trackName: "",
+    artistName: "",
+    albumName: "",
+    spotifyUri: ""
+
   })
   newTrack.save();
 

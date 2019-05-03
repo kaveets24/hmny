@@ -14,7 +14,7 @@ router.put("/api/findtrack", requireLogin, async (req, res) => {
   spotifyApi.setRefreshToken(user.spotifyRefreshToken);
 
   const searchResults = await spotifyApi.searchTracks(query, {
-    limit: 1
+    limit: 10
   });
   const tracks = searchResults.body.tracks.items;
 
@@ -24,7 +24,6 @@ router.put("/api/findtrack", requireLogin, async (req, res) => {
   //   albumName: "Single",
   //   spotifyUri: matchedTrack.uri
   // }).save();
- console.log(tracks);
   res.status(200).send(tracks);
 });
 
