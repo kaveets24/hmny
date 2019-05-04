@@ -8,6 +8,7 @@ const trackSchema = new Schema({
   albumName: String,
   spotifyUri: String,
   youtubeUri: String,
+  duration: Number,
   bpm: Number,
   source: String, // Spotify, Youtube, Soundcloud, etc.
   playlist: { type: Schema.Types.ObjectId, ref: 'playlist' }

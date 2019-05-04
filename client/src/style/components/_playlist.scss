@@ -10,6 +10,12 @@
         &--grey {
             color: $color3;
             padding-left: 35px;
+               
+        }
+
+        &:hover {
+            background-color: $hover-color;
+
         }
     }
 
@@ -23,7 +29,7 @@
 
         &--duration {
             position: absolute;
-            right:0 ;
+            right: 60px;
         }
     }
 
