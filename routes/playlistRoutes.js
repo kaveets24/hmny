@@ -44,7 +44,7 @@ router.get("/api/tracks/view", async (req, res) => {
   res.send(playlist.tracks);
 });
 // Will be a post request
-router.get("/api/tracks/new", async (req, res) => {
+router.post("/api/tracks/new", async (req, res) => {
   //  Placeholder code
   // will need access to this.props.playlists.current & the track metadata. 
   // Depending on whether or not its a Spotify, Youtube, or Soundcloud uri will determine how the track's metadata is pulled off and converted into the schema of our Track Model.
@@ -61,9 +61,14 @@ router.get("/api/tracks/new", async (req, res) => {
 
   const newTrack = await new Track({
     trackName: "",
-    artistName: "",
-    albumName: "",
-    spotifyUri: ""
+    artistName:  "",
+    albumName:  "",
+    spotifyUri:  "",
+    youtubeUri:  "",
+    duration:  0,
+    bpm:  0,
+    source:  "", // Spotify, Youtube, Soundcloud, etc.
+    playlist: ""
 
   })
   newTrack.save();

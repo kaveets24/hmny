@@ -5,10 +5,11 @@ import Track from "./Track";
 
 class Search extends Component {
   constructor(props) {
+    
     super(props);
     this.state = {
       inputText: "",
-      overlay: false
+      overlay: false,
     };
   }
 
@@ -52,7 +53,7 @@ class Search extends Component {
           duration: duration_ms
         };
         return (
-          <Track track={track} key={order} order={order} />
+          <Track track={track} searching={true} key={order} order={order} />
           // <div key={`${name}-${artists[0]}`}>
           // {}
           //   {/* {images ? <div>{images[0]}</div> : "no artwork" } */}
@@ -84,7 +85,7 @@ class Search extends Component {
           <fieldset>
             <div className="search__radio-fields">
               <input
-                checked
+                defaultChecked
                 type="radio"
                 value="spotify"
                 id="spotify"

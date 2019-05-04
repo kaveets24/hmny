@@ -42,7 +42,6 @@ class Playlist extends Component {
     // Needed to grab this.props.location.state
   }
   renderTracks() {
-    console.log(this.props.tracks.current);
     return this.props.tracks.current.map(track => {
       let order = this.props.tracks.current.indexOf(track) + 1;
       return <Track track={track} key={order} order={order} />;

@@ -7,7 +7,8 @@ import {
   FETCH_PLAYLISTS,
   SET_CURRENT_PLAYLIST,
   FETCH_TRACKS,
-  SEARCH_TRACKS
+  SEARCH_TRACKS,
+  ADD_TRACK_TO_PLAYLIST
 } from "./types";
 
 export const fetchUser = () => async dispatch => {
@@ -32,6 +33,14 @@ export const searchTracks = (query) => async dispatch => {
   });
   dispatch({ type: SEARCH_TRACKS, payload: res.data });
 };
+
+export const addTrackToPlaylist = (track, playlist) => async dispatch => {
+  const newTrack = {
+    
+  }
+  const res = await axios.post("/api/tracks/new",  )
+  dispatch({ type: ADD_TRACK_TO_PLAYLIST, payload: playlist });
+}
 export const setCurrentPlaylist = (playlist) => async dispatch => {
   dispatch({ type: SET_CURRENT_PLAYLIST, payload: playlist });
 };
