@@ -22,8 +22,12 @@ export const fetchPlaylists = () => async dispatch => {
   dispatch({ type: FETCH_PLAYLISTS, payload: res.data });
 };
 
-export const fetchTracks = () => async dispatch => {
-  const res = await axios.get("/api/tracks/view");
+export const fetchTracks = (playlistId) => async dispatch => {
+
+  const reqBody = {
+    playlistId
+  }
+  const res = await axios.put("/api/tracks/view", reqBody);
   dispatch({ type: FETCH_TRACKS, payload: res.data });
 };
 
@@ -34,12 +38,15 @@ export const searchTracks = (query) => async dispatch => {
   dispatch({ type: SEARCH_TRACKS, payload: res.data });
 };
 
-export const addTrackToPlaylist = (track, playlist) => async dispatch => {
-  const newTrack = {
-    
+export const addTrackToPlaylist = (track, playlistId) => async dispatch => {
+  const reqBody = {
+    track, 
+    playlistId   
   }
-  const res = await axios.post("/api/tracks/new",  )
-  dispatch({ type: ADD_TRACK_TO_PLAYLIST, payload: playlist });
+  const res = await axios.post("/api/tracks/new", reqBody  )
+
+  console.log(" TRACK", res.data);
+  dispatch({ type: ADD_TRACK_TO_PLAYLIST, payload: res.data });
 }
 export const setCurrentPlaylist = (playlist) => async dispatch => {
   dispatch({ type: SET_CURRENT_PLAYLIST, payload: playlist });

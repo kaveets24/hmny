@@ -48,13 +48,18 @@ class Playlist extends Component {
     });
   }
 
+  componentDidUpdate() {
+    const { _id } = this.props.playlists.current;
+    this.props.fetchTracks(_id);
+  }
+
   componentDidMount() {
     // We have to do this here because the current playlist object is being passed as a prop through the <Link> component in Playlists.js
     // If we refresh the page, this.props.location.state is undefined, so we dispatch an action to update this.props.playlists.current in our redux data store.
     if (this.props.location.state !== undefined) {
       this.props.setCurrentPlaylist(this.props.location.state.playlist)
     }
-    this.props.fetchTracks();
+
   }
 
   render() {

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import * as actions from '../actions';
 
 
 
@@ -10,8 +11,9 @@ class Track extends Component {
   }
 
   handleClick = () => {
-    // add track to the playlist
-    // This component needs to know what the current playlist is, 
+    const { _id } = this.props.playlists.current;
+
+    this.props.addTrackToPlaylist(this.props.track, _id);
     
   }
   msToMin = (ms) => {
@@ -24,21 +26,19 @@ class Track extends Component {
     min = Math.floor(min);
     return min + ":" + sec;
   }
-
   componentDidMount() {
     console.log(this.props);
-
   }
 
   render() {
     let time = this.msToMin(this.props.track.duration);
     let addButtonClass = this.props.searching ? "" : "hidden";
     let orderClass = this.props.searching ? "hidden" : "playlist__data";
-    let onClickFunction = this.props.searching ? this.handleClick : ""
+    // let onClickFunction = this.props.searching ? this.handleClick : ""
   return (
-    <div onClick={onClickFunction} className="playlist__trackrow">
+    <div className="playlist__trackrow">
       <div className="playlist__trackrow--white">
-        <button className={addButtonClass} onClick={this.handleClick}><i class="fas fa-plus fa-lg"></i></button>
+        <button className={addButtonClass} onClick={this.handleClick}><i className="fas fa-plus fa-lg"></i></button>
         <span className={orderClass}>{this.props.order}.</span>
         <span className="playlist__data">{this.props.track.trackName}</span>
       </div>
@@ -59,11 +59,12 @@ class Track extends Component {
 function mapStateToProps(state) {
   return {
     auth: state.auth,
+    playlists: state.playlists,
     playerState: state.playerState
   };
 }
 
 export default connect(
   mapStateToProps,
-  null
+  actions
 )(Track);

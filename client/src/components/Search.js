@@ -45,21 +45,17 @@ class Search extends Component {
       const { searchResults } = this.props.tracks;
 
       return searchResults.map(result => {
-        const { name, artists, images, duration_ms } = result;
+        const { name, artists, duration_ms, uri } = result;
         let order = searchResults.indexOf(result) + 1;
         let track = {
           trackName: name,
           artists,
-          duration: duration_ms
+          duration: duration_ms,
+          spotifyUri: uri,
+          source: "Spotify"
         };
         return (
           <Track track={track} searching={true} key={order} order={order} />
-          // <div key={`${name}-${artists[0]}`}>
-          // {}
-          //   {/* {images ? <div>{images[0]}</div> : "no artwork" } */}
-          //   <div>{name}</div>
-          //   {artists.map(artist => <div key={artist.name}>{artist.name}</div>)}
-          // </div>
         );
       });
     } else {

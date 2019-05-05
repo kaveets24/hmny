@@ -4,7 +4,7 @@ const { Schema } = mongoose;
 
 const trackSchema = new Schema({
   trackName: String,
-  artistName: String,
+  artistNames: [{type: String}],
   albumName: String,
   spotifyUri: String,
   youtubeUri: String,
