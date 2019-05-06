@@ -23,11 +23,12 @@ export const fetchPlaylists = () => async dispatch => {
 };
 
 export const fetchTracks = (playlistId) => async dispatch => {
-
   const reqBody = {
     playlistId
   }
+  console.log("MADE CALL TO DATABASE")
   const res = await axios.put("/api/tracks/view", reqBody);
+
   dispatch({ type: FETCH_TRACKS, payload: res.data });
 };
 
@@ -45,7 +46,6 @@ export const addTrackToPlaylist = (track, playlistId) => async dispatch => {
   }
   const res = await axios.post("/api/tracks/new", reqBody  )
 
-  console.log(" TRACK", res.data);
   dispatch({ type: ADD_TRACK_TO_PLAYLIST, payload: res.data });
 }
 export const setCurrentPlaylist = (playlist) => async dispatch => {

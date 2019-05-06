@@ -37,7 +37,6 @@ class Search extends Component {
   };
 
   showSearchResults = () => {
-    console.log("SEARCH RESULTS", this.props.tracks.searchResults);
     if (
       this.props.tracks.searchResults !== undefined &&
       this.props.tracks.searchResults.length > 0

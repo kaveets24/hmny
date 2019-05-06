@@ -67,15 +67,16 @@ router.post("/api/tracks/new", async (req, res) => {
         albumName: "",
         spotifyUri,
         youtubeUri: "",
-        duration: duration,
+        duration,
         bpm: 0,
         source: "", // Spotify, Youtube, Soundcloud, etc.
         playlist: playlistId
       });
       newTrack.save();
-      const playlist = await Playlist.findByIdAndUpdate(playlistId, {
-        $push: { tracks: [newTrack] }
-      });
+      const playlist = await Playlist.findByIdAndUpdate(playlistId, 
+        { $push: { tracks: [newTrack] }}, 
+        {new: true} 
+      );
 
       res.status(200).send(playlist);
 

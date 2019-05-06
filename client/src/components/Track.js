@@ -1,22 +1,15 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import * as actions from '../actions';
-
-
+import * as actions from "../actions";
 
 class Track extends Component {
-
-  constructor(props) {
-    super(props);
-  }
 
   handleClick = () => {
     const { _id } = this.props.playlists.current;
 
     this.props.addTrackToPlaylist(this.props.track, _id);
-    
-  }
-  msToMin = (ms) => {
+  };
+  msToMin = ms => {
     var min = ms / 1000 / 60;
     var r = min % 1;
     var sec = Math.floor(r * 60);
@@ -25,35 +18,44 @@ class Track extends Component {
     }
     min = Math.floor(min);
     return min + ":" + sec;
-  }
+  };
   componentDidMount() {
-    console.log(this.props);
+    console.log("TRACK COMPONENT DIDMOUNT,", this.props);
   }
 
   render() {
     let time = this.msToMin(this.props.track.duration);
-    let addButtonClass = this.props.searching ? "" : "hidden";
-    let orderClass = this.props.searching ? "hidden" : "playlist__data";
-    // let onClickFunction = this.props.searching ? this.handleClick : ""
-  return (
-    <div className="playlist__trackrow">
-      <div className="playlist__trackrow--white">
-        <button className={addButtonClass} onClick={this.handleClick}><i className="fas fa-plus fa-lg"></i></button>
-        <span className={orderClass}>{this.props.order}.</span>
-        <span className="playlist__data">{this.props.track.trackName}</span>
-      </div>
-      <div className="playlist__trackrow--grey">
-        <span className="playlist__data">{this.props.track.artistName}</span>
-        <span className="playlist__data playlist__data--duration">{time}</span>
-        <span className="playlist__data">
-          <i className="fab fa-spotify" />
-        </span>
-      </div>
-    </div>
-  );
+    let { searching } = this.props;
+    let addButtonClass = searching ? "" : "hidden";
+    let orderClass = searching ? "hidden" : "playlist__data";
+    let { artistNames } = this.props.track;
 
+    let artistName = "";
+    if (artistNames)
+      artistNames.forEach(artist => {
+        (artistNames.indexOf(artist) !== artistNames.length - 1) ? artistName += artist + ", " : artistName += artist; 
+      });
+    return (
+      <div className="playlist__trackrow">
+        <div className="playlist__trackrow--white">
+          <button className={addButtonClass} onClick={this.handleClick}>
+            <i className="fas fa-plus fa-lg" />
+          </button>
+          <span className={orderClass}>{this.props.order}.</span>
+          <span className="playlist__data">{this.props.track.trackName}</span>
+        </div>
+        <div className="playlist__trackrow--grey">
+          <span className="playlist__data">{artistName}</span>
+          <span className="playlist__data playlist__data--duration">
+            {time}
+          </span>
+          <span className="playlist__data">
+            <i className="fab fa-spotify" />
+          </span>
+        </div>
+      </div>
+    );
   }
-  
 }
 
 function mapStateToProps(state) {
