@@ -1,7 +1,6 @@
 import {
   FETCH_TRACKS,
   SEARCH_TRACKS,
-  ADD_TRACK_TO_PLAYLIST
 } from "../actions/types";
 
 const initialState = {
