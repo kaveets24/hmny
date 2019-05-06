@@ -15,9 +15,6 @@ class Playlist extends Component {
 
   }
 
-  // componentDidUpdate() {
-
-  // }
 
   async componentDidMount() {
     // We have to do this here because the current playlist object is being passed as a prop through the <Link> component in Playlists.js
@@ -25,7 +22,6 @@ class Playlist extends Component {
     if (this.props.location.state !== undefined) {
       await this.props.setCurrentPlaylist(this.props.location.state.playlist);
       const { _id } = this.props.playlists.current;
-      console.log(this.props.playlists);
   
       this.props.fetchTracks(_id);
     }

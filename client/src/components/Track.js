@@ -4,10 +4,11 @@ import * as actions from "../actions";
 
 class Track extends Component {
 
-  handleClick = () => {
+  handleClick = async () => {
     const { _id } = this.props.playlists.current;
 
-    this.props.addTrackToPlaylist(this.props.track, _id);
+    await this.props.addTrackToPlaylist(this.props.track, _id);
+    await this.props.fetchTracks(_id);
   };
   msToMin = ms => {
     var min = ms / 1000 / 60;

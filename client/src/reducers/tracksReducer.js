@@ -1,4 +1,8 @@
-import { FETCH_TRACKS, SEARCH_TRACKS } from "../actions/types";
+import {
+  FETCH_TRACKS,
+  SEARCH_TRACKS,
+  ADD_TRACK_TO_PLAYLIST
+} from "../actions/types";
 
 const initialState = {
   current: [],
@@ -10,6 +14,7 @@ export default function(state = initialState, action) {
       return { ...state, current: action.payload };
     case SEARCH_TRACKS:
       return { ...state, searchResults: action.payload };
+  
 
     default:
       return state;
