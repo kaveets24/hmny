@@ -48,10 +48,8 @@ router.put("/api/tracks/view", async (req, res) => {
   }).populate("tracks");
   res.send(playlist.tracks);
 });
-// Will be a post request
+
 router.post("/api/tracks/new", async (req, res) => {
-  //  Placeholder code
-  // will need access to this.props.playlists.current & the track metadata.
   // Depending on whether or not its a Spotify, Youtube, or Soundcloud uri will determine how the track's metadata is pulled off and converted into the schema of our Track Model.
 
   const { source, trackName, spotifyUri, duration, artists } = req.body.track;
@@ -76,8 +74,7 @@ router.post("/api/tracks/new", async (req, res) => {
       const playlist = await Playlist.findByIdAndUpdate(playlistId, 
         { $push: { tracks: [newTrack] }}, 
         {new: true} 
-      );
-
+      ).populate("tracks");
       res.status(200).send(playlist);
 
       break;
@@ -86,6 +83,20 @@ router.post("/api/tracks/new", async (req, res) => {
     case "SoundCloud":
       break;
   }
+
+  router.delete("/api/tracks/remove", async (req, res) => {
+    const { playlistId, trackId } = req.body;
+
+    const playlist = await Playlist.findByIdAndUpdate(playlistId, 
+      { $pull: { tracks: [trackId] }}, 
+      {new: true} 
+    ).populate("tracks");
+    res.send(removedTrack);
+
+
+
+
+  });
 });
 
 module.exports = router;

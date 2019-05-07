@@ -22,6 +22,7 @@ class Playlist extends Component {
     if (this.props.location.state !== undefined) {
       await this.props.setCurrentPlaylist(this.props.location.state.playlist);
       const { _id } = this.props.playlists.current;
+      console.log("props.playlists.current", this.props.playlists.current);
   
       this.props.fetchTracks(_id);
     }

@@ -10,6 +10,12 @@ class Track extends Component {
     await this.props.addTrackToPlaylist(this.props.track, _id);
     await this.props.fetchTracks(_id);
   };
+
+  handleDelete = async () => {
+    const { _id } = this.props.playlists.current;
+
+    await this.props.deleteTrack(this.props.track, _id);
+  };
   msToMin = ms => {
     var min = ms / 1000 / 60;
     var r = min % 1;
@@ -28,6 +34,7 @@ class Track extends Component {
     let time = this.msToMin(this.props.track.duration);
     let { searching } = this.props;
     let addButtonClass = searching ? "" : "hidden";
+    let deleteButtonClass = searching ? "hidden" : "";
     let orderClass = searching ? "hidden" : "playlist__data";
     let { artistNames } = this.props.track;
 
@@ -42,8 +49,12 @@ class Track extends Component {
           <button className={addButtonClass} onClick={this.handleClick}>
             <i className="fas fa-plus fa-lg" />
           </button>
+       
           <span className={orderClass}>{this.props.order}.</span>
           <span className="playlist__data">{this.props.track.trackName}</span>
+          <button className={deleteButtonClass} onClick={this.handleDelete}>
+            <i className="fa fa-trash" aria-hidden="true"></i>
+          </button>
         </div>
         <div className="playlist__trackrow--grey">
           <span className="playlist__data">{artistName}</span>
