@@ -21,9 +21,7 @@ class Playlist extends Component {
     // If we refresh the page, this.props.location.state is undefined, so we dispatch an action to update this.props.playlists.current in our redux data store.
     if (this.props.location.state !== undefined) {
       await this.props.setCurrentPlaylist(this.props.location.state.playlist);
-      const { _id } = this.props.playlists.current;
-      console.log("props.playlists.current", this.props.playlists.current);
-  
+      const { _id } = this.props.playlists.current;  
       this.props.fetchTracks(_id);
     }
 

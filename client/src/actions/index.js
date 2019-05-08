@@ -8,7 +8,8 @@ import {
   SET_CURRENT_PLAYLIST,
   FETCH_TRACKS,
   SEARCH_TRACKS,
-  ADD_TRACK_TO_PLAYLIST
+  ADD_TRACK_TO_PLAYLIST,
+  REMOVE_TRACK_FROM_PLAYLIST
 } from "./types";
 
 export const fetchUser = () => async dispatch => {
@@ -26,7 +27,6 @@ export const fetchTracks = (playlistId) => async dispatch => {
   const reqBody = {
     playlistId
   }
-  console.log("MADE CALL TO DATABASE")
   const res = await axios.put("/api/tracks/view", reqBody);
 
   dispatch({ type: FETCH_TRACKS, payload: res.data });
@@ -48,10 +48,23 @@ export const addTrackToPlaylist = (track, playlistId) => async dispatch => {
 
   dispatch({ type: ADD_TRACK_TO_PLAYLIST, payload: res.data });
 }
+
+export const removeTrackFromPlaylist = (track, playlistId) => async dispatch => {
+  console.log("removeTrackFromPlaylist called", track, playlistId);
+  const reqBody = {
+    track, 
+    playlistId   
+  }
+  const res = await axios.post("/api/tracks/remove", reqBody  )
+
+  dispatch({ type: REMOVE_TRACK_FROM_PLAYLIST, payload: res.data });
+}
 export const setCurrentPlaylist = (playlist) => async dispatch => {
   dispatch({ type: SET_CURRENT_PLAYLIST, payload: playlist });
 };
 
+
+// Spotify Actions
 export const updatePlayer = (playerState) => dispatch => {
   // console.log("updatePlayer action called. Here's the playerState object it was passed:", playerState);
   

@@ -1,7 +1,8 @@
 import {
   FETCH_PLAYLISTS,
   SET_CURRENT_PLAYLIST,
-  ADD_TRACK_TO_PLAYLIST
+  ADD_TRACK_TO_PLAYLIST,
+  REMOVE_TRACK_FROM_PLAYLIST
 } from "../actions/types";
 
 const initialState = {
@@ -21,6 +22,12 @@ export default function(state = initialState, action) {
       return { ...state, current: action.payload };
     case ADD_TRACK_TO_PLAYLIST:
       console.log("ADD_TRACK_TO_PLAYLIST", {
+        ...state,
+        current: action.payload
+      });
+      return { ...state, current: action.payload };
+    case REMOVE_TRACK_FROM_PLAYLIST:
+      console.log("REMOVE_TRACK_FROM_PLAYLIST", {
         ...state,
         current: action.payload
       });

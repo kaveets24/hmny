@@ -5,16 +5,14 @@ import * as actions from "../actions";
 class Track extends Component {
 
   handleClick = async () => {
-    const { _id } = this.props.playlists.current;
 
-    await this.props.addTrackToPlaylist(this.props.track, _id);
-    await this.props.fetchTracks(_id);
+    await this.props.addTrackToPlaylist(this.props.track, this.props.playlists.current._id);
+    await this.props.fetchTracks(this.props.playlists.current._id);
   };
 
   handleDelete = async () => {
-    const { _id } = this.props.playlists.current;
-
-    await this.props.deleteTrack(this.props.track, _id);
+    await this.props.removeTrackFromPlaylist(this.props.track, this.props.playlists.current._id);
+    await this.props.fetchTracks(this.props.playlists.current._id); 
   };
   msToMin = ms => {
     var min = ms / 1000 / 60;

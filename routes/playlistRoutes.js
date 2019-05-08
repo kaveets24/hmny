@@ -84,14 +84,15 @@ router.post("/api/tracks/new", async (req, res) => {
       break;
   }
 
-  router.delete("/api/tracks/remove", async (req, res) => {
-    const { playlistId, trackId } = req.body;
+  router.post("/api/tracks/remove", async (req, res) => {
+      const { playlistId, track } = req.body;
+
 
     const playlist = await Playlist.findByIdAndUpdate(playlistId, 
-      { $pull: { tracks: [trackId] }}, 
-      {new: true} 
+      { $pull: { tracks: track._id }}, 
     ).populate("tracks");
-    res.send(removedTrack);
+
+    res.status(200).send(playlist);
 
 
 
