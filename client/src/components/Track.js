@@ -4,7 +4,7 @@ import * as actions from "../actions";
 
 class Track extends Component {
 
-  handleClick = async () => {
+  handleAdd = async () => {
 
     await this.props.addTrackToPlaylist(this.props.track, this.props.playlists.current._id);
     await this.props.fetchTracks(this.props.playlists.current._id);
@@ -14,6 +14,16 @@ class Track extends Component {
     await this.props.removeTrackFromPlaylist(this.props.track, this.props.playlists.current._id);
     await this.props.fetchTracks(this.props.playlists.current._id); 
   };
+
+  handlePlay = async () => {
+    let { playing, currentTrackId} = this.props.globalPlayer
+
+    if (playing === false || currentTrackId !== this.props.track._id) {
+      await this.props.playTrack(this.props.track);
+    } else {
+      await this.props.pauseTrack();
+    }
+  }
   msToMin = ms => {
     var min = ms / 1000 / 60;
     var r = min % 1;
@@ -31,11 +41,14 @@ class Track extends Component {
   render() {
     let time = this.msToMin(this.props.track.duration);
     let { searching } = this.props;
-    let addButtonClass = searching ? "" : "hidden";
+    let searchingClass = searching ? "" : "hidden";
     let deleteButtonClass = searching ? "hidden" : "";
     let orderClass = searching ? "hidden" : "playlist__data";
     let { artistNames } = this.props.track;
 
+    let { playing } = this.props.playerState;
+    let playButtonClass = playing ? "fas fa-pause": "fas fa-play";
+    let currentTrackPlayingClass = (this.props.track._id === this.props.globalPlayer.currentTrackId) ? "fas fa-pause": "fas fa-play";
     let artistName = "";
     if (artistNames)
       artistNames.forEach(artist => {
@@ -44,11 +57,14 @@ class Track extends Component {
     return (
       <div className="playlist__trackrow">
         <div className="playlist__trackrow--white">
-          <button className={addButtonClass} onClick={this.handleClick}>
+          <button className={searchingClass} onClick={this.handleAdd}>
             <i className="fas fa-plus fa-lg" />
           </button>
        
           <span className={orderClass}>{this.props.order}.</span>
+          <button className={''} onClick={this.handlePlay}>
+            <i className={currentTrackPlayingClass} />
+          </button>
           <span className="playlist__data">{this.props.track.trackName}</span>
           <button className={deleteButtonClass} onClick={this.handleDelete}>
             <i className="fa fa-trash" aria-hidden="true"></i>
@@ -72,7 +88,8 @@ function mapStateToProps(state) {
   return {
     auth: state.auth,
     playlists: state.playlists,
-    playerState: state.playerState
+    playerState: state.playerState,
+    globalPlayer: state.globalPlayer
   };
 }
 

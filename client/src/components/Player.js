@@ -58,7 +58,7 @@ class Player extends Component {
           }
 
           await this.props.updateDeviceId(device_id);
-          // this.selectHmnyOnSpotifyConnect();
+          this.selectHmnyOnSpotifyConnect();
         });
 
         // Not Ready
@@ -90,7 +90,7 @@ class Player extends Component {
         .join(", ");
       const playing = !playerState.paused;
       // Call updatePlayer action with this object passed to it.
-      this.props.updatePlayer({
+      this.props.updateSpotifyPlayer({
         position,
         duration,
         trackName,

@@ -8,11 +8,11 @@ module.exports = function(app) {
     "/api/tracks/*",
     "/auth/*",
     "/callback",
-    "/refresh_token",
-
+    "/refresh_token"
   ];
 
   for (path of pathnames) {
     app.use(proxy(path, { target: "http://localhost:8000" }));
+    app.use(proxy(path, { target: "http://10.76.230.68:8000" }));
   }
 };

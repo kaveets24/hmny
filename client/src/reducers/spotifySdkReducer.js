@@ -1,4 +1,4 @@
-import { UPDATE_PLAYER, UPDATE_DEVICE_ID, UPDATE_VOLUME } from '../actions/types';
+import { UPDATE_SPOTIFY_PLAYER, UPDATE_DEVICE_ID, UPDATE_VOLUME } from '../actions/types';
 
 const initialState = {
     deviceId: "",
@@ -15,7 +15,7 @@ const initialState = {
 
 export default function (state = initialState, action) {
     switch (action.type) {
-        case UPDATE_PLAYER:
+        case UPDATE_SPOTIFY_PLAYER:
             return Object.assign({}, state, action.payload);
 
         case UPDATE_DEVICE_ID:

@@ -3,6 +3,7 @@ import authReducer from './authReducer';
 import spotifySdkReducer from './spotifySdkReducer';
 import tracksReducer from './tracksReducer';
 import playlistsReducer from "./playlistsReducer";
+import globalPlayerReducer from "./globalPlayerReducer";
 
 
 export default combineReducers(
@@ -10,6 +11,7 @@ export default combineReducers(
         auth: authReducer,
         playerState: spotifySdkReducer,
         playlists: playlistsReducer,
-        tracks: tracksReducer
+        tracks: tracksReducer,
+        globalPlayer: globalPlayerReducer
     
     });
