@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import * as actions from "../actions";
-import axios from "axios";
 
 class Playlists extends Component {
   state = {
@@ -27,12 +26,6 @@ class Playlists extends Component {
             </div>
           );
         }
-        // for (let p of this.props.playlists) {
-        //   if (typeof p === "object") {
-        //     // Is there a better way to wait for playlists to be an object?
-        //     playlists.push(p);
-        //   }
-        // }
         break;
     }
 

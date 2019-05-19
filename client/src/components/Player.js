@@ -77,9 +77,7 @@ class Player extends Component {
     console.log("onPlayerStateChange called");
     console.log("Here's the current state:", this.props.spotifyState);
     if (playerState !== null) {
-      const {
-        current_track: currentTrack
-      } = playerState.track_window; // using ES6 destructuring, take objects off of the playerState.track_window
+      const { current_track: currentTrack } = playerState.track_window; // using ES6 destructuring, take objects off of the playerState.track_window
       const { position, duration } = playerState;
       const trackName = currentTrack.name;
       const albumName = currentTrack.album.name;
@@ -103,9 +101,9 @@ class Player extends Component {
   componentDidMount() {
     this.initializeSpotifySdk();
 
-      console.log("Global Player State:", this.props.globalPlayer);
+    console.log("Global Player State:", this.props.globalPlayer);
     // set up globalPlayer state.
-    // 1. should get an array of track ids 
+    // 1. should get an array of track ids
   }
   // Sets hmny as the user's currently playing device on Spotify Connect
   selectHmnyOnSpotifyConnect() {
@@ -127,26 +125,36 @@ class Player extends Component {
 
   // Player Controls
   onPreviousClick() {
-    this.player.previousTrack();
+    const { currentTrack } = this.props.globalPlayer;
+    const { tracks, playTrack } = this.props;
+    const previousSong = tracks.current[currentTrack.index - 1];
+    if (currentTrack.index > 0)
+      playTrack(previousSong, currentTrack.index - 1, 0);
+
+    // this.player.previousTrack();
   }
   onPlayClick = () => {
     const { currentTrack, playing, position } = this.props.globalPlayer;
     const { tracks, spotifyState } = this.props;
     const currentSong = this.props.tracks.current[currentTrack.index];
-    // const position = currenTrack.position ? currentTrack.position : 0;
     if (!playing) {
-          // If paused AND a track has been played previously, then resume the current track OR the first track of the playlist.
-
-      // NOTE: this.playerState.position is only for spotify, we'll need to give the youtube position for those cases.
-      console.log("GLOBAL PLAYER", this.props.globalPlayer)
-      currentTrack.index ? this.props.playTrack(currentSong, currentTrack.index, position) : this.props.playTrack(tracks.current[0], 0, 0);
+      // If paused AND a track has been played previously, then resume the current track OR the first track of the playlist.
+      // NOTE: spotifyState.position is only for spotify, we'll need to give the youtube position for those cases.
+      currentTrack.index
+        ? this.props.playTrack(currentSong, currentTrack.index, position)
+        : this.props.playTrack(tracks.current[0], 0, 0);
     } else {
       this.props.pauseTrack(currentSong, spotifyState.position);
     }
-
   };
   onNextClick() {
-    this.player.nextTrack();
+    const { currentTrack } = this.props.globalPlayer;
+    const { tracks, playTrack } = this.props;
+    const nextSong = tracks.current[currentTrack.index + 1];
+    if (currentTrack.index !== tracks.current.length - 1)
+      playTrack(nextSong, currentTrack.index + 1, 0);
+
+    // this.player.nextTrack();
   }
 
   onSetVolume(volume) {
@@ -225,9 +233,9 @@ class Player extends Component {
 function mapStateToProps(state) {
   return {
     auth: state.auth,
-    spotifyState: state.spotifyState, 
+    spotifyState: state.spotifyState,
     globalPlayer: state.globalPlayer,
-    tracks: state.tracks,
+    tracks: state.tracks
   };
 }
 
