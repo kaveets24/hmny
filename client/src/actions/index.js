@@ -75,31 +75,32 @@ export const addPlaylist = formData => async dispatch => {
     description: formData.description,
     artwork: formData.artwork
   });
+
+  dispatch({ type: ADD_PLAYLIST, payload: res.data });
 };
 
 export const playTrack = (track, trackIndex, position) => async dispatch => {
-  console.log("PLAY TRACK:", position);
-  if (track.spotifyUri) {
-    // reach out to spotify play route
-    const res = await axios.put("/api/play", {
-      context_uri: track.spotifyUri,
-      position_ms: position
-    });
-    let globalPlayer = {
-      playing: true,
-      position,
-      currentTrack: {
-        id: track._id,
-        index: trackIndex
-      }
-    };
+  if (track !== undefined) {
+    if (track.spotifyUri) {
+      const res = await axios.put("/api/play", {
+        context_uri: track.spotifyUri,
+        position_ms: position
+      });
+      let globalPlayer = {
+        playing: true,
+        position,
+        currentTrack: {
+          id: track._id,
+          index: trackIndex
+        }
+      };
 
-    dispatch({ type: PLAY_TRACK, payload: globalPlayer });
-  } else if (track.youtubeUri) {
-    // reach out to youtube play route
+      dispatch({ type: PLAY_TRACK, payload: globalPlayer });
+    } else if (track.youtubeUri) {
+      // reach out to youtube play route
+    }
   }
 };
-
 
 export const pauseTrack = (track, position) => async dispatch => {
   let globalPlayer = {

@@ -11,7 +11,7 @@ class Playlists extends Component {
   };
 
   renderContent() {
-    console.log("FROM PLAYLISTS.js", this.props.playlists);
+    console.log("THIS.PROPS.PLAYLISTS", this.props.playlists);
     switch (this.props.playlists) {
       case undefined:
         return null;
@@ -52,12 +52,7 @@ class Playlists extends Component {
   // Used arrow "class-field" snytax so that "this" is bound correctly.
   handleSubmit = async event => {
     event.preventDefault();
-
-    // This should be an action instead of a direct post request. That way, we won't have to call fetchPlaylists, because our store should be updated.
     this.props.addPlaylist(this.state);
-
-    // clear out the input field after successfully submitting.
-    // this.props.fetchPlaylists();
     this.setState({ name: "" });
   };
 

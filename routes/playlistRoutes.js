@@ -33,9 +33,10 @@ router.post("/api/playlists/new", async (req, res) => {
   newPlaylist.save();
 
   const currentUser = await User.findByIdAndUpdate(req.user._id, {
-    $push: { playlists: [newPlaylist] }
-  });
-  res.send();
+    $push: { playlists: [newPlaylist] }},
+    { new: true }
+  ).populate("playlists");
+  res.send(currentUser.playlists);
 });
 
 // Track Routes

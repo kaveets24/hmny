@@ -54,7 +54,7 @@ class Track extends Component {
     let { artistNames } = this.props.track;
 
     let currentTrackPlayingClass;
-    if (globalPlayer.playing) {
+    if (globalPlayer.playing && !searching) {
       // If globalPlayer is playing...
       currentTrackPlayingClass = (this.props.track._id === globalPlayer.currentTrack.id) ? "fas fa-pause": "fas fa-play";
     } else {
