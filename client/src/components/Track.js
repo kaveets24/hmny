@@ -16,12 +16,19 @@ class Track extends Component {
   };
 
   handlePlay = async () => {
-    let { playing, currentTrackId} = this.props.globalPlayer
-
-    if (playing === false || currentTrackId !== this.props.track._id) {
-      await this.props.playTrack(this.props.track);
+    const { order, tracks } = this.props;
+    const { playing, currentTrack} = this.props.globalPlayer;
+    const currentSong = tracks.current[currentTrack.index];
+    
+    if (!playing) {
+      // If paused, play the clicked track.
+      await this.props.playTrack(this.props.track, order -1, 0);
+    } else if (playing && currentTrack.id === this.props.track._id) {
+      // If playing and the currently playing song is clicked, then pause the song.
+      await this.props.pauseTrack(currentSong, currentTrack.position);
     } else {
-      await this.props.pauseTrack();
+      //  Otherwise, just play the clicked track.
+      await this.props.playTrack(this.props.track, order -1, 0);
     }
   }
   msToMin = ms => {
@@ -40,15 +47,22 @@ class Track extends Component {
 
   render() {
     let time = this.msToMin(this.props.track.duration);
-    let { searching } = this.props;
+    let { searching, globalPlayer } = this.props;
     let searchingClass = searching ? "" : "hidden";
     let deleteButtonClass = searching ? "hidden" : "";
     let orderClass = searching ? "hidden" : "playlist__data";
     let { artistNames } = this.props.track;
 
-    let { playing } = this.props.playerState;
-    let playButtonClass = playing ? "fas fa-pause": "fas fa-play";
-    let currentTrackPlayingClass = (this.props.track._id === this.props.globalPlayer.currentTrackId) ? "fas fa-pause": "fas fa-play";
+    let currentTrackPlayingClass;
+    if (globalPlayer.playing) {
+      // If globalPlayer is playing...
+      currentTrackPlayingClass = (this.props.track._id === globalPlayer.currentTrack.id) ? "fas fa-pause": "fas fa-play";
+    } else {
+            // If globalPlayer is NOT playing...
+            currentTrackPlayingClass = "fas fa-play";
+
+    }
+
     let artistName = "";
     if (artistNames)
       artistNames.forEach(artist => {
@@ -62,7 +76,7 @@ class Track extends Component {
           </button>
        
           <span className={orderClass}>{this.props.order}.</span>
-          <button className={''} onClick={this.handlePlay}>
+          <button className='' onClick={this.handlePlay}>
             <i className={currentTrackPlayingClass} />
           </button>
           <span className="playlist__data">{this.props.track.trackName}</span>
@@ -88,8 +102,9 @@ function mapStateToProps(state) {
   return {
     auth: state.auth,
     playlists: state.playlists,
-    playerState: state.playerState,
-    globalPlayer: state.globalPlayer
+    spotifyState: state.spotifyState,
+    globalPlayer: state.globalPlayer,
+    tracks: state.tracks,
   };
 }
 

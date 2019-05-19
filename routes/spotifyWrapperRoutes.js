@@ -23,11 +23,12 @@ router.put("/api/findtrack", requireLogin, async (req, res) => {
 
 router.put("/api/play", async (req, res) => {
   const user = req.user;
-  const { context_uri } = req.body;
+  const { context_uri, position_ms } = req.body;
+
   spotifyApi.setAccessToken(user.spotifyAccessToken);
   spotifyApi.setRefreshToken(user.spotifyRefreshToken);
 
-  await spotifyApi.play({ uris: [context_uri] });
+  await spotifyApi.play({ uris: [context_uri], position_ms: position_ms });
   res.status(200).send();
 });
 

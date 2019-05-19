@@ -9,7 +9,7 @@ import globalPlayerReducer from "./globalPlayerReducer";
 export default combineReducers(
     {
         auth: authReducer,
-        playerState: spotifySdkReducer,
+        spotifyState: spotifySdkReducer,
         playlists: playlistsReducer,
         tracks: tracksReducer,
         globalPlayer: globalPlayerReducer

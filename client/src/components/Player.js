@@ -75,13 +75,12 @@ class Player extends Component {
   onPlayerStateChange(playerState) {
     // if we're no longer listening to music, we'll get a null state.
     console.log("onPlayerStateChange called");
-    console.log("Here's the current state:", this.props.playerState);
+    console.log("Here's the current state:", this.props.spotifyState);
     if (playerState !== null) {
       const {
-        current_track: currentTrack,
-        position,
-        duration
+        current_track: currentTrack
       } = playerState.track_window; // using ES6 destructuring, take objects off of the playerState.track_window
+      const { position, duration } = playerState;
       const trackName = currentTrack.name;
       const albumName = currentTrack.album.name;
       const albumArt = currentTrack.album.images[0].url;
@@ -103,11 +102,15 @@ class Player extends Component {
   }
   componentDidMount() {
     this.initializeSpotifySdk();
+
+      console.log("Global Player State:", this.props.globalPlayer);
+    // set up globalPlayer state.
+    // 1. should get an array of track ids 
   }
   // Sets hmny as the user's currently playing device on Spotify Connect
   selectHmnyOnSpotifyConnect() {
     const { spotifyAccessToken } = this.props.auth;
-    const { deviceId } = this.props.playerState;
+    const { deviceId } = this.props.spotifyState;
 
     fetch("https://api.spotify.com/v1/me/player", {
       method: "PUT",
@@ -127,7 +130,20 @@ class Player extends Component {
     this.player.previousTrack();
   }
   onPlayClick = () => {
-    this.player.togglePlay();
+    const { currentTrack, playing, position } = this.props.globalPlayer;
+    const { tracks, spotifyState } = this.props;
+    const currentSong = this.props.tracks.current[currentTrack.index];
+    // const position = currenTrack.position ? currentTrack.position : 0;
+    if (!playing) {
+          // If paused AND a track has been played previously, then resume the current track OR the first track of the playlist.
+
+      // NOTE: this.playerState.position is only for spotify, we'll need to give the youtube position for those cases.
+      console.log("GLOBAL PLAYER", this.props.globalPlayer)
+      currentTrack.index ? this.props.playTrack(currentSong, currentTrack.index, position) : this.props.playTrack(tracks.current[0], 0, 0);
+    } else {
+      this.props.pauseTrack(currentSong, spotifyState.position);
+    }
+
   };
   onNextClick() {
     this.player.nextTrack();
@@ -139,7 +155,7 @@ class Player extends Component {
   }
 
   onToggleMute() {
-    if (this.props.playerState.volume > 0.02) {
+    if (this.props.spotifyState.volume > 0.02) {
       this.onSetVolume(0);
     } else {
       this.onSetVolume(1);
@@ -147,7 +163,7 @@ class Player extends Component {
   }
 
   render() {
-    const { playing, volume } = this.props.playerState;
+    const { playing, volume } = this.props.spotifyState;
 
     let playButtonClass;
     playing === true
@@ -209,7 +225,9 @@ class Player extends Component {
 function mapStateToProps(state) {
   return {
     auth: state.auth,
-    playerState: state.playerState
+    spotifyState: state.spotifyState, 
+    globalPlayer: state.globalPlayer,
+    tracks: state.tracks,
   };
 }
 

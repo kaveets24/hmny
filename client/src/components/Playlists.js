@@ -59,14 +59,12 @@ class Playlists extends Component {
   // Used arrow "class-field" snytax so that "this" is bound correctly.
   handleSubmit = async event => {
     event.preventDefault();
-    await axios.post("/api/playlists/new", {
-      name: this.state.name,
-      description: this.state.description,
-      artwork: this.state.artwork
-    });
+
+    // This should be an action instead of a direct post request. That way, we won't have to call fetchPlaylists, because our store should be updated.
+    this.props.addPlaylist(this.state);
 
     // clear out the input field after successfully submitting.
-    this.props.fetchPlaylists();
+    // this.props.fetchPlaylists();
     this.setState({ name: "" });
   };
 

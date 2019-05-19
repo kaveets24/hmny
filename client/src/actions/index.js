@@ -8,11 +8,12 @@ import {
   SET_CURRENT_PLAYLIST,
   FETCH_TRACKS,
   SEARCH_TRACKS,
+  ADD_PLAYLIST,
   ADD_TRACK_TO_PLAYLIST,
   REMOVE_TRACK_FROM_PLAYLIST,
   PLAY_TRACK,
   PAUSE_TRACK,
-  UPDATE_GLOBAL_PLAYER
+  UPDATE_CURRENT_PLAYLIST
 } from "./types";
 
 export const fetchUser = () => async dispatch => {
@@ -65,16 +66,32 @@ export const removeTrackFromPlaylist = (
 };
 export const setCurrentPlaylist = playlist => async dispatch => {
   dispatch({ type: SET_CURRENT_PLAYLIST, payload: playlist });
+  dispatch({ type: UPDATE_CURRENT_PLAYLIST, payload: playlist });
 };
 
-export const playTrack = track => async dispatch => {
+export const addPlaylist = formData => async dispatch => {
+  const res = await axios.post("/api/playlists/new", {
+    name: formData.name,
+    description: formData.description,
+    artwork: formData.artwork
+  });
+};
+
+export const playTrack = (track, trackIndex, position) => async dispatch => {
+  console.log("PLAY TRACK:", position);
   if (track.spotifyUri) {
     // reach out to spotify play route
-    const res = await axios.put("/api/play", { context_uri: track.spotifyUri });
+    const res = await axios.put("/api/play", {
+      context_uri: track.spotifyUri,
+      position_ms: position
+    });
     let globalPlayer = {
       playing: true,
-      currentTrackId: track._id,
-      currentPlaylistId: track.playlist // set this later
+      position,
+      currentTrack: {
+        id: track._id,
+        index: trackIndex
+      }
     };
 
     dispatch({ type: PLAY_TRACK, payload: globalPlayer });
@@ -83,17 +100,25 @@ export const playTrack = track => async dispatch => {
   }
 };
 
-export const pauseTrack = () => async dispatch => {
-  // await axios.get("/api/pause");
+
+export const pauseTrack = (track, position) => async dispatch => {
   let globalPlayer = {
-    playing: false
+    playing: false,
+    position
   };
+
+  if (track.spotifyUri) {
+    axios.get("/api/pause");
+  } else if (track.youtubeUri) {
+    // pause youtube track.
+  }
+
   dispatch({ type: PAUSE_TRACK, payload: globalPlayer });
 };
 
-export const updateGlobalPlayer = globalPlayerState => dispatch => {
-  dispatch({ type: UPDATE_GLOBAL_PLAYER, payload: globalPlayerState });
-};
+// export const updateGlobalPlayer = globalPlayerState => dispatch => {
+//   dispatch({ type: UPDATE_GLOBAL_PLAYER, payload: globalPlayerState });
+// };
 
 // Spotify Actions
 export const updateSpotifyPlayer = playerState => dispatch => {

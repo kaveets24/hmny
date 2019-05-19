@@ -1,13 +1,21 @@
 // This is a generic player state which only keeps track of "playing" and the _id of the currently playing track.
 import {
-  UPDATE_GLOBAL_PLAYER,
+  UPDATE_CURRENT_PLAYLIST,
   PLAY_TRACK,
   PAUSE_TRACK
 } from "../actions/types";
 const initialState = {
   playing: false,
-  currentTrackId: null,
-  currentPlaylistId: null
+  volume: 100,
+  position: 0,
+  currentTrack: {
+    id: null, 
+    index: null
+  },
+  currentPlaylist: {
+    id: null,
+    tracks: []
+  }
 };
 
 export default function(state = initialState, action) {
@@ -16,15 +24,31 @@ export default function(state = initialState, action) {
       return {
         ...state,
         playing: action.payload.playing,
-        currentTrackId: action.payload.currentTrackId,
-        currentPlaylistId: action.payload.currentPlaylistId
+        position: action.payload.position,
+        currentTrack: {
+          id: action.payload.currentTrack.id,
+          index: action.payload.currentTrack.index
+        
+        }
       };
 
     case PAUSE_TRACK:
+    console.log("PAUSE TRACK", action.payload.position)
       return {
         ...state,
-        playing: action.payload.playing
+        playing: action.payload.playing, 
+        position: action.payload.position
       };
+
+    case UPDATE_CURRENT_PLAYLIST:
+      return {
+        ...state,
+        currentPlaylist: {
+          id: action.payload._id,
+          tracks: action.payload.tracks
+        }
+      };
+
     default:
       return state;
   }

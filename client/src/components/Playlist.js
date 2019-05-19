@@ -25,6 +25,8 @@ class Playlist extends Component {
       this.props.fetchTracks(_id);
     }
 
+    console.log("GLOBAL_PLAYER", this.props.globalPlayer)
+
 
   }
 
@@ -43,11 +45,11 @@ class Playlist extends Component {
             </div>
             <img
               className="playlist__albumart"
-              src={this.props.playerState.albumArt}
+              src={this.props.spotifyState.albumArt}
               alt="Your Album Art"
             />
             <div className="playlist__trackname">
-              {this.props.playerState.trackName}
+              {this.props.spotifyState.trackName}
             </div>
           </div>
         </div>
@@ -59,7 +61,8 @@ class Playlist extends Component {
 function mapStateToProps(state) {
   return {
     auth: state.auth,
-    playerState: state.playerState,
+    spotifyState: state.spotifyState,
+    globalPlayer: state.globalPlayer,
     tracks: state.tracks,
     playlists: state.playlists
   };
