@@ -32,6 +32,7 @@
     "passport-google-oauth20": "^1.0.0",
     "passport-spotify": "^1.0.1",
     "request": "^2.88.0",
-    "spotify-web-api-node": "^4.0.0"
+    "spotify-web-api-node": "^4.0.0",
+    "youtube-search": "^1.1.4"
   }
 }
