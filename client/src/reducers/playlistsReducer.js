@@ -8,7 +8,7 @@ import {
 
 const initialState = {
   all: [],
-  current: []
+  current: {}
 };
 export default function(state = initialState, action) {
   switch (action.type) {

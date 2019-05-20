@@ -6,15 +6,23 @@ import Track from "./Track";
 import Search from "./Search";
 
 class Playlist extends Component {
-  renderTracks() {
-      return this.props.tracks.current.map(track => {
-        let order = this.props.tracks.current.indexOf(track) + 1;
-        return <Track track={track} key={order} order={order} />;
-      });
+  renderTracks = () => {
+    const { tracks } = this.props.playlists.current;
+
+    switch (tracks) {
+      case undefined:
+        return null;
+
+      default:
+        return tracks.map(track => {
+          let order = tracks.indexOf(track) + 1;
+          return <Track track={track} key={order} order={order} />;
+        });
+    }
+
   
 
   }
-
 
   async componentDidMount() {
     // We have to do this here because the current playlist object is being passed as a prop through the <Link> component in Playlists.js
@@ -22,11 +30,8 @@ class Playlist extends Component {
     if (this.props.location.state !== undefined) {
       await this.props.setCurrentPlaylist(this.props.location.state.playlist);
       const { _id } = this.props.playlists.current;  
-      this.props.fetchTracks(_id);
+      this.props.fetchTracks(_id); // can we remove this to instead return a playlist with the populated tracks array?
     }
-
-    console.log("GLOBAL_PLAYER", this.props.globalPlayer)
-
 
   }
 

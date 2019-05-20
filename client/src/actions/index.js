@@ -36,6 +36,7 @@ export const fetchTracks = playlistId => async dispatch => {
 };
 
 export const searchTracks = query => async dispatch => {
+
   const res = await axios.put("/api/findtrack", {
     query
   });
@@ -48,7 +49,6 @@ export const addTrackToPlaylist = (track, playlistId) => async dispatch => {
     playlistId
   };
   const res = await axios.post("/api/tracks/new", reqBody);
-
   dispatch({ type: ADD_TRACK_TO_PLAYLIST, payload: res.data });
 };
 
@@ -80,7 +80,6 @@ export const addPlaylist = formData => async dispatch => {
 };
 
 export const playTrack = (track, trackIndex, position) => async dispatch => {
-  if (track !== undefined) {
     if (track.spotifyUri) {
       const res = await axios.put("/api/play", {
         context_uri: track.spotifyUri,
@@ -99,7 +98,6 @@ export const playTrack = (track, trackIndex, position) => async dispatch => {
     } else if (track.youtubeUri) {
       // reach out to youtube play route
     }
-  }
 };
 
 export const pauseTrack = (track, position) => async dispatch => {

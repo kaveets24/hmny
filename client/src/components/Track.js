@@ -8,7 +8,6 @@ class Track extends Component {
       this.props.track,
       this.props.playlists.current._id
     );
-    await this.props.fetchTracks(this.props.playlists.current._id);
   };
 
   handleDelete = async () => {
@@ -16,7 +15,6 @@ class Track extends Component {
       this.props.track,
       this.props.playlists.current._id
     );
-    await this.props.fetchTracks(this.props.playlists.current._id);
   };
 
   handlePlay = async () => {

@@ -3,6 +3,7 @@ const proxy = require("http-proxy-middleware");
 module.exports = function(app) {
   const pathnames = [
     "/auth/google",
+    "/api/current_user",
     "/api/*",
     "/api/playlists/*",
     "/api/tracks/*",

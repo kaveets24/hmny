@@ -11,7 +11,7 @@ require('./models/Playlist');
 
 require('./services/passport');
 const spotifyAuth = require('./routes/spotifyAuthRoutes');
-const spotifyWrapper = require('./routes/spotifyWrapperRoutes');
+const searchAndPlayer = require('./routes/searchAndPlayerRoutes');
 const googleAuth = require('./routes/googleAuthRoutes');
 const playlists = require('./routes/playlistRoutes');
 
@@ -42,8 +42,8 @@ app.use(bodyParser.json())
 
 // Routes
 app.use('/', googleAuth);
-app.use('/', spotifyAuth); // correct way using express Router;
-app.use('/', spotifyWrapper); // correct way using express Router;
+app.use('/', spotifyAuth);
+app.use('/', searchAndPlayer); 
 app.use('/', playlists);
 
 if (process.env.NODE_ENV === 'production') {

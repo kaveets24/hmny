@@ -5,14 +5,17 @@ import Track from "./Track";
 
 class Search extends Component {
   constructor(props) {
-    
     super(props);
     this.state = {
       inputText: "",
-      overlay: false,
+      source: "spotify",
+      overlay: false
     };
   }
 
+  handleRadioClick = e => {
+    this.setState({ source: e.target.value });
+  };
   handleChange = e => {
     this.setState({
       inputText: e.target.value
@@ -25,7 +28,7 @@ class Search extends Component {
     clearTimeout(timeout);
     timeout = setTimeout(async () => {
       // make a request to fetch search query (results limited to 10-15)
-      await this.props.searchTracks(this.state.inputText);
+      await this.props.searchTracks(this.state);
     }, 600);
   };
 
@@ -51,7 +54,7 @@ class Search extends Component {
           artists,
           duration: duration_ms,
           spotifyUri: uri,
-          source: "Spotify"
+          source: "spotify"
         };
         return (
           <Track track={track} searching={true} key={order} order={order} />
@@ -80,6 +83,7 @@ class Search extends Component {
           <fieldset>
             <div className="search__radio-fields">
               <input
+                onClick={this.handleRadioClick}
                 defaultChecked
                 type="radio"
                 value="spotify"
@@ -88,6 +92,7 @@ class Search extends Component {
               />
               <label htmlFor="spotify">Spotify</label>
               <input
+                onClick={this.handleRadioClick}
                 type="radio"
                 value="youtube"
                 id="youtube"
@@ -95,6 +100,7 @@ class Search extends Component {
               />
               <label htmlFor="youtube">Youtube</label>
               <input
+                onClick={this.handleRadioClick}
                 type="radio"
                 value="soundcloud"
                 id="soundcloud"

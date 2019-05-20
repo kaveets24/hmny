@@ -58,7 +58,7 @@ router.post("/api/tracks/new", async (req, res) => {
   const user = req.user;
 
   switch (source) {
-    case "Spotify":
+    case "spotify":
       const artistNames = artists.map(artist => artist.name);
       const newTrack = await new Track({
         trackName,
@@ -68,7 +68,7 @@ router.post("/api/tracks/new", async (req, res) => {
         youtubeUri: "",
         duration,
         bpm: 0,
-        source: "", // Spotify, Youtube, Soundcloud, etc.
+        source: "spotify", // Spotify, Youtube, Soundcloud, etc.
         playlist: playlistId
       });
       newTrack.save();
@@ -90,7 +90,7 @@ router.post("/api/tracks/new", async (req, res) => {
 
 
     const playlist = await Playlist.findByIdAndUpdate(playlistId, 
-      { $pull: { tracks: track._id }}, 
+      { $pull: { tracks: track._id }}, {new: true} 
     ).populate("tracks");
 
     res.status(200).send(playlist);

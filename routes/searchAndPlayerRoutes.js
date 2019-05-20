@@ -4,21 +4,36 @@ const requireLogin = require("../middleware/requireLogin");
 const spotifyApi = require("../services/spotifyWebApi");
 const mongoose = require("mongoose");
 const Track = mongoose.model("track");
-// const Playlist = require('../models/Playlist');
+const search = require("youtube-search");
 
 router.put("/api/findtrack", requireLogin, async (req, res) => {
   const user = req.user;
-  const query = req.body.query;
+  const { inputText, source } = req.body.query;
 
-  spotifyApi.setAccessToken(user.spotifyAccessToken);
-  spotifyApi.setRefreshToken(user.spotifyRefreshToken);
+switch (source) {
+  case "spotify":
+    spotifyApi.setAccessToken(user.spotifyAccessToken);
+    spotifyApi.setRefreshToken(user.spotifyRefreshToken);
 
-  const searchResults = await spotifyApi.searchTracks(query, {
-    limit: 30
-  });
-  const tracks = searchResults.body.tracks.items;
+    const searchResults = await spotifyApi.searchTracks(inputText, {
+      limit: 30
+    });
+    
+    const tracks = searchResults.body.tracks.items;
 
-  res.status(200).send(tracks);
+    res.status(200).send(tracks);
+
+
+  case "youtube":
+    // Do youtube stuff
+    return
+
+  default:
+    return;
+
+}
+
+
 });
 
 router.put("/api/play", async (req, res) => {
