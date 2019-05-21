@@ -47,7 +47,7 @@ router.put("/api/tracks/view", async (req, res) => {
   const playlist = await Playlist.findById(playlistId, err => {
     if (err) res.status(404).send(err, "There was an error fetching your playlists...");
   }).populate("tracks");
-  res.send(playlist.tracks);
+  res.status(200).send(playlist);
 });
 
 router.post("/api/tracks/new", async (req, res) => {

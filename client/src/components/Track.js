@@ -18,20 +18,24 @@ class Track extends Component {
   };
 
   handlePlay = async () => {
-    const { order, tracks } = this.props;
+    const { order, playlists } = this.props;
     const { playing, currentTrack } = this.props.globalPlayer;
-    const currentSong = tracks.current[currentTrack.index];
-
-    if (!playing) {
-      // If paused, play the clicked track.
-      await this.props.playTrack(this.props.track, order - 1, 0);
-    } else if (playing && currentTrack.id === this.props.track._id) {
-      // If playing and the currently playing song is clicked, then pause the song.
-      await this.props.pauseTrack(currentSong, currentTrack.position);
-    } else {
-      //  Otherwise, just play the clicked track.
-      await this.props.playTrack(this.props.track, order - 1, 0);
+    
+    const currentSong = playlists.current.tracks;
+    console.log(" CURRENT SONG",currentSong, currentTrack);
+    if (currentSong !== undefined) {
+      if (!playing) {
+        // If paused, play the clicked track.
+        await this.props.playTrack(currentSong, order - 1, 0);
+      } else if (playing && currentTrack.id === this.props.track._id) {
+        // If playing and the currently playing song is clicked, then pause the song.
+        await this.props.pauseTrack(currentSong, currentTrack.position);
+      } else {
+        //  Otherwise, just play the clicked track.
+        await this.props.playTrack(this.props.track, order - 1, 0);
+      }
     }
+
   };
   msToMin = ms => {
     var min = ms / 1000 / 60;
@@ -56,7 +60,7 @@ class Track extends Component {
     let { artistNames } = this.props.track;
 
     let currentTrackPlayingClass;
-    
+
     if (!searching)
       if (globalPlayer.playing) {
         // If globalPlayer is playing...

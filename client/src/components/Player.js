@@ -136,14 +136,14 @@ class Player extends Component {
   onPlayClick = () => {
     const { currentTrack, playing, position } = this.props.globalPlayer;
     const { tracks, spotifyState } = this.props;
-    const currentSong = this.props.tracks.current[currentTrack.index];
+    const currentSong = tracks.current[currentTrack.index];
     if (!playing && currentSong !== undefined) {
       // If paused AND a track has been played previously, then resume the current track OR the first track of the playlist.
       // NOTE: spotifyState.position is only for spotify, we'll need to give the youtube position for those cases.
       currentTrack.index
         ? this.props.playTrack(currentSong, currentTrack.index, position)
         : this.props.playTrack(tracks.current[0], 0, 0);
-    } else {
+    } else if (currentSong !== undefined) {
       this.props.pauseTrack(currentSong, spotifyState.position);
     }
   };

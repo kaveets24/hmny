@@ -12,12 +12,21 @@ class Playlist extends Component {
     switch (tracks) {
       case undefined:
         return null;
+      
+      case true:
+      return tracks.map(track => {
+        let order = tracks.indexOf(track) + 1;
+        return <Track track={track} key={order} order={order} />;
+      });
 
       default:
-        return tracks.map(track => {
-          let order = tracks.indexOf(track) + 1;
-          return <Track track={track} key={order} order={order} />;
-        });
+      console.log("TRACKS", tracks);
+      return tracks.map(track => {
+        let order = tracks.indexOf(track) + 1;
+        return <Track track={track} key={order} order={order} />;
+      });
+   
+
     }
 
   
@@ -30,7 +39,7 @@ class Playlist extends Component {
     if (this.props.location.state !== undefined) {
       await this.props.setCurrentPlaylist(this.props.location.state.playlist);
       const { _id } = this.props.playlists.current;  
-      this.props.fetchTracks(_id); // can we remove this to instead return a playlist with the populated tracks array?
+      // await this.props.fetchTracks(_id); // can we remove this to instead return a playlist with the populated tracks array?
     }
 
   }
