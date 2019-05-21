@@ -1,5 +1,5 @@
 import {
-  SEARCH_TRACKS,
+  SEARCH_TRACKS, FETCH_TRACKS
 } from "../actions/types";
 
 const initialState = {
@@ -10,6 +10,9 @@ export default function(state = initialState, action) {
   switch (action.type) {
     case SEARCH_TRACKS:
       return { ...state, searchResults: action.payload };
+
+     case FETCH_TRACKS:
+      return { ...state, current: action.payload };
   
 
     default:
