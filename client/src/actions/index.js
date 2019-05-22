@@ -6,7 +6,6 @@ import {
   UPDATE_VOLUME,
   FETCH_PLAYLISTS,
   SET_CURRENT_PLAYLIST,
-  // UPDATE_CURRENT_PLAYLIST,
   FETCH_TRACKS,
   SEARCH_TRACKS,
   ADD_PLAYLIST,
@@ -26,14 +25,14 @@ export const fetchPlaylists = () => async dispatch => {
   dispatch({ type: FETCH_PLAYLISTS, payload: res.data });
 };
 
-export const fetchTracks = playlistId => async dispatch => {
-  const reqBody = {
-    playlistId
-  };
-  const res = await axios.put("/api/tracks/view", reqBody);
+// export const fetchTracks = playlistId => async dispatch => {
+//   const reqBody = {
+//     playlistId
+//   };
+//   const res = await axios.put("/api/tracks/view", reqBody);
 
-  dispatch({ type: FETCH_TRACKS, payload: res.data });
-};
+//   dispatch({ type: FETCH_TRACKS, payload: res.data });
+// };
 
 export const searchTracks = query => async dispatch => {
   const res = await axios.put("/api/findtrack", {
@@ -83,7 +82,6 @@ export const addPlaylist = formData => async dispatch => {
 };
 
 export const playTrack = (track, trackIndex, position) => async dispatch => {
-  console.log("THE FAILING TRACK", track);
   if (track.spotifyUri) {
     const res = await axios.put("/api/play", {
       context_uri: track.spotifyUri,
@@ -118,10 +116,6 @@ export const pauseTrack = (track, position) => async dispatch => {
 
   dispatch({ type: PAUSE_TRACK, payload: globalPlayer });
 };
-
-// export const updateGlobalPlayer = globalPlayerState => dispatch => {
-//   dispatch({ type: UPDATE_GLOBAL_PLAYER, payload: globalPlayerState });
-// };
 
 // Spotify Actions
 export const updateSpotifyPlayer = playerState => dispatch => {
