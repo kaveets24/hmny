@@ -24,8 +24,6 @@ export default function (state = initialState, action) {
         current: action.payload
       });
       return { ...state, current: action.payload };
-
-   
       
     case ADD_TRACK_TO_PLAYLIST:
       console.log("ADD_TRACK_TO_PLAYLIST", {

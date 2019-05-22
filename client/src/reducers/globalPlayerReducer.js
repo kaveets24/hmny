@@ -12,10 +12,7 @@ const initialState = {
     id: null, 
     index: null
   },
-  currentPlaylist: {
-    id: null,
-    tracks: []
-  }
+  currentPlaylist: {}
 };
 
 export default function(state = initialState, action) {
@@ -40,14 +37,11 @@ export default function(state = initialState, action) {
         position: action.payload.position
       };
 
-    case UPDATE_CURRENT_PLAYLIST:
-      return {
-        ...state,
-        currentPlaylist: {
-          id: action.payload._id,
-          tracks: action.payload.tracks
-        }
-      };
+    // case UPDATE_CURRENT_PLAYLIST:
+    //   return {
+    //     ...state,
+    //     currentPlaylist: action.payload
+    //   };
 
     default:
       return state;

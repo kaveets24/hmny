@@ -74,7 +74,7 @@ router.post("/api/tracks/new", async (req, res) => {
       newTrack.save();
       const playlist = await Playlist.findByIdAndUpdate(playlistId, 
         { $push: { tracks: [newTrack] }}, 
-        {new: true} 
+        {new: true}
       ).populate("tracks");
       res.status(200).send(playlist);
 

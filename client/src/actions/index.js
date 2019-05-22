@@ -6,6 +6,7 @@ import {
   UPDATE_VOLUME,
   FETCH_PLAYLISTS,
   SET_CURRENT_PLAYLIST,
+  // UPDATE_CURRENT_PLAYLIST,
   FETCH_TRACKS,
   SEARCH_TRACKS,
   ADD_PLAYLIST,
@@ -13,7 +14,6 @@ import {
   REMOVE_TRACK_FROM_PLAYLIST,
   PLAY_TRACK,
   PAUSE_TRACK,
-  UPDATE_CURRENT_PLAYLIST
 } from "./types";
 
 export const fetchUser = () => async dispatch => {
@@ -44,6 +44,7 @@ export const searchTracks = query => async dispatch => {
 };
 
 export const addTrackToPlaylist = (track, playlistId) => async dispatch => {
+  console.log(track);
   const reqBody = {
     track,
     playlistId
@@ -65,15 +66,11 @@ export const removeTrackFromPlaylist = (
   dispatch({ type: REMOVE_TRACK_FROM_PLAYLIST, payload: res.data });
 };
 export const setCurrentPlaylist = playlist => async dispatch => {
-  console.log("PLAYLIST", playlist);
   const reqBody = {
     playlistId: playlist._id
   };
   const res = await axios.put("/api/tracks/view", reqBody);
-
-  dispatch({ type: FETCH_TRACKS, payload: res.data });
-  // dispatch({ type: SET_CURRENT_PLAYLIST, payload: playlist });
-  // dispatch({ type: UPDATE_CURRENT_PLAYLIST, payload: playlist });
+  dispatch({ type: SET_CURRENT_PLAYLIST, payload: res.data });
 };
 
 export const addPlaylist = formData => async dispatch => {
