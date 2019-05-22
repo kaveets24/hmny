@@ -7,7 +7,7 @@ import {
 } from "../actions/types";
 
 const initialState = {
-  all: [],
+  all: null,
   current: {}
 };
 export default function (state = initialState, action) {

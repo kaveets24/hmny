@@ -12,15 +12,8 @@ class Playlist extends Component {
     switch (tracks) {
       case undefined:
         return null;
-      
-      case true:
-      return tracks.map(track => {
-        let order = tracks.indexOf(track) + 1;
-        return <Track track={track} key={order} order={order} />;
-      });
 
       default:
-      console.log("TRACKS", tracks);
       return tracks.map(track => {
         let order = tracks.indexOf(track) + 1;
         return <Track track={track} key={order} order={order} />;

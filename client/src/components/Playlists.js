@@ -11,43 +11,37 @@ class Playlists extends Component {
   };
 
   renderContent() {
-    console.log("THIS.PROPS.PLAYLISTS", this.props.playlists);
-    switch (this.props.playlists) {
-      case undefined:
-        return null;
-    
+    const { playlists } = this.props;
+    if (playlists.all === null) {
 
-      default:
-        if (this.props.playlists.all.length < 1) {
-          return (
-            <div style={{ color: "white" }} className="">
-              You currently don't have any playlists! (Ps this is an inline
-              style, change it later)
-            </div>
-          );
-        }
-        break;
-    }
-
-    return this.props.playlists.all.map(playlist => {
+      return <div style={{ color: "white" }} className="">Loading...</div>
+    } else if (playlists.all.length) {
+      return playlists.all.map(playlist => {
+        return (
+          <Link
+            key={playlist.playlistName}
+            to={{
+              pathname: `/playlists/${playlist.playlistName}`.replace(
+                /\s/gi,
+                "-"
+              ),
+              state: {
+                playlist
+              }
+            }}
+          >
+            <div className="main__item">{playlist.playlistName}</div>
+          </Link>
+        );
+      });
+    } else {
       return (
-
-        <Link
-          key={playlist.playlistName}
-          to={{
-            pathname: `/playlists/${playlist.playlistName}`.replace(
-              /\s/gi,
-              "-"
-            ),
-            state: {
-              playlist
-            }
-          }}
-        >
-          <div className="main__item">{playlist.playlistName}</div>
-        </Link>
+        <div style={{ color: "white" }} className="">
+          You currently don't have any playlists! (Ps this is an inline style,
+          change it later)
+        </div>
       );
-    });
+    }
   }
   // Used arrow "class-field" snytax so that "this" is bound correctly.
   handleSubmit = async event => {
