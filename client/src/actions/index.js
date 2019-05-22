@@ -83,6 +83,7 @@ export const addPlaylist = formData => async dispatch => {
 };
 
 export const playTrack = (track, trackIndex, position) => async dispatch => {
+  console.log("THE FAILING TRACK", track);
   if (track.spotifyUri) {
     const res = await axios.put("/api/play", {
       context_uri: track.spotifyUri,

@@ -126,32 +126,35 @@ class Player extends Component {
   // Player Controls
   onPreviousClick() {
     const { currentTrack } = this.props.globalPlayer;
-    const { tracks } = this.props;
-    const previousSong = tracks.current[currentTrack.index - 1];
+    const { tracks } = this.props.playlists.current;
+    const previousSong = tracks[currentTrack.index - 1];
     if (currentTrack.index > 0 && previousSong !== undefined)
       this.props.playTrack(previousSong, currentTrack.index - 1, 0);
   }
   onPlayClick = () => {
     const { currentTrack, playing, position } = this.props.globalPlayer;
-    const { tracks, spotifyState } = this.props;
-    const currentSong = tracks.current[currentTrack.index];
+    const {  spotifyState } = this.props;
+    const { tracks } = this.props.playlists.current;
+    
+    const currentSong = tracks[currentTrack.index];
 
-    if (!playing) {
+    if (!playing && currentSong !== undefined) {
       // If paused AND a track has been played previously, then resume the current track OR the first track of the playlist.
       // NOTE: spotifyState.position is only for spotify, we'll need to give the youtube position for those cases.
-      currentTrack.index
-        ? this.props.playTrack(currentSong, currentTrack.index, position)
-        : this.props.playTrack(tracks.current[0], 0, 0);
-    } else if (currentSong !== undefined) {
+        this.props.playTrack(currentSong, currentTrack.index, position);
+
+    } else if (!playing && currentSong === undefined) {
+      this.props.playTrack(tracks[0], 0, 0);
+    } else if (playing) {
       this.props.pauseTrack(currentSong, spotifyState.position);
     }
   };
   onNextClick() {
     const { currentTrack } = this.props.globalPlayer;
-    const { tracks, playTrack } = this.props;
-    const nextSong = tracks.current[currentTrack.index + 1];
-    if (currentTrack.index !== tracks.current.length - 1 && nextSong !== undefined)
-      playTrack(nextSong, currentTrack.index + 1, 0);
+    const { tracks } = this.props.playlists.current;
+    const nextSong = tracks[currentTrack.index + 1];
+    if (currentTrack.index !== tracks.length - 1 && nextSong !== undefined)
+      this.props.playTrack(nextSong, currentTrack.index + 1, 0);
 
   }
 
@@ -233,7 +236,7 @@ function mapStateToProps(state) {
     auth: state.auth,
     spotifyState: state.spotifyState,
     globalPlayer: state.globalPlayer,
-    tracks: state.tracks
+    playlists: state.playlists,
   };
 }
 
