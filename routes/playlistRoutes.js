@@ -93,6 +93,8 @@ router.post("/api/tracks/new", async (req, res) => {
       { $pull: { tracks: track._id }}, {new: true} 
     ).populate("tracks");
 
+   await Track.findByIdAndDelete(track._id);
+
     res.status(200).send(playlist);
 
 
