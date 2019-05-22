@@ -13,7 +13,7 @@ import {
   ADD_TRACK_TO_PLAYLIST,
   REMOVE_TRACK_FROM_PLAYLIST,
   PLAY_TRACK,
-  PAUSE_TRACK,
+  PAUSE_TRACK
 } from "./types";
 
 export const fetchUser = () => async dispatch => {
@@ -36,7 +36,6 @@ export const fetchTracks = playlistId => async dispatch => {
 };
 
 export const searchTracks = query => async dispatch => {
-
   const res = await axios.put("/api/findtrack", {
     query
   });
@@ -70,6 +69,7 @@ export const setCurrentPlaylist = playlist => async dispatch => {
   };
   const res = await axios.put("/api/tracks/view", reqBody);
   dispatch({ type: SET_CURRENT_PLAYLIST, payload: res.data });
+  dispatch({ type: FETCH_TRACKS, payload: res.data });
 };
 
 export const addPlaylist = formData => async dispatch => {
@@ -83,25 +83,24 @@ export const addPlaylist = formData => async dispatch => {
 };
 
 export const playTrack = (track, trackIndex, position) => async dispatch => {
+  if (track.spotifyUri) {
+    const res = await axios.put("/api/play", {
+      context_uri: track.spotifyUri,
+      position_ms: position
+    });
+    let globalPlayer = {
+      playing: true,
+      position,
+      currentTrack: {
+        id: track._id,
+        index: trackIndex
+      }
+    };
 
-    if (track.spotifyUri) {
-      const res = await axios.put("/api/play", {
-        context_uri: track.spotifyUri,
-        position_ms: position
-      });
-      let globalPlayer = {
-        playing: true,
-        position,
-        currentTrack: {
-          id: track._id,
-          index: trackIndex
-        }
-      };
-
-      dispatch({ type: PLAY_TRACK, payload: globalPlayer });
-    } else if (track.youtubeUri) {
-      // reach out to youtube play route
-    }
+    dispatch({ type: PLAY_TRACK, payload: globalPlayer });
+  } else if (track.youtubeUri) {
+    // reach out to youtube play route
+  }
 };
 
 export const pauseTrack = (track, position) => async dispatch => {

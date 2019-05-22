@@ -12,7 +12,7 @@ export default function(state = initialState, action) {
       return { ...state, searchResults: action.payload };
 
      case FETCH_TRACKS:
-      return { ...state, current: action.payload };
+      return { ...state, current: action.payload.tracks };
   
 
     default:

@@ -18,23 +18,19 @@ class Track extends Component {
   };
 
   handlePlay = async () => {
-    const { order, playlists } = this.props;
+    const { order, track, playlists } = this.props;
     const { playing, currentTrack } = this.props.globalPlayer;
     
-    const currentSong = playlists.current.tracks;
-    console.log(" CURRENT SONG",currentSong, currentTrack);
-    if (currentSong !== undefined) {
       if (!playing) {
         // If paused, play the clicked track.
-        await this.props.playTrack(currentSong, order - 1, 0);
-      } else if (playing && currentTrack.id === this.props.track._id) {
+        await this.props.playTrack(track, order - 1, 0);
+      } else if (playing && currentTrack.id === track._id) {
         // If playing and the currently playing song is clicked, then pause the song.
-        await this.props.pauseTrack(currentSong, currentTrack.position);
+        await this.props.pauseTrack(track, currentTrack.position);
       } else {
         //  Otherwise, just play the clicked track.
-        await this.props.playTrack(this.props.track, order - 1, 0);
+        await this.props.playTrack(track, order - 1, 0);
       }
-    }
 
   };
   msToMin = ms => {

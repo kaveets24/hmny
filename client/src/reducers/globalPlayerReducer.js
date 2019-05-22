@@ -36,13 +36,6 @@ export default function(state = initialState, action) {
         playing: action.payload.playing, 
         position: action.payload.position
       };
-
-    // case UPDATE_CURRENT_PLAYLIST:
-    //   return {
-    //     ...state,
-    //     currentPlaylist: action.payload
-    //   };
-
     default:
       return state;
   }
