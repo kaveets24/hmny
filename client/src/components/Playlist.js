@@ -68,7 +68,6 @@ function mapStateToProps(state) {
     auth: state.auth,
     spotifyState: state.spotifyState,
     globalPlayer: state.globalPlayer,
-    tracks: state.tracks,
     playlists: state.playlists
   };
 }

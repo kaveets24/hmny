@@ -11,8 +11,8 @@ export default function(state = initialState, action) {
     case SEARCH_TRACKS:
       return { ...state, searchResults: action.payload };
 
-     case FETCH_TRACKS:
-      return { ...state, current: action.payload.tracks };
+    //  case FETCH_TRACKS:
+    //   return { ...state, current: action.payload.tracks };
   
 
     default:
