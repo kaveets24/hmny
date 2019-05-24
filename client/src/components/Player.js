@@ -127,34 +127,43 @@ class Player extends Component {
   onPreviousClick() {
     const { currentTrack } = this.props.globalPlayer;
     const { tracks } = this.props.playlists.current;
-    const previousSong = tracks[currentTrack.index - 1];
-    if (currentTrack.index > 0 && previousSong !== undefined)
+    if (tracks !== undefined) {
+      const previousSong = tracks[currentTrack.index - 1];
+      if (currentTrack.index > 0 && previousSong !== undefined)
       this.props.playTrack(previousSong, currentTrack.index - 1, 0);
+    }
+  
   }
   onPlayClick = () => {
     const { currentTrack, playing, position } = this.props.globalPlayer;
     const {  spotifyState } = this.props;
     const { tracks } = this.props.playlists.current;
-    
-    const currentSong = tracks[currentTrack.index];
+    if (tracks !== undefined) {
+      const currentSong = tracks[currentTrack.index];
+      if (!playing && currentSong !== undefined) {
+        // If paused AND a track has been played previously, then resume the current track OR the first track of the playlist.
+        // NOTE: spotifyState.position is only for spotify, we'll need to give the youtube position for those cases.
+          this.props.playTrack(currentSong, currentTrack.index, position);
+  
+      } else if (!playing && currentSong === undefined) {
+        this.props.playTrack(tracks[0], 0, 0);
+      } else if (playing) {
+        this.props.pauseTrack(currentSong, spotifyState.position);
+      }
 
-    if (!playing && currentSong !== undefined) {
-      // If paused AND a track has been played previously, then resume the current track OR the first track of the playlist.
-      // NOTE: spotifyState.position is only for spotify, we'll need to give the youtube position for those cases.
-        this.props.playTrack(currentSong, currentTrack.index, position);
-
-    } else if (!playing && currentSong === undefined) {
-      this.props.playTrack(tracks[0], 0, 0);
-    } else if (playing) {
-      this.props.pauseTrack(currentSong, spotifyState.position);
     }
+
+
   };
   onNextClick() {
     const { currentTrack } = this.props.globalPlayer;
     const { tracks } = this.props.playlists.current;
-    const nextSong = tracks[currentTrack.index + 1];
-    if (currentTrack.index !== tracks.length - 1 && nextSong !== undefined)
+    if (tracks !== undefined) {
+      const nextSong = tracks[currentTrack.index + 1];
+      if (currentTrack.index !== tracks.length - 1 && nextSong !== undefined)
       this.props.playTrack(nextSong, currentTrack.index + 1, 0);
+    }
+
 
   }
 
