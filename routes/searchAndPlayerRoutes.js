@@ -5,6 +5,7 @@ const spotifyApi = require("../services/spotifyWebApi");
 const mongoose = require("mongoose");
 const Track = mongoose.model("track");
 const search = require("youtube-search");
+const keys = require('../config/keys');
 
 router.put("/api/findtrack", requireLogin, async (req, res) => {
   const user = req.user;
@@ -25,7 +26,15 @@ switch (source) {
 
 
   case "youtube":
-    // Do youtube stuff
+    var opts = {
+      maxResults: 10,
+      key: keys.googleApiKey
+    };
+     
+    search(inputText, opts, (err, results) => {
+      if(err) console.log(err);
+      console.dir(results);
+    });
     return
 
   default:
