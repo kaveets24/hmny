@@ -10,7 +10,6 @@ const keys = require('../config/keys');
 router.put("/api/findtrack", requireLogin, async (req, res) => {
   const user = req.user;
   const { inputText, source } = req.body.query;
-
 switch (source) {
   case "spotify":
     spotifyApi.setAccessToken(user.spotifyAccessToken);
@@ -23,6 +22,7 @@ switch (source) {
     const tracks = searchResults.body.tracks.items;
 
     res.status(200).send(tracks);
+    break;
 
 
   case "youtube":
@@ -33,12 +33,12 @@ switch (source) {
      
     search(inputText, opts, (err, results) => {
       if(err) console.log(err);
-      console.dir(results);
+      console.log(results);
     });
-    return
+    break;
 
   default:
-    return;
+    break;
 
 }
 
