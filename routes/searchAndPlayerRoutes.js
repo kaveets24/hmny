@@ -27,13 +27,15 @@ switch (source) {
 
   case "youtube":
     var opts = {
-      maxResults: 10,
+      maxResults: 5,
+      type: ["video"],
       key: keys.googleApiKey
     };
      
     search(inputText, opts, (err, results) => {
       if(err) console.log(err);
-      console.log(results);
+        console.log(results);
+        res.status(200).send(results);
     });
     break;
 

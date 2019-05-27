@@ -38,7 +38,11 @@ export const searchTracks = query => async dispatch => {
   const res = await axios.put("/api/findtrack", {
     query
   });
-  dispatch({ type: SEARCH_TRACKS, payload: res.data });
+
+  dispatch({
+    type: SEARCH_TRACKS,
+    payload: res.data
+  });
 };
 
 export const addTrackToPlaylist = (track, playlistId) => async dispatch => {

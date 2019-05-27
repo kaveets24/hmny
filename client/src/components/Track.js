@@ -43,18 +43,17 @@ class Track extends Component {
     min = Math.floor(min);
     return min + ":" + sec;
   };
-  componentDidMount() {
-    console.log("TRACK COMPONENT DIDMOUNT,", this.props);
-  }
 
   render() {
     let time = this.msToMin(this.props.track.duration);
-    let { searching, globalPlayer } = this.props;
+    let { searching, globalPlayer, track, order } = this.props;
+    let { artistNames, source } = track;
+    let youtubeThumbnailImage = (source === "youtube" ? <img src={track.thumbnail.url} alt={`thumbnail-${order}`} /> : null)
+
     let searchingClass = searching ? "" : "hidden";
     let deleteButtonClass = searching ? "hidden" : "";
     let orderClass = searching ? "hidden" : "playlist__data";
-    let { artistNames } = this.props.track;
-
+    
     let currentTrackPlayingClass;
 
     if (!searching)
@@ -98,8 +97,9 @@ class Track extends Component {
             {time}
           </span>
           <span className="playlist__data">
-            <i className="fab fa-spotify" />
+            <i className={`fab fa-${source}`} />
           </span>
+          {youtubeThumbnailImage}
         </div>
       </div>
     );
@@ -112,7 +112,7 @@ function mapStateToProps(state) {
     playlists: state.playlists,
     spotifyState: state.spotifyState,
     globalPlayer: state.globalPlayer,
-    tracks: state.tracks
+    search: state.search
   };
 }
 

@@ -41,25 +41,50 @@ class Search extends Component {
 
   showSearchResults = () => {
     if (
-      this.props.tracks.searchResults !== undefined &&
-      this.props.tracks.searchResults.length > 0
+      this.props.search.results !== undefined &&
+      this.props.search.results.length > 0
     ) {
-      const { searchResults } = this.props.tracks;
+      const { results } = this.props.search;
 
-      return searchResults.map(result => {
-        const { name, artists, duration_ms, uri } = result;
-        let order = searchResults.indexOf(result) + 1;
-        let track = {
-          trackName: name,
-          artists,
-          duration: duration_ms,
-          spotifyUri: uri,
-          source: "spotify"
-        };
-        return (
-          <Track track={track} searching={true} key={order} order={order} />
-        );
-      });
+      switch (this.state.source) {
+        case "spotify":
+          return results.map((result, index) => {
+            const { name, artists, duration_ms, uri } = result;
+            let order = index + 1;
+            let track = {
+              trackName: name,
+              artists,
+              duration: duration_ms,
+              spotifyUri: uri,
+              source: this.state.source
+            };
+            return (
+              <Track track={track} searching={true} key={order} order={order} />
+            );
+          });
+
+        case "youtube":
+            return results.map((result, index) => {
+              const { title, id, thumbnails } = result;
+              let decodedTitle = decodeURI(title);
+              let order = index + 1;
+              let track = {
+                trackName: decodedTitle,
+                artists: [],
+                duration: null,
+                youtubeUri: id,
+                source: this.state.source,
+                thumbnail: thumbnails.default
+              };
+              return (
+                <Track track={track} searching={true} key={order} order={order} />
+              );
+            });
+          break;
+
+        default:
+          break;
+      }
     } else {
       return <div>Start typing above to add new tracks to your playlist!</div>;
     }
@@ -124,7 +149,7 @@ class Search extends Component {
 }
 function mapStateToProps(state) {
   return {
-    tracks: state.tracks
+    search: state.search
   };
 }
 
