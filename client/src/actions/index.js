@@ -46,6 +46,7 @@ export const searchTracks = query => async dispatch => {
 };
 
 export const addTrackToPlaylist = (track, playlistId) => async dispatch => {
+  console.log("INDEX.js:", track)
   const reqBody = {
     track,
     playlistId

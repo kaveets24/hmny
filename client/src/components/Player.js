@@ -58,7 +58,7 @@ class Player extends Component {
           }
 
           await this.props.updateDeviceId(device_id);
-          this.selectHmnyOnSpotifyConnect();
+          this.selectHmnyOnSpotifyConnect(); // Uncomment if you want the web browser to automatically select itself as your Spotify device. 
         });
 
         // Not Ready

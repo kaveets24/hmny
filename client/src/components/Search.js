@@ -26,10 +26,19 @@ class Search extends Component {
     e.preventDefault();
     let timeout = null;
     clearTimeout(timeout);
-    timeout = setTimeout(async () => {
-      // make a request to fetch search query (results limited to 10-15)
-      await this.props.searchTracks(this.state);
-    }, 600);
+    if (this.state.source !== "youtube") {
+      timeout = setTimeout(async () => {
+        // make a request to fetch search query (results limited to 10-15)
+        await this.props.searchTracks(this.state);
+      }, 600);
+    } else {
+      timeout = setTimeout(async () => {
+        // make a request to fetch search query (results limited to 10-15)
+        await this.props.searchTracks(this.state);
+      }, 6000);
+
+    }
+
   };
 
   showOverlay = () => {
@@ -74,13 +83,13 @@ class Search extends Component {
                 duration: null,
                 youtubeUri: id,
                 source: this.state.source,
-                thumbnail: thumbnails.default
+                thumbnail: thumbnails.default.url
               };
               return (
                 <Track track={track} searching={true} key={order} order={order} />
               );
             });
-          break;
+          
 
         default:
           break;

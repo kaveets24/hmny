@@ -6,6 +6,8 @@ const mongoose = require("mongoose");
 const Track = mongoose.model("track");
 const search = require("youtube-search");
 const keys = require('../config/keys');
+const axios = require("axios");
+const queryString = require("query-string");
 
 router.put("/api/findtrack", requireLogin, async (req, res) => {
   const user = req.user;
@@ -26,6 +28,8 @@ switch (source) {
 
 
   case "youtube":
+
+  // Old Code
     var opts = {
       maxResults: 5,
       type: ["video"],

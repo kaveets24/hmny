@@ -53,10 +53,10 @@ router.put("/api/tracks/view", async (req, res) => {
 router.post("/api/tracks/new", async (req, res) => {
   // Depending on whether or not its a Spotify, Youtube, or Soundcloud uri will determine how the track's metadata is pulled off and converted into the schema of our Track Model.
 
-  const { source, trackName, spotifyUri, duration, artists } = req.body.track;
+  const { source, trackName, spotifyUri, thumbnail, youtubeUri, duration, artists } = req.body.track;
   const { playlistId } = req.body;
   const user = req.user;
-
+  var playlist;
   switch (source) {
     case "spotify":
       const artistNames = artists.map(artist => artist.name);
@@ -72,16 +72,33 @@ router.post("/api/tracks/new", async (req, res) => {
         playlist: playlistId
       });
       newTrack.save();
-      const playlist = await Playlist.findByIdAndUpdate(playlistId, 
+      playlist = await Playlist.findByIdAndUpdate(playlistId, 
         { $push: { tracks: [newTrack] }}, 
         {new: true}
       ).populate("tracks");
       res.status(200).send(playlist);
 
       break;
-    case "Youtube":
+    case "youtube":
+
+    const newVideo = new Track({
+      trackName,
+      youtubeUri,
+      duration,
+      bpm: 0,
+      thumbnail,
+      source: "youtube",
+      playlist: playlistId
+    });
+
+    newVideo.save();
+    playlist = await Playlist.findByIdAndUpdate(playlistId,
+       { $push: {tracks: [newVideo]}}, {new: true}
+       ).populate("tracks");
+    res.status(200).send(playlist);
+
       break;
-    case "SoundCloud":
+    case "soundcloud":
       break;
   }
 

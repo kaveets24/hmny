@@ -8,6 +8,7 @@ const trackSchema = new Schema({
   albumName: String,
   spotifyUri: String,
   youtubeUri: String,
+  thumbnail: String, // A URL for the Youtube Video thumbnail image
   duration: Number,
   bpm: Number,
   source: String, // Spotify, Youtube, Soundcloud, etc.
