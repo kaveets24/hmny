@@ -4,6 +4,7 @@ import * as actions from "../actions";
 
 import Track from "./Track";
 import Search from "./Search";
+import YouTubePlayer from "./Youtube";
 
 class Playlist extends Component {
   renderTracks = () => {
@@ -58,6 +59,7 @@ class Playlist extends Component {
             </div>
           </div>
         </div>
+        <YouTubePlayer />
       </div>
     );
   }
