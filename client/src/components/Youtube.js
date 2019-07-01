@@ -5,6 +5,11 @@ import * as actions from "../actions";
 import YouTube from 'react-youtube';
 
 class YouTubePlayer extends Component {
+    state = {
+        active: false,
+        youtubeUri: ""
+    };
+
     render() {
         const opts = {
           height: '390',
