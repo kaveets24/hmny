@@ -11,8 +11,8 @@ const initialState = {
   currentTrack: {
     id: null, 
     index: null,
-    spotifyUri: "",
-    youtubeUri: ""
+    spotifyUri: null,
+    youtubeUri: null
   },
   currentPlaylist: {}
 };

@@ -128,9 +128,14 @@ class Player extends Component {
     const { currentTrack } = this.props.globalPlayer;
     const { tracks } = this.props.playlists.current;
     if (tracks !== undefined) {
+      const currentSong = tracks[currentTrack.index];
       const previousSong = tracks[currentTrack.index - 1];
-      if (currentTrack.index > 0 && previousSong !== undefined)
-      this.props.playTrack(previousSong, currentTrack.index - 1, 0);
+      if (currentTrack.index > 0 && previousSong !== undefined) {
+        this.props.pauseTrack(currentSong, 0);
+        this.props.playTrack(previousSong, currentTrack.index - 1, 0);
+      }
+    
+
     }
   
   }
@@ -143,9 +148,11 @@ class Player extends Component {
       if (!playing && currentSong !== undefined) {
         // If paused AND a track has been played previously, then resume the current track OR the first track of the playlist.
         // NOTE: spotifyState.position is only for spotify, we'll need to give the youtube position for those cases.
-          this.props.playTrack(currentSong, currentTrack.index, position);
+        this.props.pauseTrack(currentSong, 0);
+        this.props.playTrack(currentSong, currentTrack.index, position);
   
       } else if (!playing && currentSong === undefined) {
+        this.props.pauseTrack(tracks[0], 0);
         this.props.playTrack(tracks[0], 0, 0);
       } else if (playing) {
         this.props.pauseTrack(currentSong, spotifyState.position);
@@ -159,9 +166,13 @@ class Player extends Component {
     const { currentTrack } = this.props.globalPlayer;
     const { tracks } = this.props.playlists.current;
     if (tracks !== undefined) {
+      const currentSong = tracks[currentTrack.index];
+      console.log(currentSong);
       const nextSong = tracks[currentTrack.index + 1];
-      if (currentTrack.index !== tracks.length - 1 && nextSong !== undefined)
-      this.props.playTrack(nextSong, currentTrack.index + 1, 0);
+      if (currentTrack.index !== tracks.length - 1 && nextSong !== undefined) {
+        this.props.pauseTrack(currentSong, 0);
+        this.props.playTrack(nextSong, currentTrack.index + 1, 0);
+      }
     }
 
 
@@ -181,7 +192,7 @@ class Player extends Component {
   }
 
   render() {
-    const { playing, volume } = this.props.spotifyState;
+    const { playing, volume } = this.props.globalPlayer;
 
     let playButtonClass;
     playing === true

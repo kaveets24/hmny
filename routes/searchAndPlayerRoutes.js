@@ -53,23 +53,34 @@ switch (source) {
 
 router.put("/api/play", async (req, res) => {
   const user = req.user;
-  const { context_uri, position_ms, source } = req.body;
+  const { spotifyUri, position_ms, source } = req.body;
 
+  switch (source) {
+    case "spotify":
+      spotifyApi.setAccessToken(user.spotifyAccessToken);
+      spotifyApi.setRefreshToken(user.spotifyRefreshToken);
 
-  spotifyApi.setAccessToken(user.spotifyAccessToken);
-  spotifyApi.setRefreshToken(user.spotifyRefreshToken);
+      await spotifyApi.play({ uris: [spotifyUri], position_ms: position_ms });
+      res.status(200).send();
+      break;
 
-  await spotifyApi.play({ uris: [context_uri], position_ms: position_ms });
-  res.status(200).send();
+    case "youtube":
+      
+      // Play youtube video.
+      res.status(200).send();
+      break;
+  }
 });
 
 router.get("/api/pause", async (req, res) => {
   const user = req.user;
-  spotifyApi.setAccessToken(user.spotifyAccessToken);
-  spotifyApi.setRefreshToken(user.spotifyRefreshToken);
 
-  await spotifyApi.pause();
-  res.status(200).send();
+      spotifyApi.setAccessToken(user.spotifyAccessToken);
+      spotifyApi.setRefreshToken(user.spotifyRefreshToken);
+
+      await spotifyApi.pause();
+      res.status(200).send();
+
 });
 
 module.exports = router;
