@@ -53,7 +53,8 @@ switch (source) {
 
 router.put("/api/play", async (req, res) => {
   const user = req.user;
-  const { context_uri, position_ms } = req.body;
+  const { context_uri, position_ms, source } = req.body;
+
 
   spotifyApi.setAccessToken(user.spotifyAccessToken);
   spotifyApi.setRefreshToken(user.spotifyRefreshToken);

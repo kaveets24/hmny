@@ -87,23 +87,24 @@ export const addPlaylist = formData => async dispatch => {
 };
 
 export const playTrack = (track, trackIndex, position) => async dispatch => {
-  if (track.spotifyUri) {
+  if (track) {
     const res = await axios.put("/api/play", {
       context_uri: track.spotifyUri,
-      position_ms: position
+      position_ms: position,
+      source: track.source
     });
     let globalPlayer = {
       playing: true,
       position,
       currentTrack: {
         id: track._id,
-        index: trackIndex
+        index: trackIndex,
+        spotifyUri: track.spotifyUri,
+        youtubeUri: track.youtubeUri
       }
     };
 
     dispatch({ type: PLAY_TRACK, payload: globalPlayer });
-  } else if (track.youtubeUri) {
-    // reach out to youtube play route
   }
 };
 

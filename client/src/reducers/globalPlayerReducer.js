@@ -10,7 +10,9 @@ const initialState = {
   position: 0,
   currentTrack: {
     id: null, 
-    index: null
+    index: null,
+    spotifyUri: "",
+    youtubeUri: ""
   },
   currentPlaylist: {}
 };
@@ -24,7 +26,9 @@ export default function(state = initialState, action) {
         position: action.payload.position,
         currentTrack: {
           id: action.payload.currentTrack.id,
-          index: action.payload.currentTrack.index
+          index: action.payload.currentTrack.index,
+          spotifyUri: action.payload.currentTrack.spotifyUri,
+          youtubeUri: action.payload.currentTrack.youtubeUri
         
         }
       };
