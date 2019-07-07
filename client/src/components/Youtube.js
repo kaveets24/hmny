@@ -10,6 +10,39 @@ class YouTubePlayer extends Component {
     // youtubeUri: ""
   };
 
+  // _onStateChange = (event) => {
+  //   // if (this.props) {
+  //     const { currentTrack, playing } = this.props.globalPlayer;
+
+  //     if (currentTrack.youtubeUri && playing) {
+  //       event.target.pauseVideo();
+  //     } else if (currentTrack.youtubeUri && !playing) {
+  //       event.target.playVideo();
+  //     }
+  //   // }
+  // }
+  // _onReady = (event) => {
+  //   // access to player in all event handlers via event.target
+  //   event.target.playVideo();
+  // }
+
+  _onPlay = (event) => {
+    const { tracks } = this.props.playlists.current;
+    const { currentTrack } = this.props.globalPlayer;
+
+    if (tracks !== undefined) {
+      const currentSong = tracks[currentTrack.index];
+      this.props.playTrack(currentSong, currentTrack.index, 0);
+    }
+
+  }
+
+  _onPause = (event) => {
+    if (this.props.globalPlayer.currentTrack.youtubeUri)
+      this.props.pauseTrack({}, 0);
+  
+  }
+
   render() {
     const { currentTrack, playing } = this.props.globalPlayer;
     const className = currentTrack.youtubeUri ? "youtube" : "youtube--hidden";
@@ -31,24 +64,10 @@ class YouTubePlayer extends Component {
         opts={opts}
         onReady={this._onReady}
         onStateChange={this._onStateChange}
+        onPlay={this._onPlay}
+        onPause={this._onPause}
       />
     );
-  }
-
-  _onStateChange(event) {
-    if (this.props) {
-      const { currentTrack, playing } = this.props.globalPlayer;
-
-      if (currentTrack.youtubeUri && playing) {
-        event.target.pauseVideo();
-      } else if (currentTrack.youtubeUri && !playing) {
-        event.target.playVideo();
-      }
-    }
-  }
-  _onReady(event) {
-    // access to player in all event handlers via event.target
-    event.target.pauseVideo();
   }
 }
 function mapStateToProps(state) {

@@ -83,7 +83,7 @@ class Search extends Component {
                 duration: null,
                 youtubeUri: id,
                 source: this.state.source,
-                thumbnail: thumbnails.default.url
+                thumbnail: thumbnails ? thumbnails.default.url : ""
               };
               return (
                 <Track track={track} searching={true} key={order} order={order} />

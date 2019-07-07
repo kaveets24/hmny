@@ -192,8 +192,10 @@ class Player extends Component {
   }
 
   render() {
-    const { playing, volume } = this.props.globalPlayer;
+    const { playing } = this.props.globalPlayer;
 
+    const volume = this.props.spotifyState.volume; // Volume should be taken from this.props.globalPlayer, and converted to properly interact with spotify and youtube apis.
+    
     let playButtonClass;
     playing === true
       ? (playButtonClass = "fas fa-pause")
