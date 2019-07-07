@@ -10,14 +10,20 @@ class YouTubePlayer extends Component {
     // youtubeUri: ""
   };
 
+
+  componentDidUpdate() {
+    // Place logic here for pausing the youtube video using the global <Player /> component. 
+    console.log("<Youtube /> Updated");
+  }
+
   // _onStateChange = (event) => {
-  //   // if (this.props) {
+  //     console.log("STATE CHANGED");
   //     const { currentTrack, playing } = this.props.globalPlayer;
 
   //     if (currentTrack.youtubeUri && playing) {
-  //       event.target.pauseVideo();
+  //       this.props.pauseTrack({}, 0);
   //     } else if (currentTrack.youtubeUri && !playing) {
-  //       event.target.playVideo();
+  //       // event.target.playVideo();
   //     }
   //   // }
   // }
