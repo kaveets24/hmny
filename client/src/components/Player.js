@@ -3,7 +3,9 @@ import { connect } from "react-redux";
 import * as actions from "../actions";
 
 class Player extends Component {
-  // Initialize the Spotify Web Playback SDK
+ 
+
+ // Initialize the Spotify Web Playback SDK
   async initializeSpotifySdk() {
     const token = this.props.auth.spotifyAccessToken;
 
@@ -150,12 +152,16 @@ class Player extends Component {
         // NOTE: spotifyState.position is only for spotify, we'll need to give the youtube position for those cases.
         this.props.pauseTrack(currentSong, 0);
         this.props.playTrack(currentSong, currentTrack.index, position);
+        if (window.youtubePlayer)
+          window.youtubePlayer.playVideo();
   
       } else if (!playing && currentSong === undefined) {
         this.props.pauseTrack(tracks[0], 0);
         this.props.playTrack(tracks[0], 0, 0);
       } else if (playing) {
         this.props.pauseTrack(currentSong, spotifyState.position);
+        if (window.youtubePlayer)
+          window.youtubePlayer.pauseVideo();
       }
 
     }
