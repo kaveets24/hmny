@@ -14,7 +14,7 @@ class Header extends Component {
         return (
           <div>
             <Link className="header__a" to="/playlists">Playlists</Link>
-            <Link className="header__a" to="/settings">Settings</Link>
+            {/* <Link className="header__a" to="/settings">Settings</Link> */}
             <a className="header__a" href="/api/logout">Logout</a>
           </div>
         )
