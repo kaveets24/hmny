@@ -43,7 +43,6 @@ class Player extends Component {
         // Playback status updates
         this.player.addListener("player_state_changed", state => {
           this.onPlayerStateChange(state);
-          console.log(state);
         });
 
         // Ready
@@ -76,8 +75,8 @@ class Player extends Component {
 
   onPlayerStateChange(playerState) {
     // if we're no longer listening to music, we'll get a null state.
-    console.log("onPlayerStateChange called");
-    console.log("Here's the current state:", this.props.spotifyState);
+    // console.log("onPlayerStateChange called");
+    // console.log("Here's the current state:", this.props.spotifyState);
     if (playerState !== null) {
       const { current_track: currentTrack } = playerState.track_window; // using ES6 destructuring, take objects off of the playerState.track_window
       const { position, duration } = playerState;
@@ -102,8 +101,6 @@ class Player extends Component {
   }
   componentDidMount() {
     this.initializeSpotifySdk();
-
-    console.log("Global Player State:", this.props.globalPlayer);
     // set up globalPlayer state.
     // 1. should get an array of track ids
   }
@@ -173,7 +170,7 @@ class Player extends Component {
     const { tracks } = this.props.playlists.current;
     if (tracks !== undefined) {
       const currentSong = tracks[currentTrack.index];
-      console.log(currentSong);
+      // console.log(currentSong);
       const nextSong = tracks[currentTrack.index + 1];
       if (currentTrack.index !== tracks.length - 1 && nextSong !== undefined) {
         this.props.pauseTrack(currentSong, 0);

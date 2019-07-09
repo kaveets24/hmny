@@ -34,7 +34,6 @@ export default function(state = initialState, action) {
       };
 
     case PAUSE_TRACK:
-    console.log("PAUSE TRACK", action.payload.position)
       return {
         ...state,
         playing: action.payload.playing, 

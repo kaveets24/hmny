@@ -19,23 +19,11 @@ export default function (state = initialState, action) {
       return { ...state, all: action.payload };
 
     case SET_CURRENT_PLAYLIST:
-      console.log("SET_CURRENT_PLAYLIST", {
-        ...state,
-        current: action.payload
-      });
       return { ...state, current: action.payload };
       
     case ADD_TRACK_TO_PLAYLIST:
-      console.log("ADD_TRACK_TO_PLAYLIST", {
-        ...state,
-        current: action.payload
-      });
       return { ...state, current: action.payload };
     case REMOVE_TRACK_FROM_PLAYLIST:
-      console.log("REMOVE_TRACK_FROM_PLAYLIST", {
-        ...state,
-        current: action.payload
-      });
       return { ...state, current: action.payload };
 
     default:

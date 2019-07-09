@@ -46,7 +46,6 @@ export const searchTracks = query => async dispatch => {
 };
 
 export const addTrackToPlaylist = (track, playlistId) => async dispatch => {
-  console.log("INDEX.js:", track);
   const reqBody = {
     track,
     playlistId
@@ -109,7 +108,6 @@ export const playTrack = (track, trackIndex, position) => async dispatch => {
 };
 
 export const pauseTrack = (track, position) => async dispatch => {
-  console.log("Pause Track Called");
   let globalPlayer = {
     playing: false,
     position
@@ -133,7 +131,6 @@ export const updateDeviceId = device_id => dispatch => {
 export const updateVolume = (player, volume) => async dispatch => {
   await player.setVolume(volume);
   const getVolume = await player.getVolume();
-  console.log(getVolume);
 
   dispatch({ type: UPDATE_VOLUME, payload: getVolume });
 };
