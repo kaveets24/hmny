@@ -1,33 +1,29 @@
 // Partials
-@import './partials/styleguide';
-@import './partials/breakpoints';
+@import "./partials/styleguide";
+@import "./partials/breakpoints";
+@import "./partials/mixins";
 
 // Components
-@import './components/main';
-@import './components/header';
-@import './components/player';
-@import './components/playlist';
-@import './components/search';
-
-
+@import "./components/main";
+@import "./components/header";
+@import "./components/player";
+@import "./components/playlist";
+@import "./components/search";
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-
 body {
-    font-family: 'Roboto', sans-serif;
-    font-size: $small-font;
-    background-color: $color2;  
+  font-family: "Roboto", sans-serif;
+  font-size: $small-font;
+//   background-color: $color2;
+    @include gradient(200s);
+
 }
 
 .hidden {
-    display: none;
+  display: none;
 }
-
-
-
