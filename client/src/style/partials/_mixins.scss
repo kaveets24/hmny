@@ -1,27 +1,27 @@
 @mixin gradient($time) {
       // Gradient Animator
   // https://www.gradient-animator.com/
-  background: linear-gradient(285deg, #004346, #172a3a, #508991);
-  background-size: 600% 600%;
+  background: linear-gradient(286deg, rgba(0, 67, 70, 0.9), rgba(23, 42, 58, 1), rgba(80, 137, 145, 0.7));
+  background-size: 880% 80%;
   
-  -webkit-animation: cheese $time ease infinite;
-  -moz-animation: cheese $time ease infinite;
-  animation: cheese $time ease infinite;
+  -webkit-animation: gradient $time ease infinite;
+  -moz-animation: gradient $time ease infinite;
+  animation: gradient $time ease infinite;
   
-  @-webkit-keyframes cheese {
-      0%{background-position:42% 0%}
-      50%{background-position:59% 100%}
-      100%{background-position:42% 0%}
+  @-webkit-keyframes gradient {
+      0%{background-position:20% 0%}
+      50%{background-position:81% 100%}
+      100%{background-position:20% 0%}
   }
-  @-moz-keyframes cheese {
-      0%{background-position:42% 0%}
-      50%{background-position:59% 100%}
-      100%{background-position:42% 0%}
+  @-moz-keyframes gradient {
+      0%{background-position:20% 0%}
+      50%{background-position:81% 100%}
+      100%{background-position:20% 0%}
   }
-  @keyframes cheese { 
-      0%{background-position:42% 0%}
-      50%{background-position:59% 100%}
-      100%{background-position:42% 0%}
+  @keyframes gradient { 
+      0%{background-position:20% 0%}
+      50%{background-position:81% 100%}
+      100%{background-position:20% 0%}
   }
   
 
