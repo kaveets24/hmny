@@ -15,7 +15,7 @@ class Header extends Component {
           <div>
             <Link className="header__a" to="/playlists">Playlists</Link>
             {/* <Link className="header__a" to="/settings">Settings</Link> */}
-            <a className="header__a" href="/api/logout">Logout</a>
+            <a className="header__a" href={`${process.env.ROOT_URL}/api/logout`}>Logout</a>
           </div>
         )
         
