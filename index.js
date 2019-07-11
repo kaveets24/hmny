@@ -35,7 +35,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 // Routes
-app.use('/', googleAuth);
+// app.use('/', googleAuth);
 app.use('/', spotifyAuth);
 app.use('/', searchAndPlayer); 
 app.use('/', playlists);
