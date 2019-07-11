@@ -14,6 +14,8 @@ module.exports = function(app) {
 
   for (path of pathnames) {
     app.use(proxy(path, { target: "http://localhost:8000" }));
+    app.use(proxy(path, { target: "https://hmny-music.herokuapp.com" }));
+    app.use(proxy(path, { target: "http://hmny-music.herokuapp.com" }));
     app.use(proxy(path, { target: "http://10.76.230.68:8000" }));
   }
 };
