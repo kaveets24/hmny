@@ -174,7 +174,6 @@ class Player extends Component {
     const { globalPlayer } = this.props;
     this.props.updateVolume(this.player, volume, globalPlayer.currentTrack);
     if (globalPlayer.currentTrack.youtubeUri) {
-      // window.youtubePlayer.unMute();
       window.youtubePlayer.setVolume(volume);
     }
   }
