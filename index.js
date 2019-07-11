@@ -12,7 +12,7 @@ require('./models/Playlist');
 require('./services/passport');
 const spotifyAuth = require('./routes/spotifyAuthRoutes');
 const searchAndPlayer = require('./routes/searchAndPlayerRoutes');
-// const googleAuth = require('./routes/googleAuthRoutes');
+const googleAuth = require('./routes/googleAuthRoutes');
 const playlists = require('./routes/playlistRoutes');
 
 const app = express();
