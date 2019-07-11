@@ -78,10 +78,10 @@ router.get('/auth/refresh_token', function (req, res) {
 
 });
 
-router.get('/api/logout', (req, res) => {
-  req.logout(); // Takes the cookie which contains our user id, and kills the id that's there.
-  res.redirect("/");
-});
+// router.get('/api/logout', (req, res) => {
+//   req.logout(); // Takes the cookie which contains our user id, and kills the id that's there.
+//   res.redirect("/");
+// });
 
 module.exports = router;
 

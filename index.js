@@ -12,7 +12,7 @@ require('./models/Playlist');
 require('./services/passport');
 const spotifyAuth = require('./routes/spotifyAuthRoutes');
 const searchAndPlayer = require('./routes/searchAndPlayerRoutes');
-// const googleAuth = require('./routes/googleAuthRoutes');
+const googleAuth = require('./routes/googleAuthRoutes');
 const playlists = require('./routes/playlistRoutes');
 
 const app = express();
@@ -35,7 +35,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 // Routes
-// app.use('/', googleAuth);
+app.use('/', googleAuth);
 app.use('/', spotifyAuth);
 app.use('/', searchAndPlayer); 
 app.use('/', playlists);
