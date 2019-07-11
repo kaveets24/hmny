@@ -3,9 +3,7 @@ import { connect } from "react-redux";
 import * as actions from "../actions";
 
 class Player extends Component {
- 
-
- // Initialize the Spotify Web Playback SDK
+  // Initialize the Spotify Web Playback SDK
   async initializeSpotifySdk() {
     const token = this.props.auth.spotifyAccessToken;
 
@@ -59,7 +57,7 @@ class Player extends Component {
           }
 
           await this.props.updateDeviceId(device_id);
-          this.selectHmnyOnSpotifyConnect(); // Uncomment if you want the web browser to automatically select itself as your Spotify device. 
+          this.selectHmnyOnSpotifyConnect(); // Uncomment if you want the web browser to automatically select itself as your Spotify device.
         });
 
         // Not Ready
@@ -133,14 +131,11 @@ class Player extends Component {
         this.props.pauseTrack(currentSong, 0);
         this.props.playTrack(previousSong, currentTrack.index - 1, 0);
       }
-    
-
     }
-  
   }
   onPlayClick = () => {
     const { currentTrack, playing, position } = this.props.globalPlayer;
-    const {  spotifyState } = this.props;
+    const { spotifyState } = this.props;
     const { tracks } = this.props.playlists.current;
     if (tracks !== undefined) {
       const currentSong = tracks[currentTrack.index];
@@ -149,21 +144,15 @@ class Player extends Component {
         // NOTE: spotifyState.position is only for spotify, we'll need to give the youtube position for those cases.
         this.props.pauseTrack(currentSong, 0);
         this.props.playTrack(currentSong, currentTrack.index, position);
-        if (window.youtubePlayer)
-          window.youtubePlayer.playVideo();
-  
+        if (window.youtubePlayer) window.youtubePlayer.playVideo();
       } else if (!playing && currentSong === undefined) {
         this.props.pauseTrack(tracks[0], 0);
         this.props.playTrack(tracks[0], 0, 0);
       } else if (playing) {
         this.props.pauseTrack(currentSong, spotifyState.position);
-        if (window.youtubePlayer)
-          window.youtubePlayer.pauseVideo();
+        if (window.youtubePlayer) window.youtubePlayer.pauseVideo();
       }
-
     }
-
-
   };
   onNextClick() {
     const { currentTrack } = this.props.globalPlayer;
@@ -177,37 +166,40 @@ class Player extends Component {
         this.props.playTrack(nextSong, currentTrack.index + 1, 0);
       }
     }
-
-
   }
 
   onSetVolume(volume) {
     // calls the UPDATE_VOLUME action
-    this.props.updateVolume(this.player, volume);
+
+    const { globalPlayer } = this.props;
+    this.props.updateVolume(this.player, volume, globalPlayer.currentTrack);
+    if (globalPlayer.currentTrack.youtubeUri) {
+      // window.youtubePlayer.unMute();
+      window.youtubePlayer.setVolume(volume);
+    }
   }
 
   onToggleMute() {
-    if (this.props.spotifyState.volume > 0.02) {
+    const { globalPlayer } = this.props;
+    if (globalPlayer.volume > 2) {
       this.onSetVolume(0);
     } else {
-      this.onSetVolume(1);
+      this.onSetVolume(100);
     }
   }
 
   render() {
-    const { playing } = this.props.globalPlayer;
+    const { playing, volume } = this.props.globalPlayer;
 
-    const volume = this.props.spotifyState.volume; // Volume should be taken from this.props.globalPlayer, and converted to properly interact with spotify and youtube apis.
-    
     let playButtonClass;
     playing === true
       ? (playButtonClass = "fas fa-pause")
       : (playButtonClass = "fas fa-play");
 
     let volumeButtonClass;
-    if (volume >= 0.5) {
+    if (volume >= 50) {
       volumeButtonClass = "fas fa-volume-up";
-    } else if (volume < 0.5 && volume > 0.01) {
+    } else if (volume < 50 && volume > 1) {
       volumeButtonClass = "fas fa-volume-down";
     } else {
       volumeButtonClass = "fas fa-volume-mute";
@@ -242,12 +234,12 @@ class Player extends Component {
           </div>
           <div className="player__slidecontainer player__button">
             <input
-              onChange={event => this.onSetVolume(event.target.value / 100)}
+              onChange={event => this.onSetVolume(event.target.value)}
               className="player__slider"
               type="range"
               min="0"
               max="100"
-              value={volume * 100}
+              value={volume}
             />
           </div>
         </div>
@@ -261,7 +253,7 @@ function mapStateToProps(state) {
     auth: state.auth,
     spotifyState: state.spotifyState,
     globalPlayer: state.globalPlayer,
-    playlists: state.playlists,
+    playlists: state.playlists
   };
 }
 

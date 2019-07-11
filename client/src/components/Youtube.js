@@ -10,12 +10,12 @@ class YouTubePlayer extends Component {
     // youtubeUri: ""
   };
 
-  _onReady = (event) => {
+  _onReady = event => {
     // access to player in all event handlers via event.target
     window.youtubePlayer = event.target; // Make the player object available via the window.
-  }
+  };
 
-  _onPlay = (event) => {
+  _onPlay = event => {
     const { tracks } = this.props.playlists.current;
     const { currentTrack } = this.props.globalPlayer;
 
@@ -23,14 +23,23 @@ class YouTubePlayer extends Component {
       const currentSong = tracks[currentTrack.index];
       this.props.playTrack(currentSong, currentTrack.index, 0);
     }
+  };
 
-  }
-
-  _onPause = (event) => {
+  _onPause = event => {
     if (this.props.globalPlayer.currentTrack.youtubeUri)
       this.props.pauseTrack({}, 0);
-  
-  }
+  };
+
+  _onEnd = event => {
+    const { tracks } = this.props.playlists.current;
+    const { currentTrack } = this.props.globalPlayer;
+
+    // if (tracks !== undefined) {
+      const nextSong = tracks[currentTrack.index + 1];
+      if (nextSong !== undefined)
+        this.props.playTrack(nextSong, currentTrack.index + 1, 0);
+    // }
+  };
 
   render() {
     const { currentTrack, playing } = this.props.globalPlayer;
@@ -56,6 +65,7 @@ class YouTubePlayer extends Component {
         onStateChange={this._onStateChange}
         onPlay={this._onPlay}
         onPause={this._onPause}
+        onEnd={this._onEnd}
       />
     );
   }

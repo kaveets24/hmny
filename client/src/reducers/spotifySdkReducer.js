@@ -1,4 +1,4 @@
-import { UPDATE_SPOTIFY_PLAYER, UPDATE_DEVICE_ID, UPDATE_VOLUME } from '../actions/types';
+import { UPDATE_SPOTIFY_PLAYER, UPDATE_DEVICE_ID, UPDATE_SPOTIFY_VOLUME } from '../actions/types';
 
 const initialState = {
     deviceId: "",
@@ -21,8 +21,8 @@ export default function (state = initialState, action) {
         case UPDATE_DEVICE_ID:
             return { ...state, deviceId: action.payload };
         
-        case UPDATE_VOLUME:
-            return {...state, volume: action.payload };
+        case UPDATE_SPOTIFY_VOLUME:
+            return {...state, volume: action.payload};
 
         default:
             return state;

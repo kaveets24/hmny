@@ -3,7 +3,7 @@ import {
   FETCH_USER,
   UPDATE_SPOTIFY_PLAYER,
   UPDATE_DEVICE_ID,
-  UPDATE_VOLUME,
+  UPDATE_SPOTIFY_VOLUME,
   FETCH_PLAYLISTS,
   SET_CURRENT_PLAYLIST,
   FETCH_TRACKS,
@@ -11,8 +11,11 @@ import {
   ADD_PLAYLIST,
   ADD_TRACK_TO_PLAYLIST,
   REMOVE_TRACK_FROM_PLAYLIST,
+
+  // globalPlayer
   PLAY_TRACK,
-  PAUSE_TRACK
+  PAUSE_TRACK,
+  UPDATE_GLOBAL_VOLUME,
 } from "./types";
 
 export const fetchUser = () => async dispatch => {
@@ -128,11 +131,15 @@ export const updateDeviceId = device_id => dispatch => {
   dispatch({ type: UPDATE_DEVICE_ID, payload: device_id });
 };
 
-export const updateVolume = (player, volume) => async dispatch => {
-  await player.setVolume(volume);
-  const getVolume = await player.getVolume();
+export const updateVolume = (player, volume, currentTrack) => async dispatch => {
 
-  dispatch({ type: UPDATE_VOLUME, payload: getVolume });
+  if (currentTrack.spotifyUri) {
+    await player.setVolume(volume / 100);
+    const getVolume = await player.getVolume();
+    dispatch({ type: UPDATE_SPOTIFY_VOLUME, payload: getVolume });
+  }
+
+  dispatch({ type: UPDATE_GLOBAL_VOLUME, payload: volume });
 };
 
 export const requestNewSpotifyToken = () => async dispatch => {

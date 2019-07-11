@@ -1,6 +1,6 @@
 // This is a generic player state which only keeps track of "playing" and the _id of the currently playing track.
 import {
-  UPDATE_CURRENT_PLAYLIST,
+  UPDATE_GLOBAL_VOLUME,
   PLAY_TRACK,
   PAUSE_TRACK
 } from "../actions/types";
@@ -39,6 +39,11 @@ export default function(state = initialState, action) {
         playing: action.payload.playing, 
         position: action.payload.position
       };
+
+    case UPDATE_GLOBAL_VOLUME:
+        return {
+          ...state, volume: parseInt(action.payload)
+        }
     default:
       return state;
   }
