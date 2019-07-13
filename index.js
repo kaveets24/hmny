@@ -44,11 +44,11 @@ app.use('/', searchAndPlayer);
 app.use('/', playlists);
 
 if (process.env.NODE_ENV === 'production') {
-
+  app.use(requireHTTPS);
   app.use(express.static('client/build'));
 
   const path = require('path');
-  app.get("*", requireHTTPS, (req, res) => {
+  app.get("*", (req, res) => {
     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
   })
 }
