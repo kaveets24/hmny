@@ -1,7 +1,7 @@
 @mixin gradient($time) {
       // Gradient Animator
   // https://www.gradient-animator.com/
-  background: linear-gradient(286deg, rgba(0, 67, 70, 0.9), rgba(23, 42, 58, 1), rgba(80, 137, 145, 0.7));
+  background: linear-gradient(28deg, rgba(0, 67, 70, 0.9), rgba(23, 42, 58, 1), rgba(80, 137, 145, 0.7));
   background-size: 880% 80%;
   
   -webkit-animation: gradient $time ease infinite;
