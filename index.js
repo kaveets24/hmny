@@ -15,6 +15,9 @@ const searchAndPlayer = require('./routes/searchAndPlayerRoutes');
 const googleAuth = require('./routes/googleAuthRoutes');
 const playlists = require('./routes/playlistRoutes');
 
+// Middleware
+const requireHTTPS = require("./middleware/requireHTTPS");
+
 const app = express();
 
 mongoose.connect(keys.mongoURI, { useNewUrlParser: true });
@@ -45,7 +48,7 @@ if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));
 
   const path = require('path');
-  app.get("*", (req, res) => {
+  app.get("*", requireHTTPS, (req, res) => {
     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
   })
 }
