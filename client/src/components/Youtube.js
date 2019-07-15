@@ -12,8 +12,10 @@ class YouTubePlayer extends Component {
 
   _onReady = event => {
     // access to player in all event handlers via event.target
+    event.target.unMute();
     window.youtubePlayer = event.target; // Make the player object available via the window.
   };
+
 
   _onPlay = event => {
     const { tracks } = this.props.playlists.current;
@@ -62,7 +64,7 @@ class YouTubePlayer extends Component {
         videoId={currentTrack.youtubeUri}
         opts={opts}
         onReady={this._onReady}
-        onStateChange={this._onStateChange}
+        // onStateChange={this._onStateChange}  
         onPlay={this._onPlay}
         onPause={this._onPause}
         onEnd={this._onEnd}

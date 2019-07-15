@@ -76,6 +76,13 @@ class Player extends Component {
     // console.log("onPlayerStateChange called");
     // console.log("Here's the current state:", this.props.spotifyState);
     if (playerState !== null) {
+
+      // If track finishes, play the next track in the playlist.
+      if(playerState.paused && playerState.position === 0 && playerState.restrictions.disallow_resuming_reasons &&
+        playerState.restrictions.disallow_resuming_reasons[0] === "not_paused"){
+        this.onNextClick();
+      }
+      
       const { current_track: currentTrack } = playerState.track_window; // using ES6 destructuring, take objects off of the playerState.track_window
       const { position, duration } = playerState;
       const trackName = currentTrack.name;
@@ -174,6 +181,7 @@ class Player extends Component {
     const { globalPlayer } = this.props;
     this.props.updateVolume(this.player, volume, globalPlayer.currentTrack);
     if (globalPlayer.currentTrack.youtubeUri) {
+      window.youtubePlayer.unMute();
       window.youtubePlayer.setVolume(volume);
     }
   }
@@ -183,6 +191,7 @@ class Player extends Component {
     if (globalPlayer.volume > 2) {
       this.onSetVolume(0);
     } else {
+
       this.onSetVolume(100);
     }
   }
