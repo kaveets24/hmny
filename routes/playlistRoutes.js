@@ -101,12 +101,11 @@ router.post("/api/tracks/new", async (req, res) => {
     case "soundcloud":
       break;
   }
+});
 
   router.post("/api/tracks/remove", async (req, res) => {
       const { playlistId, track } = req.body;
-
-
-    const playlist = await Playlist.findByIdAndUpdate(playlistId, 
+      const playlist = await Playlist.findByIdAndUpdate(playlistId, 
       { $pull: { tracks: track._id }}, {new: true} 
     ).populate("tracks");
 
@@ -118,6 +117,6 @@ router.post("/api/tracks/new", async (req, res) => {
 
 
   });
-});
+
 
 module.exports = router;

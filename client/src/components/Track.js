@@ -11,10 +11,26 @@ class Track extends Component {
   };
 
   handleDelete = async () => {
+    await this.props.pauseTrack({}, 100);
+    if (this.props.globalPlayer.currentTrack.youtubeUri) {
+      window.youtubePlayer.pauseVideo();
+
+    }
     await this.props.removeTrackFromPlaylist(
       this.props.track,
       this.props.playlists.current._id
     );
+
+      // Play the next song.
+  
+      const { currentTrack } = this.props.globalPlayer;
+      const { tracks } = this.props.playlists.current;
+      if (tracks !== undefined) {
+        const nextSong = tracks[currentTrack.index];
+        if (nextSong !== undefined) {
+          await this.props.playTrack(nextSong, currentTrack.index, 0);
+        }
+      }
   };
 
   handlePlay = async () => {
