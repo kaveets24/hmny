@@ -34,7 +34,7 @@ router.get(
   '/callback',
   passport.authenticate('spotify', { failureRedirect: '/' }),
   function (req, res) {
-    res.redirect('/');
+    res.redirect('/playlists');
   }
 );
 

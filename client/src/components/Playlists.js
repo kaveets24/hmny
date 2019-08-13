@@ -37,8 +37,7 @@ class Playlists extends Component {
     } else {
       return (
         <div style={{ color: "white" }} className="">
-          You currently don't have any playlists! (Ps this is an inline style,
-          change it later)
+          You currently don't have any playlists! Fill out the form above to get started.
         </div>
       );
     }
