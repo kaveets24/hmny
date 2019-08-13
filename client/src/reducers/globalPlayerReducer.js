@@ -29,7 +29,6 @@ export default function(state = initialState, action) {
           index: action.payload.currentTrack.index,
           spotifyUri: action.payload.currentTrack.spotifyUri,
           youtubeUri: action.payload.currentTrack.youtubeUri
-        
         }
       };
 

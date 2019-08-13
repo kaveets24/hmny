@@ -63,11 +63,11 @@ class Playlists extends Component {
     return (
       <div>
         <div className="main__form">
-          <img
+          {/* <img
             src="https://via.placeholder.com/150C"
             alt="artwork"
             className="main__form-artwork"
-          />
+          /> */}
           <form onSubmit={this.handleSubmit} id="newPlaylist">
             <input
               onChange={this.handleChange}
@@ -76,17 +76,17 @@ class Playlists extends Component {
               placeholder="Enter a name for your playlist"
             />
 
-            <textarea
+            {/* <textarea
               onChange={this.handleChange}
               value={this.state.description}
               placeholder="Enter a description"
-            />
-            <input
+            /> */}
+            {/* <input
               onChange={this.handleChange}
               value={this.state.artwork}
               type="text"
               placeholder="Choose an image"
-            />
+            /> */}
             <button type="submit" form="newPlaylist">
               Create
             </button>
