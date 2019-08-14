@@ -38,14 +38,24 @@ export const fetchPlaylists = () => async dispatch => {
 // };
 
 export const searchTracks = query => async dispatch => {
-  const res = await axios.put("/api/findtrack", {
-    query
-  });
+  console.log(query);
+  if (query.inputText !== "") {
+    const res = await axios.put("/api/findtrack", {
+      query
+    });
+    dispatch({
+      type: SEARCH_TRACKS,
+      payload: res.data
+    });
+  } else {
+    dispatch({
+      type: SEARCH_TRACKS,
+      payload: []
+    })
+  }
 
-  dispatch({
-    type: SEARCH_TRACKS,
-    payload: res.data
-  });
+    
+ 
 };
 
 export const addTrackToPlaylist = (track, playlistId) => async dispatch => {

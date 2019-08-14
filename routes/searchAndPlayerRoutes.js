@@ -12,42 +12,40 @@ const queryString = require("query-string");
 router.put("/api/findtrack", requireLogin, async (req, res) => {
   const user = req.user;
   const { inputText, source } = req.body.query;
-switch (source) {
-  case "spotify":
-    spotifyApi.setAccessToken(user.spotifyAccessToken);
-    spotifyApi.setRefreshToken(user.spotifyRefreshToken);
-
-    const searchResults = await spotifyApi.searchTracks(inputText, {
-      limit: 30
-    });
+    switch (source) {
+      case "spotify":
+        spotifyApi.setAccessToken(user.spotifyAccessToken);
+        spotifyApi.setRefreshToken(user.spotifyRefreshToken);
     
-    const tracks = searchResults.body.tracks.items;
-    res.status(200).send(tracks);
-    break;
-
-
-  case "youtube":
-
-  // Old Code
-    var opts = {
-      maxResults: 5,
-      type: ["video"],
-      key: keys.googleApiKey
-    };
-     
-    search(inputText, opts, (err, results) => {
-      if(err) console.log(err);
-        console.log(results);
-        res.status(200).send(results);
-    });
-    break;
-
-  default:
-    break;
-
+        const searchResults = await spotifyApi.searchTracks(inputText, {
+          limit: 30
+        });
+        
+        const tracks = searchResults.body.tracks.items;
+        res.status(200).send(tracks);
+        break;
+    
+    
+      case "youtube":
+    
+      // Old Code
+        var opts = {
+          maxResults: 5,
+          type: ["video"],
+          key: keys.googleApiKey
+        };
+         
+        search(inputText, opts, (err, results) => {
+          if(err) console.log(err);
+            console.log(results);
+            res.status(200).send(results);
+        });
+        break;
+    
+      default:
+        break;
+    
 }
-
-
 });
 
 router.put("/api/play", async (req, res) => {

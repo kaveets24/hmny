@@ -15,7 +15,7 @@ class Search extends Component {
 
   handleRadioClick = e => {
     this.setState({ source: e.target.value, inputText: "" });
-    // This resubmits our form when a user clicks a different source radio button.
+    this.props.searchTracks({inputText: "", source: e.target.value});
   };
   handleChange = e => {
     this.setState({
@@ -52,7 +52,7 @@ class Search extends Component {
   showSearchResults = () => {
     if (
       this.props.search.results !== undefined &&
-      this.props.search.results.length > 0
+      this.props.search.results.length
     ) {
       const { results } = this.props.search;
 
@@ -74,7 +74,6 @@ class Search extends Component {
           });
 
         case "youtube":
-          if (results[0].thumbnails) // This checks to make sure that our search results are for Youtube. 
             return results.map((result, index) => {
               const { title, id, thumbnails } = result;
               let decodedTitle = decodeURI(title);
