@@ -1,5 +1,5 @@
 # hmny
-- hmny is currently only supported on Google Chrome & Firefox.
+- hmny is currently only supported on browsers that support the [Spotify web playback SDK](https://developer.spotify.com/documentation/web-playback-sdk/#supported-browsers).
 
 ## Quickstart
 
