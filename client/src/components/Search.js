@@ -14,7 +14,8 @@ class Search extends Component {
   }
 
   handleRadioClick = e => {
-    this.setState({ source: e.target.value });
+    this.setState({ source: e.target.value, inputText: "" });
+    // This resubmits our form when a user clicks a different source radio button.
   };
   handleChange = e => {
     this.setState({
@@ -73,6 +74,7 @@ class Search extends Component {
           });
 
         case "youtube":
+          if (results[0].thumbnails) // This checks to make sure that our search results are for Youtube. 
             return results.map((result, index) => {
               const { title, id, thumbnails } = result;
               let decodedTitle = decodeURI(title);
@@ -133,14 +135,15 @@ class Search extends Component {
                 name="music-service"
               />
               <label htmlFor="youtube">Youtube</label>
-              <input
+              {/* SoundCloud Radio Button */}
+              {/* <input
                 onClick={this.handleRadioClick}
                 type="radio"
                 value="soundcloud"
                 id="soundcloud"
                 name="music-service"
               />
-              <label htmlFor="soundcloud">Soundcloud</label>
+              <label htmlFor="soundcloud">Soundcloud</label> */}
             </div>
           </fieldset>
         </form>

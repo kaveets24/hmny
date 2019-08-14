@@ -64,9 +64,7 @@ class Track extends Component {
     let time = this.msToMin(this.props.track.duration);
     let { searching, globalPlayer, track, order } = this.props;
     let { artistNames, source, artists } = track;
-    console.log("These are the artists", artists);
     let youtubeThumbnailImage = (source === "youtube" ? <img src={track.thumbnail} alt={`thumbnail-${order}`} /> : null)
-
     let searchingClass = searching ? "" : "hidden";
     let deleteButtonClass = searching ? "hidden" : "";
     let orderClass = searching ? "hidden" : "playlist__data";
