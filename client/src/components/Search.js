@@ -35,7 +35,7 @@ class Search extends Component {
       timeout = setTimeout(async () => {
         // make a request to fetch search query (results limited to 10-15)
         await this.props.searchTracks(this.state);
-      }, 6000);
+      }, 2000);
 
     }
 
@@ -68,7 +68,7 @@ class Search extends Component {
               source: this.state.source
             };
             return (
-              <Track track={track} searching={true} key={order} order={order} />
+              <Track track={track} artists={artists} searching={true} key={order} order={order} />
             );
           });
 

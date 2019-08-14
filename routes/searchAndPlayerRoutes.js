@@ -22,6 +22,7 @@ switch (source) {
     });
     
     const tracks = searchResults.body.tracks.items;
+    console.log(tracks);
 
     res.status(200).send(tracks);
     break;

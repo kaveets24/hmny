@@ -63,7 +63,8 @@ class Track extends Component {
   render() {
     let time = this.msToMin(this.props.track.duration);
     let { searching, globalPlayer, track, order } = this.props;
-    let { artistNames, source } = track;
+    let { artistNames, source, artists } = track;
+    console.log("These are the artists", artists);
     let youtubeThumbnailImage = (source === "youtube" ? <img src={track.thumbnail} alt={`thumbnail-${order}`} /> : null)
 
     let searchingClass = searching ? "" : "hidden";
@@ -85,12 +86,25 @@ class Track extends Component {
       }
 
     let artistName = "";
-    if (artistNames)
-      artistNames.forEach(artist => {
-        artistNames.indexOf(artist) !== artistNames.length - 1
+
+    // If artistsNames (we're looking at the playlists of tracks)
+    if (artistNames) {
+      artists = artistNames
+      artistNames.forEach((artist, index) => {
+        index !== artistNames.length - 1
           ? (artistName += artist + ", ")
           : (artistName += artist);
       });
+      // If artists, we're looking at the search results of tracks.
+    } else if (artists && artists.length) {
+      artists.forEach((artist, index) => {
+        (index !== artists.length - 1) ?
+        (artistName += artist.name + ", ")
+        : (artistName += artist.name);
+        
+      })
+    }
+
     return (
       <div className="playlist__trackrow">
         <div className="playlist__trackrow--white">
