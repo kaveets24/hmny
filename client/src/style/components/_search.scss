@@ -13,6 +13,9 @@
             background-color: $color1;
             color: $color2;
         }
+        textarea:focus, input:focus{
+          outline: none;
+      }
 
         fieldset {
             overflow: hidden;
