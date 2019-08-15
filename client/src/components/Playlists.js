@@ -61,7 +61,7 @@ class Playlists extends Component {
   render() {
     return (
       <div>
-        <div className="main__form">
+        <div className="search">
           {/* <img
             src="https://via.placeholder.com/150C"
             alt="artwork"
@@ -86,9 +86,9 @@ class Playlists extends Component {
               type="text"
               placeholder="Choose an image"
             /> */}
-            <button type="submit" form="newPlaylist">
-              Create
-            </button>
+            {/* <button className="button" type="submit" form="newPlaylist">
+              Add
+            </button> */}
           </form>
         </div>
         <div className="main__grid">{this.renderContent()}</div>
