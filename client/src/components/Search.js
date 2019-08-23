@@ -114,7 +114,7 @@ class Search extends Component {
             onChange={this.handleChange}
             onClick={this.showOverlay}
             onKeyUp={this.handleSubmit}
-            value={this.state.inputText}f
+            value={this.state.inputText}
             type="text"
             placeholder="Search for more tracks..."
           />

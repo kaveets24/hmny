@@ -57,6 +57,7 @@ class Player extends Component {
           }
 
           await this.props.updateDeviceId(device_id);
+
           this.selectHmnyOnSpotifyConnect(); // Uncomment if you want the web browser to automatically select itself as your Spotify device.
         });
 
@@ -76,13 +77,16 @@ class Player extends Component {
     // console.log("onPlayerStateChange called");
     // console.log("Here's the current state:", this.props.spotifyState);
     if (playerState !== null) {
-
       // If track finishes, play the next track in the playlist.
-      if(playerState.paused && playerState.position === 0 && playerState.restrictions.disallow_resuming_reasons &&
-        playerState.restrictions.disallow_resuming_reasons[0] === "not_paused"){
+      if (
+        playerState.paused &&
+        playerState.position === 0 &&
+        playerState.restrictions.disallow_resuming_reasons &&
+        playerState.restrictions.disallow_resuming_reasons[0] === "not_paused"
+      ) {
         this.onNextClick();
       }
-      
+
       const { current_track: currentTrack } = playerState.track_window; // using ES6 destructuring, take objects off of the playerState.track_window
       const { position, duration } = playerState;
       const trackName = currentTrack.name;
@@ -105,9 +109,11 @@ class Player extends Component {
     }
   }
   componentDidMount() {
-    this.initializeSpotifySdk();
-    // set up globalPlayer state.
-    // 1. should get an array of track ids
+    // If not on a mobile display
+    console.log((/Mobile/.test(navigator.userAgent)))
+    if (/Mobi/.test(navigator.userAgent) == false) {
+      this.initializeSpotifySdk();
+    }
   }
   // Sets hmny as the user's currently playing device on Spotify Connect
   selectHmnyOnSpotifyConnect() {
@@ -191,7 +197,6 @@ class Player extends Component {
     if (globalPlayer.volume > 2) {
       this.onSetVolume(0);
     } else {
-
       this.onSetVolume(100);
     }
   }
