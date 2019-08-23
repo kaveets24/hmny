@@ -19,6 +19,7 @@ class Playlists extends Component {
       return playlists.all.map(playlist => {
         return (
           <Link
+            style={{ textDecoration: 'none' }}
             key={playlist.playlistName}
             to={{
               pathname: `/playlists/${playlist.playlistName}`.replace(
