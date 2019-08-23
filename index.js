@@ -44,7 +44,7 @@ app.use('/', searchAndPlayer);
 app.use('/', playlists);
 
 if (process.env.NODE_ENV === 'production') {
-  app.use(requireHTTPS);
+  app.use(requireHTTPS); // redirect http requests to https.
   app.use(express.static('client/build'));
 
   const path = require('path');

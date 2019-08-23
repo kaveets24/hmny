@@ -15,7 +15,7 @@ class Search extends Component {
 
   handleRadioClick = e => {
     this.setState({ source: e.target.value, inputText: "" });
-    this.props.searchTracks({inputText: "", source: e.target.value});
+    this.props.searchTracks({ inputText: "", source: e.target.value });
   };
   handleChange = e => {
     this.setState({
@@ -37,9 +37,7 @@ class Search extends Component {
         // make a request to fetch search query (results limited to 10-15)
         await this.props.searchTracks(this.state);
       }, 2000);
-
     }
-
   };
 
   showOverlay = () => {
@@ -69,28 +67,33 @@ class Search extends Component {
               source: this.state.source
             };
             return (
-              <Track track={track} artists={artists} searching={true} key={order} order={order} />
+              <Track
+                track={track}
+                artists={artists}
+                searching={true}
+                key={order}
+                order={order}
+              />
             );
           });
 
         case "youtube":
-            return results.map((result, index) => {
-              const { title, id, thumbnails } = result;
-              let decodedTitle = decodeURI(title);
-              let order = index + 1;
-              let track = {
-                trackName: decodedTitle,
-                artists: [],
-                duration: null,
-                youtubeUri: id,
-                source: this.state.source,
-                thumbnail: thumbnails ? thumbnails.default.url : ""
-              };
-              return (
-                <Track track={track} searching={true} key={order} order={order} />
-              );
-            });
-          
+          return results.map((result, index) => {
+            const { title, id, thumbnails } = result;
+            let decodedTitle = decodeURI(title);
+            let order = index + 1;
+            let track = {
+              trackName: decodedTitle,
+              artists: [],
+              duration: null,
+              youtubeUri: id,
+              source: this.state.source,
+              thumbnail: thumbnails ? thumbnails.default.url : ""
+            };
+            return (
+              <Track track={track} searching={true} key={order} order={order} />
+            );
+          });
 
         default:
           break;
@@ -111,12 +114,12 @@ class Search extends Component {
             onChange={this.handleChange}
             onClick={this.showOverlay}
             onKeyUp={this.handleSubmit}
-            value={this.state.inputText}
+            value={this.state.inputText}f
             type="text"
             placeholder="Search for more tracks..."
           />
           <fieldset>
-            <div className="search__radio-fields">
+            <div>
               <input
                 onClick={this.handleRadioClick}
                 defaultChecked
@@ -125,7 +128,14 @@ class Search extends Component {
                 id="spotify"
                 name="music-service"
               />
-              <label htmlFor="spotify">Spotify</label>
+              <label title="Spotify" htmlFor="spotify">
+                <i
+                  style={{ color: `rgba(${[30, 215, 96, 0.4]})`, backgroundSize: "2px" }}
+                  className={`fab fa-spotify fa-2x`}
+                />
+              </label>
+            
+            
               <input
                 onClick={this.handleRadioClick}
                 type="radio"
@@ -133,9 +143,16 @@ class Search extends Component {
                 id="youtube"
                 name="music-service"
               />
-              <label htmlFor="youtube">Youtube</label>
-              {/* SoundCloud Radio Button */}
-              {/* <input
+              <label title="YouTube" htmlFor="youtube">
+                <i
+                  style={{ color: `rgba(${[255, 0, 0, 0.4]})`}}
+                  className={`fab fa-youtube fa-2x`}
+                />
+              </label>
+            </div>
+
+            {/* SoundCloud Radio Button */}
+            {/* <input
                 onClick={this.handleRadioClick}
                 type="radio"
                 value="soundcloud"
@@ -143,7 +160,6 @@ class Search extends Component {
                 name="music-service"
               />
               <label htmlFor="soundcloud">Soundcloud</label> */}
-            </div>
           </fieldset>
         </form>
         <div className={overlayClassName}>

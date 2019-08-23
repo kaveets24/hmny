@@ -61,13 +61,14 @@ class Track extends Component {
   };
 
   render() {
-    let time = this.msToMin(this.props.track.duration);
+   
     let { searching, globalPlayer, track, order } = this.props;
     let { artistNames, source, artists } = track;
-    let youtubeThumbnailImage = (source === "youtube" ? <img src={track.thumbnail} alt={`thumbnail-${order}`} /> : null)
+    let youtubeThumbnailImage = (source === "youtube" ? <img className="youtube-thumbnail" src={track.thumbnail} alt={`thumbnail-${order}`} /> : null)
     let searchingClass = searching ? "" : "hidden";
-    let deleteButtonClass = searching ? "hidden" : "";
+    let deleteButtonClass = searching ? "hidden" : "trash-icon";
     let orderClass = searching ? "hidden" : "playlist__data";
+    let trackDuration = (source === "spotify") ? this.msToMin(this.props.track.duration): "";
     
     let currentTrackPlayingClass;
 
@@ -105,12 +106,14 @@ class Track extends Component {
 
     return (
       <div className="playlist__trackrow">
+        
         <div className="playlist__trackrow--white">
+        <span className={orderClass}>{this.props.order}.</span>
           <button className={searchingClass} onClick={this.handleAdd}>
             <i className="fas fa-plus fa-lg" />
           </button>
 
-          <span className={orderClass}>{this.props.order}.</span>
+          
           <button className="" onClick={this.handlePlay}>
             <i className={currentTrackPlayingClass} />
           </button>
@@ -122,12 +125,12 @@ class Track extends Component {
         <div className="playlist__trackrow--grey">
           <span className="playlist__data">{artistName}</span>
           <span className="playlist__data playlist__data--duration">
-            {time}
+            {trackDuration}
           </span>
+          {youtubeThumbnailImage}
           <span className="playlist__data">
             <i className={`fab fa-${source}`} />
           </span>
-          {youtubeThumbnailImage}
         </div>
       </div>
     );

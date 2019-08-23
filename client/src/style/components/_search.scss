@@ -1,5 +1,6 @@
 .search {    
   margin: 10px 0;
+
     form {
         
         input[type=text] {
@@ -20,23 +21,38 @@
         fieldset {
             overflow: hidden;
             border: none;
-            max-width: 400px;
+      
+
+          div {
+            width: 200px;
             margin: 0 auto;
+            overflow: auto;
+            padding-left: 20px;
+          }
+    
+            
           }
           
+ 
           
           label {
             float: left;
             clear: none;
             display: block;
-            padding: 2px 1em 0 0;
+            padding: 0 0 0 2px;
+            
             color: $color1;
+            margin-right: 20px;
+
+      
           }
           
           input[type=radio] {
             float: left;
             clear: none;
-            margin: 6px 2px 0 2px;
+            margin: 10px 6px;
+            
+      
           }
     }
 

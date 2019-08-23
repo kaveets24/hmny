@@ -1,68 +1,80 @@
 .playlist {
-    display: flex;
-    color: $color1;
-    &__trackrow {
-        position: relative;
-        padding: 0 0 0 15px;
+  display: flex;
+  color: $color1;
 
-   
-        &--white {
-            font-weight: 500;
+  &__trackrow {
+    position: relative;
+    padding: 0 0 0 15px;
 
-        }
-        &--grey {
-            color: $color3;
-            padding-left: 35px;
-               
-        }
-
-        button {
-            background-color: Transparent;
-            padding: 7px;
-            border: none;
-            outline: none;
-            color: $color3;
-        }
+    @include bp("max", "xs") {
+      font-size: $mobile-font;
     }
 
-    &__column1 {
-        flex-basis: 70%;
-
+    &--white {
+      font-weight: 500;
     }
-    &__data {
-        padding: 0 10px;
-        line-height: 30px;
-
-        &--duration {
-            position: absolute;
-            right: 60px;
-        }
+    &--grey {
+      color: $color3;
+      padding-left: 58px;
     }
 
-    &__column2 {
-        flex-basis: 30%;
-        text-align: center;
-
+    button {
+      background-color: Transparent;
+      padding: 7px;
+      border: none;
+      outline: none;
+      color: $color3;
     }
-    &__playlistname {
-        font-size: $large-font;
+  }
+
+  &__column1 {
+    @include bp("max", "sm") {
+      margin: 0 auto;
     }
+  }
+  &__data {
+    padding: 0 10px;
+    line-height: 30px;
 
-    &__albumart {
-        width: 250px;
-        height: 250px;
+    &--duration {
+      position: absolute;
+      right: 60px;
     }
+  }
 
-    &__trackname {
-        font-size: $medium-font;
+  &__column2 {
+    flex-basis: 30%;
+    text-align: center;
+
+    @include bp("max", "sm") {
+      display: none;
     }
+  }
+  &__playlistname {
+    font-size: $large-font;
+  }
 
+  &__albumart {
+    width: 250px;
+    height: 250px;
+  }
 
+  &__trackname {
+    font-size: $medium-font;
+  }
 }
 
 .youtube {
-
-    &--hidden {
-        display: none;
-    }
+  &--hidden {
+    display: none;
+  }
 }
+
+.youtube-thumbnail {
+  width: 80px;
+
+  @include bp("max", "xs") {
+    width: 50px;
+  }
+}
+
