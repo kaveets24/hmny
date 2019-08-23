@@ -28,6 +28,7 @@
   }
 
   &__column1 {
+      flex-basis: 70%;
     @include bp("max", "sm") {
       margin: 0 auto;
     }
