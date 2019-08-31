@@ -110,6 +110,7 @@ class Player extends Component {
   }
   componentDidMount() {
     // If not on a mobile display
+    console.log((/Mobile/.test(navigator.userAgent)))
     if (/Mobi/.test(navigator.userAgent) == false) {
       this.initializeSpotifySdk();
     }
