@@ -11,11 +11,13 @@
     }
 
     &--white {
-      font-weight: 500;
+      font-weight: $primary-font-weight;
     }
     &--grey {
-      color: $color3;
+      // color: $color3;
+      color: $secondary-opacity;
       padding-left: 58px;
+      font-weight: $secondary-font-weight;
     }
 
     button {
@@ -62,6 +64,7 @@
 
   &__trackname {
     font-size: $medium-font;
+    font-weight: $secondary-font-weight;
   }
 }
 
